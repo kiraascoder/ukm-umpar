@@ -21,4 +21,21 @@ class Ukm extends Model
         'media_sosial',
         'admin_ukm_id',
     ];
+    public function admin()
+    {
+        return $this->belongsTo(User::class, 'admin_ukm_id');
+    }
+    public function anggota()
+    {
+        return $this->hasMany(Anggota::class);
+    }
+
+    public function surat()
+    {
+        return $this->hasMany(Surat::class);
+    }
+    public function keuangan()
+    {
+        return $this->hasMany(Keuangan::class);
+    }
 }

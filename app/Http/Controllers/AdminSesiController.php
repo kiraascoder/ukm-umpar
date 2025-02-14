@@ -42,8 +42,6 @@ class AdminSesiController extends Controller
 
         if (Auth::attempt($infologin, $request->has('remember'))) {
             $user = Auth::user();
-
-
             if ($user->status !== 'active') {
                 Auth::logout();
                 return redirect('/admin/login')->withErrors(['login' => 'Akun Anda belum diaktifkan oleh Super Admin.'])->withInput();

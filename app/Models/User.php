@@ -48,4 +48,10 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function ukm()
+{
+    return $this->hasOne(Ukm::class, 'admin_ukm_id'); // Sesuaikan dengan nama kolom di database
+}
+
 }
