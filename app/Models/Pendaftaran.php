@@ -2,17 +2,14 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Surat extends Model
+class Pendaftaran extends Model
 {
-
-    use HasFactory;
-    protected $table = 'arsip_surat';
+    protected $table = 'pendaftaran';
 
     protected $fillable = [
-        'ukm_id', 'judul', 'jenis_surat', 'file_path',
+        'ukm_id', 'pendaftaran', 'batas_pendaftaran', 'brosur', 'link_pendaftaran', 'persyaratan',
     ];
 
     public function ukm()

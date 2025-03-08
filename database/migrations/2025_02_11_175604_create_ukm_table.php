@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('struktur_organisasi')->nullable();
             $table->json('media_sosial')->nullable();
             $table->foreignId('admin_ukm_id')->constrained('users')->onDelete('cascade');
+            $table->decimal('saldo', 10, 2);
             $table->timestamps();
         });
         Schema::create('anggota_ukm', function (Blueprint $table) {
@@ -48,7 +49,6 @@ return new class extends Migration
 
         Schema::create('keuangan', function (Blueprint $table) {
             $table->id();
-            $table->decimal('saldo', 10, 2);
             $table->enum('jenis', ['pemasukan', 'pengeluaran',]);
             $table->decimal('jumlah', 10, 2);
             $table->text('keterangan')->nullable();

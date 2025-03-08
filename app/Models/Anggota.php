@@ -17,4 +17,9 @@ class Anggota extends Model
         'angkatan',
         'ukm_id',
     ];
+
+    public function ukm()
+    {
+        return $this->belongsTo(Ukm::class);
+    }
 }

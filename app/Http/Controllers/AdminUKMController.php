@@ -31,19 +31,14 @@ class AdminUKMController extends Controller
         return view('admin-ukm.anggota', compact('anggota'));
     }
 
-    public function ukmKegiatan()
-    {
-        return view('admin-ukm.kegiatan');
-    }
-
-    public function ukmPendaftaran()
-    {
-        return view('admin-ukm.pendaftaran');
-    }
 
     public function ukmProker()
     {
         return view('admin-ukm.proker');
+    }
+    public function ukmAlbum()
+    {
+        return view('admin-ukm.album');
     }
 
     public function ukmEditProfile()

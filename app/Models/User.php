@@ -50,8 +50,7 @@ class User extends Authenticatable
     }
 
     public function ukm()
-{
-    return $this->hasOne(Ukm::class, 'admin_ukm_id'); // Sesuaikan dengan nama kolom di database
-}
-
+    {
+        return $this->hasOne(Ukm::class, 'admin_ukm_id'); // Sesuaikan dengan nama kolom di database
+    }
 }

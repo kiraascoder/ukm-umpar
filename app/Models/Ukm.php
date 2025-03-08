@@ -20,6 +20,7 @@ class Ukm extends Model
         'struktur_organisasi',
         'media_sosial',
         'admin_ukm_id',
+        'saldo'
     ];
     public function admin()
     {
@@ -29,7 +30,6 @@ class Ukm extends Model
     {
         return $this->hasMany(Anggota::class);
     }
-
     public function surat()
     {
         return $this->hasMany(Surat::class);
@@ -37,5 +37,15 @@ class Ukm extends Model
     public function keuangan()
     {
         return $this->hasMany(Keuangan::class);
+    }
+
+    public function kegiatan()
+    {
+        return $this->hasMany(Kegiatan::class);
+    }
+
+    public function pendaftaran()
+    {
+        return $this->hasOne(Pendaftaran::class);
     }
 }

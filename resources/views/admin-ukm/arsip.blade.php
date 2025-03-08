@@ -41,7 +41,7 @@
                                     <a href="{{ route('adminUkmEditArsipSurat', $item->id) }}"
                                         class="text-blue-500 hover:underline">Edit</a>
                                     |
-                                    <form action="{{ route('adminUkmHapusSurat', $item->id) }}" method="POST"
+                                    <form action="{{ route('adminUkmKeuangan.delete', $item->id) }}" method="POST"
                                         class="inline">
                                         @csrf
                                         @method('DELETE')

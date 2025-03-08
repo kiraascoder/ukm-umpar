@@ -6,7 +6,7 @@
     <div class="bg-gray-100 min-h-screen py-10">
         <div class="container mx-auto">
             <div class="max-w-3xl mx-auto bg-white p-8 shadow-lg rounded-lg">
-                <h2 class="text-2xl font-bold mb-6 text-center">Edit Anggota UKMnpm</h2>
+                <h2 class="text-2xl font-bold mb-6 text-center">Edit Anggota UKM</h2>
                 <form action="{{ route('adminUkmEditAnggota.edit', $anggota->id) }}" method="POST"
                     enctype="multipart/form-data" class="space-y-4">
                     @csrf

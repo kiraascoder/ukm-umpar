@@ -4,20 +4,22 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Keuangan extends Model
+class Kegiatan extends Model
 {
-    protected $table = 'keuangan';
+    protected $table = "kegiatan";
 
     protected $fillable = [
         'ukm_id',
-        'jenis',
-        'jumlah',
+        'nama',
+        'deskripsi',
         'tanggal',
-        'keterangan',
-        'bukti_transaksi',
-        'ukm_id',
+        'dokumentasi'
     ];
 
+    public function dokumentasi()
+    {
+        return $this->hasMany(KegiatanDokumentasi::class);
+    }
     public function ukm()
     {
         return $this->belongsTo(Ukm::class);

@@ -61,8 +61,6 @@ class SuratController extends Controller
         }
     }
 
-
-
     public function editSurat(Request $request, $id)
     {
         $surat = Surat::findOrFail($id);

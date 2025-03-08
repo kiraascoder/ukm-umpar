@@ -1,10 +1,13 @@
 <?php
 
 use App\Http\Controllers\AdminUKMController;
+use App\Http\Controllers\PendaftaranController;
 use App\Http\Controllers\SuratController;
+use App\Http\Controllers\UploadDokumentasi;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminSesiController;
 use App\Http\Controllers\KeuanganController;
+use App\Http\Controllers\KegiatanController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -51,15 +54,32 @@ Route::middleware(['admin:admin_ukm'])->group(function () {
 
     // View dan tambah keuangan
     Route::get('/admin/ukm/keuangan', [KeuanganController::class, 'viewKeuangan'])->name('adminUkmKeuangan');
+    Route::get('/admin/ukm/keuangan/tambah', [KeuanganController::class, 'tambahKeuanganView'])->name('adminUkmTambahKeuangan');
+    Route::post('/admin/ukm/keuangan/tambah-keuangan', [KeuanganController::class, 'storeKeuangan'])->name('adminUkmTambahKeuangan.store');
+    Route::get('/admin/ukm/keuangan/{id}/edit', [KeuanganController::class, 'viewEditKeuangan'])->name('adminUkmEditKeuangan');
+    Route::put('/admin/ukm/keuangan/{id}/', [KeuanganController::class, 'editKeuangan'])->name('adminUkmKeuangan.edit');
+    Route::delete('/admin/ukm/keuangan/{id}/delete', [KeuanganController::class, 'hapusKeuangan'])->name('adminUkmKeuangan.delete');
+
 
     // View dan tambah kegiatan
-    Route::get('/admin/ukm/kegiatan', [AdminUKMController::class, 'ukmKegiatan'])->name('adminUkmKegiatan');
+    Route::get('/admin/ukm/kegiatan', [KegiatanController::class, 'ukmKegiatan'])->name('adminUkmKegiatan');
+    // Route::get('/admin/ukm/kegiatan/{id}/detail', [KegiatanController::class, 'ukmDetailKegiatan'])->name('adminDetailUkmKegiatan');
+    Route::get('/admin/ukm/kegiatan/tambah', [KegiatanController::class, 'tambahKegiatanView'])->name('adminUkmTambahKegiatan');
+    Route::post('/admin/ukm/kegiatan/tambah-kegiatan', [KegiatanController::class, 'storeKegiatan'])->name('adminUkmTambahKegiatan.store');
+    Route::get('/admin/ukm/kegiatan/{id}/edit', [KegiatanController::class, 'editKegiatanView'])->name('adminUkmEditKegiatan');
+    Route::get('/admin/ukm/kegiatan/{id}/detail', [KegiatanController::class, 'detailKegiatanView'])->name('adminUkmDetailKegiatan');
+    Route::post('/admin/ukm/kegiatan/tambah-dokumentasi/{id}', [UploadDokumentasi::class, 'store'])->name('kegiatan.uploadDokumentasi');
+    // Route::put('/admin/ukm/kegiatan/{id}', [KegiatanController::class, 'editKegiatan'])->name('adminUkmEditKegiatan.edit');
+    Route::delete('/admin/ukm/kegiatan/{id}/delete', [KegiatanController::class, 'deleteKegiatan'])->name('adminUkmKegiatan.delete');
 
     // View dan tambah pendaftaran
-    Route::get('/admin/ukm/pendaftaran', [AdminUKMController::class, 'ukmPendaftaran'])->name('adminUkmPendaftaran');
+    Route::get('/admin/ukm/pendaftaran', [PendaftaranController::class, 'ukmPendaftaran'])->name('adminUkmPendaftaran');
 
     // View dan tambah proker
     Route::get('/admin/ukm/proker', [AdminUKMController::class, 'ukmProker'])->name('adminUkmProker');
+
+    // View dan tambah Albums
+    Route::get('/admin/ukm/album', [AdminUKMController::class, 'ukmAlbum'])->name('adminUkmAlbum');
 });
 
 
