@@ -42,7 +42,6 @@ class SuratController extends Controller
             'file_path' => 'required|file|mimes:pdf,doc,docx|max:2048',
         ]);
 
-
         $user = Auth::user();
         $ukm = Ukm::where('admin_ukm_id', $user->id)->first();
         if (!$ukm) {

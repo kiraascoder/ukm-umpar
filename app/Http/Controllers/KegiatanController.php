@@ -21,7 +21,7 @@ class KegiatanController extends Controller
     {
         return view('admin-ukm.tambah.kegiatan');
     }
-        
+
     public function detailKegiatanView($id)
     {
         $kegiatan = Kegiatan::findOrFail($id);
@@ -54,8 +54,6 @@ class KegiatanController extends Controller
                 'deskripsi' => $validateData['deskripsi'],
                 'tanggal' => $validateData['tanggal'],
                 'dokumentasi' => $filePath,
-
-
             ]);
 
             return redirect('/admin/ukm/kegiatan')->with('success', 'Kegiatan berhasil ditambahkan.');

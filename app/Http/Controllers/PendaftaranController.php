@@ -3,37 +3,44 @@
 namespace App\Http\Controllers;
 
 use App\Models\Pendaftaran;
+use App\Models\Ukm;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PendaftaranController extends Controller
 {
     public function ukmPendaftaran()
     {
-        return view('admin-ukm.pendaftaran');
+        $user = Auth::user();
+        $ukm = Ukm::where('admin_ukm_id', $user->id)->first();
+        $pendaftaran = $ukm ? $ukm->pendaftaran()->get() : collect();
+        return view('admin-ukm.pendaftaran', compact('pendaftaran'));
     }
     public function tambahPendaftaranView()
     {
         return view('admin-ukm.tambah.pendaftaran');
     }
+    public function detailpendaftaranView($id)
+    {
+        $pendaftaran = Pendaftaran::findOrFail($id);
+        return view('admin-ukm.detail.pendaftaran', compact('pendaftaran'));
+    }
 
     public function editPendaftaranView($id)
     {
         $pendaftaran = Pendaftaran::findOrFail($id);
-        return view('admin-ukm.edit.pendaftaran', compact('kegiatan'));
-    }
-    public function detailKegiatanView($id)
-    {
-        $kegiatan = Kegiatan::findOrFail($id);
-        return view('admin-ukm.detail.kegiatan', compact('kegiatan'));
+        return view('admin-ukm.edit.pendaftaran', compact('pendaftaran'));
     }
 
-    public function storeKegiatan(Request $request)
+    public function storePendaftaran(Request $request)
     {
         $validateData = $request->validate([
-            'nama' => 'required|string|max:255',
-            'deskripsi' => 'required|string|min:10|max:700',
-            'tanggal' => 'required|date',
-            'dokumentasi' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:10048'
+            'pendaftaran' => 'required|string|max:255',
+            'batas_pendaftaran' => 'required|date',
+            'brosur' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:10048',
+            'link_pendaftaran' => 'required|string|max:255',
+            'persyaratan' => 'required|string|max:255',
+
         ]);
 
         $user = Auth::user();
@@ -44,28 +51,34 @@ class PendaftaranController extends Controller
         }
 
         try {
-            $filePath = $request->hasFile('dokumentasi')
-                ? $request->file('dokumentasi')->store('dokumentasi', 'public')
+            $filePath = $request->hasFile('brosur')
+                ? $request->file('brosur')->store('brosur', 'public')
                 : null;
 
-            $ukm->kegiatan()->create([
-                'nama' => $validateData['nama'],
-                'deskripsi' => $validateData['deskripsi'],
-                'tanggal' => $validateData['tanggal'],
-                'dokumentasi' => $filePath,
-
-
+            $ukm->pendaftaran()->create([
+                'pendaftaran' => $validateData['pendaftaran'],
+                'batas_pendaftaran' => $validateData['batas_pendaftaran'],
+                'brosur' => $filePath,
+                'link_pendaftaran' => $validateData['link_pendaftaran'],
+                'persyaratan' => $validateData['persyaratan'],
             ]);
 
-            return redirect('/admin/ukm/kegiatan')->with('success', 'Kegiatan berhasil ditambahkan.');
+            return redirect('/admin/ukm/pendaftaran')->with('success', 'Pendaftaran berhasil ditambahkan.');
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
         }
     }
-    public function deleteKegiatan($id)
+    public function deletePendaftaran($id)
     {
-        $kegiatan = Kegiatan::findOrFail($id);
-        $kegiatan->delete();
-        return redirect('/admin/ukm/kegiatan')->with('success', 'Kegiatan Berhasil berhasil dihapus.');
+        $pendaftaran = Pendaftaran::findOrFail($id);
+        $pendaftaran->delete();
+        return redirect('/admin/ukm/pendaftaran')->with('success', 'Pendaftaran Berhasil berhasil dihapus.');
+    }
+
+    public function editPendaftaran(Request $request, $id)
+    {
+        $pendaftaran = Pendaftaran::findOrFail($id);
+        $pendaftaran->update($request->all());
+        return redirect('/admin/ukm/pendaftaran')->with('success', 'Pendaftaran Berhasil berhasil diperbarui.');
     }
 }

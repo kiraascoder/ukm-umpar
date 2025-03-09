@@ -24,23 +24,6 @@ class AdminUKMController extends Controller
         return view('admin-ukm.profil-ukm', compact('ukm'));
     }
 
-    public function ukmAnggota()
-    {
-        $ukm = Ukm::where('admin_ukm_id', Auth::user()->id)->first();
-        $anggota = $ukm ? $ukm->anggota()->get() : collect();
-        return view('admin-ukm.anggota', compact('anggota'));
-    }
-
-
-    public function ukmProker()
-    {
-        return view('admin-ukm.proker');
-    }
-    public function ukmAlbum()
-    {
-        return view('admin-ukm.album');
-    }
-
     public function ukmEditProfile()
     {
         $user = Auth::user();
@@ -136,91 +119,6 @@ class AdminUKMController extends Controller
             'media_sosial' => $media_sosial
         ]);
 
-        return redirect('/admin/ukm/dashboard')->with('success', 'Data Berhasil Diperbarui');
-    }
-
-    public function viewTambahAnggota()
-    {
-        return view('admin-ukm.tambah.anggota');
-    }
-
-    public function viewEditAnggota($id)
-    {
-        $anggota = Anggota::findOrFail($id);
-        return view('admin-ukm.edit.anggota', compact('anggota'));
-    }
-
-    public function storeAnggota(Request $request)
-    {
-        $validatedData = $request->validate([
-            'nama' => 'required|string|max:255',
-            'jabatan' => 'required|string|max:255',
-            'tempat_lahir' => 'required|string|max:255',
-            'tanggal_lahir' => 'required|date',
-            'jurusan' => 'required|string|max:255',
-            'fakultas' => 'required|string|in:fkip,feb,faktek,fapetrik,fikes,fai,hukum',
-            'angkatan' => 'required|string|max:255',
-        ]);
-
-        $user = Auth::user();
-        $ukm = Ukm::where('admin_ukm_id', $user->id)->first();
-
-        $ukm->anggota()->create([
-            'nama' => $validatedData['nama'],
-            'jabatan' => $validatedData['jabatan'],
-            'tempat_lahir' => $validatedData['tempat_lahir'],
-            'tanggal_lahir' => $validatedData['tanggal_lahir'],
-            'jurusan' => $validatedData['jurusan'],
-            'fakultas' => $validatedData['fakultas'],
-            'angkatan' => $validatedData['angkatan'],
-        ]);
-        return redirect('/admin/ukm/anggota')->with('success', 'Anggota berhasil ditambahkan.');
-    }
-
-    public function deleteAnggota($id)
-    {
-        $anggota = Anggota::findOrFail($id);
-        $anggota->delete();
-        return redirect('/admin/ukm/anggota')->with('success', 'Anggota berhasil dihapus.');
-    }
-
-    public function editAnggota(Request $request, $id)
-    {
-        $user = Auth::user();
-        $ukm = Ukm::where('admin_ukm_id', $user->id)->first();
-
-        if (!$ukm) {
-            return redirect()->back()->with('error', 'UKM tidak ditemukan.');
-        }
-
-        $anggota = Anggota::where('id', $id)->where('ukm_id', $ukm->id)->first();
-
-        if (!$anggota) {
-            return redirect()->back()->with('error', 'Anggota tidak ditemukan.');
-        }
-
-        // Validasi input
-        $request->validate([
-            'nama' => 'required|string|max:255',
-            'jabatan' => 'required|string|max:100',
-            'tempat_lahir' => 'required|string|max:255',
-            'tanggal_lahir' => 'required|date',
-            'jurusan' => 'required|string|max:255',
-            'fakultas' => 'required|string|max:100',
-            'angkatan' => 'required|string|max:10',
-        ]);
-
-        // Update data anggota
-        $anggota->update([
-            'nama' => $request->nama,
-            'jabatan' => $request->jabatan,
-            'tempat_lahir' => $request->tempat_lahir,
-            'tanggal_lahir' => $request->tanggal_lahir,
-            'jurusan' => $request->jurusan,
-            'fakultas' => $request->fakultas,
-            'angkatan' => $request->angkatan,
-        ]);
-
-        return redirect()->route('adminUkmAnggota')->with('success', 'Data anggota berhasil diperbarui.');
+        return redirect('/admin/ukm/profile')->with('success', 'Data Berhasil Diperbarui');
     }
 }

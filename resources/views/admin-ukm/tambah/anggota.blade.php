@@ -24,27 +24,31 @@
                         <input type="text" name="tempat_lahir" class="mt-1 p-2 w-full border rounded-md">
                     </div>
 
-
                     <div>
                         <label class="block font-medium text-gray-700">Tanggal Lahir</label>
                         <input type="date" name="tanggal_lahir" class="mt-1 p-2 w-full border rounded-md">
                     </div>
 
-
                     <div>
-                        <label class="block font-medium text-gray-700">Jurusan</label>
-                        <input type="text" name="jurusan" class="mt-1 p-2 w-full border rounded-md">
+                        <label class="block font-medium text-gray-700">Jenis Kelamin</label>
+                        <select name="jenis_kelamin" id="jenis_kelamin"
+                            class="mt-2 w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            required>
+                            <option value="" selected>-- Pilih Jenis Kelamin --</option>
+                            <option value="Laki-laki">Laki-laki</option>
+                            <option value="Perempuan">Perempuan</option>
+                        </select>
                     </div>
 
                     <div>
-                        <label class="block text-sm text-[#EFE3C2]">Jenis Kelamin</label>
+                        <label class="block font-medium text-gray-700">Fakultas</label>
                         <select name="fakultas" id="fakultas"
                             class="mt-2 w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                             required>
                             <option value="" selected>-- Pilih Fakultas --</option>
                             <option value="fkip">FKIP</option>
                             <option value="feb">FEB</option>
-                            <option value="faktek">FAKTEK</option>
+                            <option value="faktek">Teknik</option>
                             <option value="fapetrik">FAPETRIK</option>
                             <option value="fikes">FIKES</option>
                             <option value="fai">FAI</option>
@@ -53,8 +57,22 @@
                     </div>
 
                     <div>
+                        <label class="block font-medium text-gray-700">Jurusan</label>
+                        <select name="jurusan" id="jurusan"
+                            class="mt-2 w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            required>
+                            <option value="" selected>-- Pilih Jurusan --</option>
+                        </select>
+                    </div>
+
+                    <div>
                         <label class="block font-medium text-gray-700">Angkatan</label>
                         <input type="text" name="angkatan" class="mt-1 p-2 w-full border rounded-md">
+                    </div>
+
+                    <div>
+                        <label class="block font-medium text-gray-700">Foto Anggota</label>
+                        <input type="file" name="foto" class="mt-1 p-2 w-full border rounded-md">
                     </div>
 
                     <div class="text-center">
@@ -66,4 +84,59 @@
             </div>
         </div>
     </div>
+
+    <script>
+        const jurusanByFakultas = {
+            fkip: [
+                "Pendidikan Matematika",
+                "Pendidikan Bahasa Inggris",
+                "Pendidikan Non Formal",
+                "Pendidikan Biologi"
+            ],
+            feb: [
+                "Ekonomi Pembangunan",
+                "Akuntansi",
+                "Prodi Manajemen",
+                "Perbankan Syariah"
+            ],
+            faktek: [
+                "Teknik Sipil",
+                "Teknik Elektro",
+                "Teknik Informatika",
+                "Perencanaan Wilayah Kota (PWK)"
+            ],
+            fapetrik: [
+                "Agribisnis",
+                "Agroteknologi",
+                "Budidaya Perairan",
+                "Peternakan"
+            ],
+            fai: [
+                "Pendidikan Agama Islam",
+                "Pendidikan Islam Anak Usia Dini",
+                "Bimbingan dan Penyuluhan Islam"
+            ],
+            fikes: [
+                "Kesehatan Masyarakat",
+                "Gizi"
+            ],
+            hukum: [
+                "Ilmu Hukum"
+            ]
+        };
+        document.getElementById("fakultas").addEventListener("change", function() {
+            let fakultas = this.value;
+            let jurusanSelect = document.getElementById("jurusan");            
+            jurusanSelect.innerHTML = '<option value="" selected>-- Pilih Jurusan --</option>';
+
+            if (fakultas && jurusanByFakultas[fakultas]) {
+                jurusanByFakultas[fakultas].forEach(jurusan => {
+                    let option = document.createElement("option");
+                    option.value = jurusan.toLowerCase().replace(/\s+/g, "-");
+                    option.textContent = jurusan;
+                    jurusanSelect.appendChild(option);
+                });
+            }
+        });
+    </script>
 @endsection

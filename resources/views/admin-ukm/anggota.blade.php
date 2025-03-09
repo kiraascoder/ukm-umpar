@@ -30,8 +30,8 @@
                                 <td class="py-2 px-4 border">{{ $item->nama }}</td>
                                 <td class="py-2 px-4 border">{{ $item->jabatan }}</td>
                                 <td class="py-2 px-4 border">
-                                    <a href="{{ route('adminUkmEditAnggota', $item->id) }}"
-                                        class="text-blue-500 hover:underline">Edit</a> |
+                                    <a href="{{ route('adminUkmDetailAnggota', $item->id) }}"
+                                        class="text-blue-500 hover:underline">Detail</a> |
                                     <form action="{{ route('adminUkmHapusAnggota', $item->id) }}" method="POST"
                                         class="inline">
                                         @csrf

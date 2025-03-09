@@ -46,6 +46,10 @@ class Ukm extends Model
 
     public function pendaftaran()
     {
-        return $this->hasOne(Pendaftaran::class);
+        return $this->hasMany(Pendaftaran::class);
+    }
+    public function proker()
+    {
+        return $this->hasMany(Proker::class);
     }
 }

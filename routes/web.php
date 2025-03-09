@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\AdminUKMController;
+use App\Http\Controllers\AnggotaController;
 use App\Http\Controllers\PendaftaranController;
+use App\Http\Controllers\ProkerController;
 use App\Http\Controllers\SuratController;
 use App\Http\Controllers\UploadDokumentasi;
 use Illuminate\Support\Facades\Route;
@@ -24,8 +26,6 @@ Route::prefix('admin')->middleware('authenticated')->group(function () {
     Route::post('admin/register', [AdminSesiController::class, 'register'])->name('admin.register.submit');
 });
 
-
-
 // Admin Ukm Route
 Route::middleware(['admin:admin_ukm'])->group(function () {
     Route::get('/admin/ukm/dashboard', [AdminUKMController::class, 'adminDashboardUkm'])->name('adminUkmDashboard');
@@ -35,12 +35,13 @@ Route::middleware(['admin:admin_ukm'])->group(function () {
     Route::put('/admin/ukm/store', [AdminUKMController::class, 'storeDataUkm'])->name('adminUkm.store');
 
     // View dan tambah anggota ukm
-    Route::get('/admin/ukm/anggota', [AdminUKMController::class, 'ukmAnggota'])->name('adminUkmAnggota');
-    Route::get('/admin/ukm/anggota/tambah', [AdminUKMController::class, 'viewTambahAnggota'])->name('adminUkmTambahAnggota');
-    Route::get('/admin/ukm/anggota/{id}/edit', [AdminUKMController::class, 'viewEditAnggota'])->name('adminUkmEditAnggota');
-    Route::put('/admin/ukm/anggota/{id}', [AdminUKMController::class, 'EditAnggota'])->name('adminUkmEditAnggota.edit');
-    Route::delete('/admin/ukm/anggota/{id}/delete', [AdminUKMController::class, 'deleteAnggota'])->name('adminUkmHapusAnggota');
-    Route::post('/admin/ukm/anggota/store', [AdminUKMController::class, 'storeAnggota'])->name('adminUkmAnggota.store');
+    Route::get('/admin/ukm/anggota', [AnggotaController::class, 'ukmAnggota'])->name('adminUkmAnggota');
+    Route::get('/admin/ukm/anggota/tambah', [AnggotaController::class, 'viewTambahAnggota'])->name('adminUkmTambahAnggota');
+    Route::get('/admin/ukm/anggota/{id}/detail', [AnggotaController::class, 'viewDetailAnggota'])->name('adminUkmDetailAnggota');
+    Route::get('/admin/ukm/anggota/{id}/edit', [AnggotaController::class, 'viewEditAnggota'])->name('adminUkmEditAnggota');
+    Route::put('/admin/ukm/anggota/{id}', [AnggotaController::class, 'EditAnggota'])->name('adminUkmEditAnggota.edit');
+    Route::delete('/admin/ukm/anggota/{id}/delete', [AnggotaController::class, 'deleteAnggota'])->name('adminUkmHapusAnggota');
+    Route::post('/admin/ukm/anggota/store', [AnggotaController::class, 'storeAnggota'])->name('adminUkmAnggota.store');
 
 
     // View dan tambah arsip surat
@@ -63,23 +64,31 @@ Route::middleware(['admin:admin_ukm'])->group(function () {
 
     // View dan tambah kegiatan
     Route::get('/admin/ukm/kegiatan', [KegiatanController::class, 'ukmKegiatan'])->name('adminUkmKegiatan');
-    // Route::get('/admin/ukm/kegiatan/{id}/detail', [KegiatanController::class, 'ukmDetailKegiatan'])->name('adminDetailUkmKegiatan');
     Route::get('/admin/ukm/kegiatan/tambah', [KegiatanController::class, 'tambahKegiatanView'])->name('adminUkmTambahKegiatan');
     Route::post('/admin/ukm/kegiatan/tambah-kegiatan', [KegiatanController::class, 'storeKegiatan'])->name('adminUkmTambahKegiatan.store');
     Route::get('/admin/ukm/kegiatan/{id}/edit', [KegiatanController::class, 'editKegiatanView'])->name('adminUkmEditKegiatan');
     Route::get('/admin/ukm/kegiatan/{id}/detail', [KegiatanController::class, 'detailKegiatanView'])->name('adminUkmDetailKegiatan');
     Route::post('/admin/ukm/kegiatan/tambah-dokumentasi/{id}', [UploadDokumentasi::class, 'store'])->name('kegiatan.uploadDokumentasi');
-    // Route::put('/admin/ukm/kegiatan/{id}', [KegiatanController::class, 'editKegiatan'])->name('adminUkmEditKegiatan.edit');
+    Route::put('/admin/ukm/kegiatan/{id}', [KegiatanController::class, 'editKegiatan'])->name('adminUkmEditKegiatan.edit');
     Route::delete('/admin/ukm/kegiatan/{id}/delete', [KegiatanController::class, 'deleteKegiatan'])->name('adminUkmKegiatan.delete');
 
     // View dan tambah pendaftaran
     Route::get('/admin/ukm/pendaftaran', [PendaftaranController::class, 'ukmPendaftaran'])->name('adminUkmPendaftaran');
+    Route::get('/admin/ukm/pendaftaran/tambah', [PendaftaranController::class, 'tambahPendaftaranView'])->name('adminUkmTambahPendaftaran');
+    Route::post('/admin/ukm/pendaftaran/tambah-pendaftaran', [PendaftaranController::class, 'storePendaftaran'])->name('adminUkmTambahPendaftaran.store');
+    Route::get('/admin/ukm/pendaftaran/{id}/detail', [PendaftaranController::class, 'detailpendaftaranView'])->name('adminUkmDetailPendaftaran');
+    Route::get('/admin/ukm/pendaftaran/{id}/edit', [PendaftaranController::class, 'editPendaftaranView'])->name('adminUkmEditPendaftaran');
+    Route::put('/admin/ukm/pendaftaran/{id}', [PendaftaranController::class, 'editPendaftaran'])->name('adminUkmEditPendaftaran.edit');
+    Route::delete('/admin/ukm/pendaftaran/{id}/delete', [PendaftaranController::class, 'deletependaftaran'])->name('adminUkmPendaftaran.delete');
 
     // View dan tambah proker
-    Route::get('/admin/ukm/proker', [AdminUKMController::class, 'ukmProker'])->name('adminUkmProker');
-
-    // View dan tambah Albums
-    Route::get('/admin/ukm/album', [AdminUKMController::class, 'ukmAlbum'])->name('adminUkmAlbum');
+    Route::get('/admin/ukm/proker', [ProkerController::class, 'ukmProker'])->name('adminUkmProker');
+    Route::get('/admin/ukm/proker/tambah', [ProkerController::class, 'tambahProkerView'])->name('adminUkmTambahProker');
+    Route::post('/admin/ukm/proker/tambah-proker', [ProkerController::class, 'storeProker'])->name('adminUkmTambahProker.store');
+    Route::get('/admin/ukm/proker/{id}/detail', [ProkerController::class, 'detailProkerView'])->name('adminUkmDetailProker');
+    Route::get('/admin/ukm/proker/{id}/edit', [ProkerController::class, 'editProkerView'])->name('adminUkmEditProker');
+    Route::put('/admin/ukm/proker/{id}', [ProkerController::class, 'editProker'])->name('adminUkmEditProker.edit');
+    Route::delete('/admin/ukm/proker/{id}/delete', [ProkerController::class, 'DeleteProker'])->name('adminUkmDeleteProker.delete');
 });
 
 

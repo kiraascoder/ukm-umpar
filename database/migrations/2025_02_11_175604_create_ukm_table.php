@@ -31,10 +31,12 @@ return new class extends Migration
             $table->string('jabatan');
             $table->string('tempat_lahir');
             $table->date('tanggal_lahir');
+            $table->string('jenis_kelamin')->nullable();
             $table->string('jurusan');
             $table->enum('fakultas', ['fkip', 'feb', 'faktek', 'fapetrik', 'fikes', 'fai', 'hukum']);
-            $table->string('angakatan');
+            $table->string('angkatan');
             $table->foreignId('ukm_id')->constrained('ukm')->onDelete('cascade');
+            $table->string('foto')->nullable();
             $table->timestamps();
         });
         Schema::create('program_kerja', function (Blueprint $table) {

@@ -4,12 +4,16 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Pendaftaran extends Model
+class Proker extends Model
 {
-    protected $table = 'pendaftaran_anggota';
+    protected $table = 'program_kerja';
 
     protected $fillable = [
-        'ukm_id', 'pendaftaran', 'batas_pendaftaran', 'brosur', 'link_pendaftaran', 'persyaratan',
+        'ukm_id',
+        'nama',
+        'bidang',
+        'deskripsi',
+        'status',
     ];
 
     public function ukm()

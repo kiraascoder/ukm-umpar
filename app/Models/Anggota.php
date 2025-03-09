@@ -12,10 +12,12 @@ class Anggota extends Model
         'jabatan',
         'tempat_lahir',
         'tanggal_lahir',
+        'jenis_kelamin',
         'jurusan',
         'fakultas',
         'angkatan',
         'ukm_id',
+        'foto',
     ];
 
     public function ukm()

@@ -49,11 +49,16 @@
                     </div>
 
 
-                    <div class="text-center">
-                        <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded">Edit
-                            Surat
+                    <div class="text-center flex justify-center space-x-4 mt-4">
+                        <a href="{{ route('adminUkmArsipSurat') }}"
+                            class="bg-gray-500 text-white px-4 py-2 rounded-md hover:bg-gray-700">
+                            Back
+                        </a>
+                        <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded">
+                            Edit Surat
                         </button>
                     </div>
+
                 </form>
             </div>
         </div>
