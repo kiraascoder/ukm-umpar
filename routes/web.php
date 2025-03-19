@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminUKMController;
 use App\Http\Controllers\AnggotaController;
 use App\Http\Controllers\PendaftaranController;
 use App\Http\Controllers\ProkerController;
+use App\Http\Controllers\SuperAdminController;
 use App\Http\Controllers\SuratController;
 use App\Http\Controllers\UploadDokumentasi;
 use Illuminate\Support\Facades\Route;
@@ -68,7 +69,6 @@ Route::middleware(['admin:admin_ukm'])->group(function () {
     Route::post('/admin/ukm/kegiatan/tambah-kegiatan', [KegiatanController::class, 'storeKegiatan'])->name('adminUkmTambahKegiatan.store');
     Route::get('/admin/ukm/kegiatan/{id}/edit', [KegiatanController::class, 'editKegiatanView'])->name('adminUkmEditKegiatan');
     Route::get('/admin/ukm/kegiatan/{id}/detail', [KegiatanController::class, 'detailKegiatanView'])->name('adminUkmDetailKegiatan');
-    Route::post('/admin/ukm/kegiatan/tambah-dokumentasi/{id}', [UploadDokumentasi::class, 'store'])->name('kegiatan.uploadDokumentasi');
     Route::put('/admin/ukm/kegiatan/{id}', [KegiatanController::class, 'editKegiatan'])->name('adminUkmEditKegiatan.edit');
     Route::delete('/admin/ukm/kegiatan/{id}/delete', [KegiatanController::class, 'deleteKegiatan'])->name('adminUkmKegiatan.delete');
 
@@ -89,9 +89,19 @@ Route::middleware(['admin:admin_ukm'])->group(function () {
     Route::get('/admin/ukm/proker/{id}/edit', [ProkerController::class, 'editProkerView'])->name('adminUkmEditProker');
     Route::put('/admin/ukm/proker/{id}', [ProkerController::class, 'editProker'])->name('adminUkmEditProker.edit');
     Route::delete('/admin/ukm/proker/{id}/delete', [ProkerController::class, 'DeleteProker'])->name('adminUkmDeleteProker.delete');
+
+
+    // Upload Dokumentasi Kegiatan
+    Route::post('/admin/ukm/kegiatan/tambah-dokumentasi', [UploadDokumentasi::class, 'storeDokumentasi'])->name('adminUkmTambahDokumentasi.store');
 });
 
-
+Route::middleware(['admin:admin'])->group(function () {
+    Route::get('/admin/dashboard', [SuperAdminController::class, 'superAdminDashboardUkm'])->name('superAdminDashboard');
+    Route::get('/admin/proker-ukm', [SuperAdminController::class, 'daftarProkerUkm'])->name('adminUkmProgram');
+    Route::get('/admin/daftar-ukm', [SuperAdminController::class, 'daftarUkm'])->name('adminUkmList');
+    Route::get('/admin/proker-ukm/{id}/detail', [SuperAdminController::class, 'detailProkerUkm'])->name('prokerUkm');
+    Route::get('/admin/daftar-ukm/{id}/detail', [SuperAdminController::class, 'detailUkm'])->name('detailUkm');
+});
 
 //Log Out
 Route::post('admin/logout', [AdminSesiController::class, 'logout'])->name('admin.logout');

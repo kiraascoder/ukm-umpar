@@ -10,10 +10,7 @@ use Storage;
 
 class AdminUKMController extends Controller
 {
-    public function adminDashboard()
-    {
-        return view('superadmin.dashboard');
-    }
+    
 
     public function ukmProfile()
     {

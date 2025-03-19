@@ -13,7 +13,6 @@ class Kegiatan extends Model
         'nama',
         'deskripsi',
         'tanggal',
-        'dokumentasi'
     ];
 
     public function dokumentasi()

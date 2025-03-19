@@ -25,7 +25,8 @@ class KegiatanController extends Controller
     public function detailKegiatanView($id)
     {
         $kegiatan = Kegiatan::findOrFail($id);
-        return view('admin-ukm.detail.kegiatan', compact('kegiatan'));
+        $kegiatanDokumentasi = $kegiatan->dokumentasi()->get();
+        return view('admin-ukm.detail.kegiatan', compact('kegiatan', 'kegiatanDokumentasi'));
     }
 
     public function storeKegiatan(Request $request)
@@ -34,8 +35,7 @@ class KegiatanController extends Controller
             'nama' => 'required|string|max:255',
             'deskripsi' => 'required|string|min:10|max:700',
             'tanggal' => 'required|date',
-            'dokumentasi' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:10048'
-        ]);
+        ],);
 
         $user = Auth::user();
         $ukm = Ukm::where('admin_ukm_id', $user->id)->first();
@@ -45,15 +45,10 @@ class KegiatanController extends Controller
         }
 
         try {
-            $filePath = $request->hasFile('dokumentasi')
-                ? $request->file('dokumentasi')->store('dokumentasi', 'public')
-                : null;
-
-            $ukm->kegiatan()->create([
+            $kegiatan = $ukm->kegiatan()->create([
                 'nama' => $validateData['nama'],
                 'deskripsi' => $validateData['deskripsi'],
-                'tanggal' => $validateData['tanggal'],
-                'dokumentasi' => $filePath,
+                'tanggal' => $validateData['tanggal']
             ]);
 
             return redirect('/admin/ukm/kegiatan')->with('success', 'Kegiatan berhasil ditambahkan.');
@@ -61,6 +56,26 @@ class KegiatanController extends Controller
             return redirect()->back()->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
         }
     }
+
+    public function updateKegiatan(Request $request, $id)
+    {
+        $validateData = $request->validate([
+            'nama' => 'required|string|max:255',
+            'deskripsi' => 'required|string|min:10|max:700',
+            'tanggal' => 'required|date',
+        ]);
+
+        $kegiatan = Kegiatan::findOrFail($id);
+
+        $kegiatan->update([
+            'nama' => $validateData['nama'],
+            'deskripsi' => $validateData['deskripsi'],
+            'tanggal' => $validateData['tanggal']
+        ]);
+
+        return redirect('/admin/ukm/kegiatan')->with('success', 'Kegiatan berhasil diperbarui.');
+    }
+
     public function deleteKegiatan($id)
     {
         $kegiatan = Kegiatan::findOrFail($id);

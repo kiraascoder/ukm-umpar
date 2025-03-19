@@ -16,7 +16,16 @@
                     </div>
                     <div>
                         <label class="block font-medium text-gray-700">Jabatan</label>
-                        <input type="text" name="jabatan" class="mt-1 p-2 w-full border rounded-md">
+                        <select id="jabatanSelect" name="jabatan" class="mt-1 p-2 w-full border rounded-md"
+                            onchange="toggleInput(this)">
+                            <option value="Ketua Umum">Ketua Umum</option>
+                            <option value="Bendahara">Bendahara</option>
+                            <option value="Sekretaris">Sekretaris</option>
+                            <option value="Ketua Bidang">Ketua Bidang</option>
+                            <option value="lainnya">Lainnya...</option>
+                        </select>
+                        <input type="text" id="jabatanInput" name="jabatan_custom"
+                            class="mt-2 p-2 w-full border rounded-md hidden" placeholder="Masukkan jabatan lain...">
                     </div>
 
                     <div>
@@ -126,7 +135,7 @@
         };
         document.getElementById("fakultas").addEventListener("change", function() {
             let fakultas = this.value;
-            let jurusanSelect = document.getElementById("jurusan");            
+            let jurusanSelect = document.getElementById("jurusan");
             jurusanSelect.innerHTML = '<option value="" selected>-- Pilih Jurusan --</option>';
 
             if (fakultas && jurusanByFakultas[fakultas]) {
@@ -138,5 +147,19 @@
                 });
             }
         });
+
+        function toggleInput(select) {
+            var input = document.getElementById('jabatanInput');
+            if (select.value === 'lainnya') {
+                input.classList.remove('hidden');
+                input.setAttribute('name', 'jabatan');
+                select.removeAttribute('name');
+                input.focus();
+            } else {
+                input.classList.add('hidden');
+                input.removeAttribute('name');
+                select.setAttribute('name', 'jabatan');
+            }
+        }
     </script>
 @endsection
