@@ -13,7 +13,7 @@ use App\Http\Controllers\KeuanganController;
 use App\Http\Controllers\KegiatanController;
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('mahasiswa.home');
 });
 
 // Super Admin Route

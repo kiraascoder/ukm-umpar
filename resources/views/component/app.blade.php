@@ -9,12 +9,12 @@
     @vite('resources/css/app.css')
 </head>
 
-<body class="bg-[#EFE3C2] min-h-screen flex flex-col">
-    @include('components.navbar')
+<body class="bg-[#F3F3E0] min-h-screen flex flex-col">
+    @include('component.navbar')
     <div class="container mx-auto">
         @yield('content')
     </div>
-
+    @include('component.footer')
 </body>
 
 </html>
