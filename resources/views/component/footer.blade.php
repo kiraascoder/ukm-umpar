@@ -1,45 +1,62 @@
-<footer class="text-white px-8 py-6 bg-gray-800">
-    <div class="container mx-auto grid grid-cols-1 md:grid-cols-4 gap-4">
-        <div class="mb-8 md:mb-0">
-            <h3 class="text-lg font-bold mb-4">Example</h3>
-            <p class="mb-2">Example</p>
-            <p class="mb-2">123 Example Street, Example City, Example Country</p>
-            <p class="mb-2"><a href="tel:+1514890000" class="hover:text-yellow-400">1-514-890-0000</a></p>
-            <p><a href="mailto:calinscompagnies@calins.com" class="hover:text-yellow-400">calinscompagnies@calins.com</a>
-            </p>
-        </div>
-        <div class="mb-8 md:mb-0">
-            <h3 class="text-lg font-bold mb-4">Example</h3>
-            <ul>
-                <li><a href="#" class="hover:text-yellow-400">About Us</a></li>
-                <li><a href="#" class="hover:text-yellow-400">Delivery Policy</a></li>
-                <li><a href="#" class="hover:text-yellow-400">Contact Us</a></li>
-                <li><a href="#" class="hover:text-yellow-400">Our Stores</a></li>
-                <li><a href="#" class="hover:text-yellow-400">Help</a></li>
-                <li><a href="#" class="hover:text-yellow-400">Work at Hugs</a></li>
-            </ul>
-        </div>
-        <div class="mb-8 md:mb-0">
-            <h3 class="text-lg font-bold mb-4">Example</h3>
-            <ul>
-                <li><a href="#" class="hover:text-yellow-400">My Personal Information</a></li>
-                <li><a href="#" class="hover:text-yellow-400">My Addresses</a></li>
-                <li><a href="#" class="hover:text-yellow-400">My Orders</a></li>
-                <li><a href="#" class="hover:text-yellow-400">My Favorites</a></li>
-            </ul>
-        </div>
-        <div>
-            <h3 class="text-lg font-bold mb-4">Contact Us</h3>
-            <ul class="mb-4">
-                <li><a href="tel:+1514890000" class="hover:text-yellow-400">1-514-890-0000</a></li>
-                <li><a href="mailto:calinscompagnies@calins.com" class="hover:text-yellow-400">Send mail</a></li>
-            </ul>
-            <div class="mt-4 icons">
-                <a href="#" class="mr-2"><i class="fab fa-facebook fa-2x"></i></a>
-                <a href="#" class="mr-2"><i class="fab fa-instagram fa-2x"></i></a>
-                <a href="mailto:calinscompagnies@calins.com"><i class="far fa-envelope fa-2x"></i></a>
+<footer class="bg-gray-900 text-white py-12">
+    <div class="container mx-auto px-6">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
+            <div>
+                <h3 class="text-xl font-bold mb-4">Demo</h3>
+                <p class="text-gray-400 mb-4">Premium vinyl playsets designed for endless adventures, built to last for
+                    generations of fun.</p>
+                <div class="flex space-x-4">
+                    <a href="#" class="text-gray-400 hover:text-white transition">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white transition">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white transition">
+                        <i class="fab fa-pinterest-p"></i>
+                    </a>
+                </div>
+            </div>            
+            <div>
+                <h3 class="text-lg font-bold mb-4">Products</h3>
+                <ul class="space-y-2">
+                    <li><a href="#" class="text-gray-400 hover:text-white transition">Swing Sets</a></li>
+                    <li><a href="#" class="text-gray-400 hover:text-white transition">Playhouses</a></li>
+                    <li><a href="#" class="text-gray-400 hover:text-white transition">Combo Playsets</a></li>
+                    <li><a href="#" class="text-gray-400 hover:text-white transition">Accessories</a></li>
+                </ul>
+            </div>
+
+            <!-- Resources -->
+            <div>
+                <h3 class="text-lg font-bold mb-4">Resources</h3>
+                <ul class="space-y-2">
+                    <li><a href="#" class="text-gray-400 hover:text-white transition">Gallery</a></li>
+                    <li><a href="#" class="text-gray-400 hover:text-white transition">Safety Tips</a></li>
+                    <li><a href="#" class="text-gray-400 hover:text-white transition">Installation Guide</a></li>
+                    <li><a href="#" class="text-gray-400 hover:text-white transition">FAQs</a></li>
+                </ul>
+            </div>
+
+            <!-- Contact -->
+            <div>
+                <h3 class="text-lg font-bold mb-4">Contact Us</h3>
+                <ul class="space-y-2">
+                    <li class="text-gray-400 flex items-center">
+                        <i class="fas fa-phone mr-2 text-yellow-500"></i>
+                        <span>909.777.9911</span>
+                    </li>
+                    <li class="text-gray-400 flex items-center">
+                        <i class="fas fa-envelope mr-2 text-yellow-500"></i>
+                        <span>info@demo.com</span>
+                    </li>
+                </ul>
             </div>
         </div>
+
+        <!-- Copyright -->
+        <div class="border-t border-gray-800 pt-8">
+            <p class="text-gray-500 text-center">&copy; 2025 Demo. All rights reserved.</p>
+        </div>
     </div>
-    <p class="text-center mt-8">&copy; 2024 - All rights reserved.</p>
 </footer>

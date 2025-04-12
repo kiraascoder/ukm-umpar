@@ -3,156 +3,335 @@
 @section('title', 'UKM UMPAR')
 
 @section('content')
-    <header>
-        <nav class="p-6">
-            <div class="flex justify-between items-center">
-            </div>
-        </nav>
-        <div class="container mx-auto bg-[#608BC1] h-96 rounded-md flex items-center">
-            <div class="sm:ml-20 text-gray-50 text-center sm:text-left">
-                <h1 class="text-5xl font-bold mb-4">
-                    Book saunas <br />
-                    everywhere.
-                </h1>
-                <p class="text-lg inline-block sm:block">The largest online community to rent saunas in Finland.</p>
-                <button class="mt-8 px-4 py-2 bg-gray-600 rounded">Browse saunas</button>
+    <!-- Features Section -->
+    <div class="py-20 bg-white" id="features">
+        <div class="container mx-auto px-6">
+            <div class="text-center">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">UNIT KEGIATAN MAHASISWA</h2>
+                <p class="text-gray-600 max-w-6xl mx-auto">Wadah bagi mahasiswa yang memiliki minat, bakat, dan kreativitas
+                    yang sama untuk mengembangkan diri serta menyalurkan aktivitas ekstrakurikuler di lingkungan kampus.
+                    Jika di bangku sekolah dikenal sebagai ekstrakurikuler (ekskul), di perguruan tinggi UKM menjadi ruang
+                    bagi mahasiswa untuk berorganisasi, berkarya, dan berkontribusi.</p>
             </div>
         </div>
-    </header>
+    </div>
 
-    <main class="py-16 container mx-auto px-6 md:px-0">
-        <section>
-            <div class="container mx-auto rounded-md text-center">
-                <h1 class="text-5xl font-bold mb-4">
-                    Book saunas <br />
-                    everywhere.
-                </h1>
-                <p class="text-lg inline-block sm:block">The largest online community to rent saunas in Finland.</p>
-            </div>
-            <h1 class="text-3xl font-bold text-gray-600 mb-10">Explore exotic locations in Finland</h1>
-            <div class="grid sm:grid-cols-3 gap-4 grid-cols-2">
-                <div>
-                    <div class="bg-gray-300 h-44"></div>
-                    <h3 class="text-lg font-semibold text-gray-500 mt-2">Saunas in <span
-                            class="text-gray-700">Helsinki</span></h3>
-                </div>
-                <div>
-                    <div class="bg-gray-300 h-44"></div>
-                    <h3 class="text-lg font-semibold text-gray-500 mt-2">Saunas in <span
-                            class="text-gray-700">Rovaniemi</span></h3>
-                </div>
-                <div>
-                    <div class="bg-gray-300 h-44"></div>
-                    <h3 class="text-lg font-semibold text-gray-500 mt-2">Saunas in <span class="text-gray-700">Ruka</span>
-                    </h3>
-                </div>
+    <!-- Featured Products -->
+    <div class="py-20 bg-gray-50" id="featured">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Daftar UKM UMPAR</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Endless adventures start with a SwingIt playset.</p>
             </div>
 
-        </section>
-
-        <section>
-            <h1 class="inline-block text-gray-600 font-bold text-3xl mt-2">
-                The holy sauna ritual <br />
-                (or how does Saunatime work).
-            </h1>
-
-            <div class="grid grid-cols-3 gap-4 mt-10">
-                <div>
-                    <h3 class="text-lg font-semibold text-gray-500 mt-2">1. Browse and book</h3>
-                    <p class="text text-gray-400">Start by searching for a location. Once you find a sauna you like,
-                        simply check the availability, book it, and make a secure payment right away.</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Product 1 -->
+                <div class="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300"
+                    x-data="{ hover: false }">
+                    <div class="relative overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1605276277265-84f97da7d47a?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
+                            alt="Adventure Playset" class="w-full h-64 object-cover transition-all duration-500"
+                            :class="{ 'transform scale-105': hover }">
+                        <div
+                            class="absolute top-4 right-4 bg-[#608BC1] text-white text-sm font-bold px-3 py-1 rounded-full">
+                            Popular
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">Adventure World</h3>
+                        <p class="text-gray-600 mb-4">Packed with fun: slides, swings, climbing wall, and monkey bars in a
+                            compact design.</p>
+                        <a href="#"
+                            class="text-[#608BC1] font-medium hover:text-yellow-600 transition inline-flex items-center">
+                            <span>View Details</span>
+                            <i class="fas fa-arrow-right ml-2 text-sm"></i>
+                        </a>
+                    </div>
                 </div>
-                <div>
-                    <h3 class="text-lg font-semibold text-gray-500 mt-2">2. Have a great bath</h3>
-                    <p class="text text-gray-400">Meet your host on the date you chose and enjoy the home sauna
-                        experience. We'll handle the payment to the host after your experience.</p>
+
+                <!-- Product 2 -->
+                <div class="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300"
+                    x-data="{ hover: false }">
+                    <div class="relative overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1575783970733-1aaedde1db74?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
+                            alt="Castle Kingdom Playset" class="w-full h-64 object-cover transition-all duration-500"
+                            :class="{ 'transform scale-105': hover }">
+                        <div class="absolute top-4 right-4 bg-blue-500 text-white text-sm font-bold px-3 py-1 rounded-full">
+                            New
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">Castle Kingdom</h3>
+                        <p class="text-gray-600 mb-4">A royal playground with turrets, wave slides, and a spacious playhouse
+                            for imaginative play.</p>
+                        <a href="#"
+                            class="text-[#608BC1] font-medium hover:text-yellow-600 transition inline-flex items-center">
+                            <span>View Details</span>
+                            <i class="fas fa-arrow-right ml-2 text-sm"></i>
+                        </a>
+                    </div>
                 </div>
-                <div>
-                    <h3 class="text-lg font-semibold text-gray-500 mt-2">3. Review the host</h3>
-                    <p class="text text-gray-400">If you enjoyed the experience, let others know by giving a review to
-                        your sauna host. This way others will know where to go.</p>
+
+                <!-- Product 3 -->
+                <div class="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300"
+                    x-data="{ hover: false }">
+                    <div class="relative overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1596461110761-b4e5d5ad49f8?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
+                            alt="Backyard Explorer Playset" class="w-full h-64 object-cover transition-all duration-500"
+                            :class="{ 'transform scale-105': hover }">
+                        <div
+                            class="absolute top-4 right-4 bg-green-500 text-white text-sm font-bold px-3 py-1 rounded-full">
+                            Best Value
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">Backyard Explorer</h3>
+                        <p class="text-gray-600 mb-4">Perfect for smaller yards with swing beam, slide, and climbing options
+                            at an affordable price.</p>
+                        <a href="#"
+                            class="text-[#608BC1] font-medium hover:text-yellow-600 transition inline-flex items-center">
+                            <span>View Details</span>
+                            <i class="fas fa-arrow-right ml-2 text-sm"></i>
+                        </a>
+                    </div>
                 </div>
             </div>
-        </section>
-    </main>
 
-    <div class="mx-auto max-w-screen-2xl mb-6">
-        <div class="mb-4 flex items-center justify-between gap-8 sm:mb-8 md:mb-12">
-            <div class="flex items-center gap-12">
-                <h2 class="text-2xl font-bold text-gray-800 lg:text-3xl dark:text-white">Gallery</h2>
+            <div class="text-center mt-12">
+                <a href="#"
+                    class="inline-block bg-[#608BC1] hover:bg-[#133E87] text-gray-900 font-bold py-3 px-8 rounded-lg transition transform hover:-translate-y-1">
+                    View All Playsets
+                </a>
+            </div>
+        </div>
+    </div>
 
-                <p class="hidden max-w-screen-sm text-gray-500 dark:text-gray-300 md:block">
-                    This is a section of some simple filler text,
-                    also known as placeholder text. It shares some characteristics of a real written text.
+    <!-- Testimonials -->
+    <div class="py-20 bg-white" id="testimonials">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Visi dan Misi</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Join hundreds of happy families who've chosen SwingIt for their
+                    children's outdoor play.</p>
+            </div>
+
+            <div class="max-w-4xl mx-auto" x-data="{ current: 0, testimonials: [0, 1, 2] }">
+                <div class="relative">
+                    <!-- Testimonial Slides -->
+                    <div class="overflow-hidden relative h-80">
+                        <!-- Testimonial 1 -->
+                        <div class="absolute inset-0 transition-all duration-500 ease-in-out p-8 bg-gray-50 rounded-xl flex flex-col justify-center"
+                            :class="{
+                                'opacity-100 transform translate-x-0': current ===
+                                    0,
+                                'opacity-0 transform translate-x-full': current !== 0
+                            }">
+                            <div class="text-[#608BC1] mb-4">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <p class="text-gray-600 italic mb-6 text-lg">"I love my swing set! SwingIt helped me with the
+                                design and planning and was so pleasant to work with. They helped me stay within my budget
+                                and time frame, and the delivery and installation was hassle-free. Such nice people to work
+                                with!"</p>
+                            <div class="flex items-center">
+                                <div class="w-12 h-12 rounded-full bg-gray-300 flex-shrink-0"></div>
+                                <div class="ml-4">
+                                    <h4 class="font-bold">Ruthy J.</h4>
+                                    <p class="text-gray-500 text-sm">Happy Parent</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Testimonial 2 -->
+                        <div class="absolute inset-0 transition-all duration-500 ease-in-out p-8 bg-gray-50 rounded-xl flex flex-col justify-center"
+                            :class="{
+                                'opacity-100 transform translate-x-0': current ===
+                                    1,
+                                'opacity-0 transform translate-x-full': current !== 1
+                            }">
+                            <div class="text-[#608BC1] mb-4">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <p class="text-gray-600 italic mb-6 text-lg">"We are so very pleased and happy with our
+                                beautiful swing set! The process was super quick and easy and the customer service was
+                                unbeatable. Thank you for helping us get an incredible playset that will hopefully last us
+                                for many more years to come!"</p>
+                            <div class="flex items-center">
+                                <div class="w-12 h-12 rounded-full bg-gray-300 flex-shrink-0"></div>
+                                <div class="ml-4">
+                                    <h4 class="font-bold">Tzipora B.</h4>
+                                    <p class="text-gray-500 text-sm">Delighted Customer</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Testimonial 3 -->
+                        <div class="absolute inset-0 transition-all duration-500 ease-in-out p-8 bg-gray-50 rounded-xl flex flex-col justify-center"
+                            :class="{
+                                'opacity-100 transform translate-x-0': current ===
+                                    2,
+                                'opacity-0 transform translate-x-full': current !== 2
+                            }">
+                            <div class="text-[#608BC1] mb-4">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <p class="text-gray-600 italic mb-6 text-lg">"Highly recommend. Amazing service, very
+                                high-quality set. Children are using and abusing it and it's in perfect condition several
+                                years later. Only regret is not purchasing an even larger one. Worth every penny."</p>
+                            <div class="flex items-center">
+                                <div class="w-12 h-12 rounded-full bg-gray-300 flex-shrink-0"></div>
+                                <div class="ml-4">
+                                    <h4 class="font-bold">Tzvi W.</h4>
+                                    <p class="text-gray-500 text-sm">Satisfied Parent</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Navigation Buttons -->
+                    <button @click="current = (current - 1 + testimonials.length) % testimonials.length"
+                        class="absolute top-1/2 left-0 -translate-y-1/2 -translate-x-6 w-12 h-12 rounded-full bg-white shadow-lg flex items-center justify-center text-gray-800 hover:text-[#608BC1] focus:outline-none transition">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <button @click="current = (current + 1) % testimonials.length"
+                        class="absolute top-1/2 right-0 -translate-y-1/2 translate-x-6 w-12 h-12 rounded-full bg-white shadow-lg flex items-center justify-center text-gray-800 hover:text-[#608BC1] focus:outline-none transition">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+
+                <!-- Indicators -->
+                <div class="flex justify-center mt-8 space-x-2">
+                    <template x-for="(_, index) in testimonials" :key="index">
+                        <button @click="current = index"
+                            class="w-3 h-3 rounded-full focus:outline-none transition-all duration-300"
+                            :class="{ 'bg-[#608BC1] scale-110': current === index, 'bg-gray-300': current !== index }"></button>
+                    </template>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Gallery Section -->
+    <div class="py-20 bg-white" id="gallery">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Galeri Kegiatan UKM</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">See how our playsets bring joy to families across the region.
                 </p>
             </div>
 
-            <a href="#"
-                class="inline-block rounded-lg border bg-white dark:bg-gray-700 dark:border-none px-4 py-2 text-center text-sm font-semibold text-gray-500 dark:text-gray-200 outline-none ring-indigo-300 transition duration-100 hover:bg-gray-100 focus-visible:ring active:bg-gray-200 md:px-8 md:py-3 md:text-base">
-                More
-            </a>
-        </div>
-
-        <div class="grid grid-cols-2 gap-4 sm:grid-cols-3 md:gap-6 xl:gap-8">
-            <!-- image - start -->
-            <a href="#"
-                class="group relative flex h-48 items-end overflow-hidden rounded-lg bg-gray-100 shadow-lg md:h-80">
-                <img src="https://images.unsplash.com/photo-1593508512255-86ab42a8e620?auto=format&q=75&fit=crop&w=600"
-                    loading="lazy" alt="Photo by Minh Pham"
-                    class="absolute inset-0 h-full w-full object-cover object-center transition duration-200 group-hover:scale-110" />
-
-                <div
-                    class="pointer-events-none absolute inset-0 bg-gradient-to-t from-gray-800 via-transparent to-transparent opacity-50">
+            <div class="relative" x-data="gallery">
+                <!-- Main Image -->
+                <div class="rounded-xl overflow-hidden shadow-xl mb-4">
+                    <template x-for="(photo, index) in photos" :key="index">
+                        <div x-show="current === index" x-transition:enter="transition ease-out duration-300"
+                            x-transition:enter-start="opacity-0 transform scale-95"
+                            x-transition:enter-end="opacity-100 transform scale-100"
+                            x-transition:leave="transition ease-in duration-200"
+                            x-transition:leave-start="opacity-100 transform scale-100"
+                            x-transition:leave-end="opacity-0 transform scale-95">
+                            <img :src="photo" class="w-full h-96 md:h-[500px] object-cover"
+                                :alt="'Gallery image ' + (index + 1)">
+                        </div>
+                    </template>
                 </div>
 
-                <span class="relative ml-4 mb-3 inline-block text-sm text-white md:ml-5 md:text-lg">VR</span>
-            </a>
-            <!-- image - end -->
-
-            <!-- image - start -->
-            <a href="#"
-                class="group relative flex h-48 items-end overflow-hidden rounded-lg bg-gray-100 shadow-lg md:col-span-2 md:h-80">
-                <img src="https://images.unsplash.com/photo-1542759564-7ccbb6ac450a?auto=format&q=75&fit=crop&w=1000"
-                    loading="lazy" alt="Photo by Magicle"
-                    class="absolute inset-0 h-full w-full object-cover object-center transition duration-200 group-hover:scale-110" />
-
-                <div
-                    class="pointer-events-none absolute inset-0 bg-gradient-to-t from-gray-800 via-transparent to-transparent opacity-50">
+                <!-- Thumbnails -->
+                <div class="grid grid-cols-4 gap-4 mt-4">
+                    <template x-for="(photo, index) in photos" :key="index">
+                        <div class="rounded-lg overflow-hidden cursor-pointer transition-all"
+                            :class="{ 'ring-2 ring-[#608BC1] ring-offset-2': current === index }">
+                            <img :src="photo" class="w-full h-24 object-cover"
+                                :alt="'Thumbnail ' + (index + 1)">
+                        </div>
+                    </template>
                 </div>
 
-                <span class="relative ml-4 mb-3 inline-block text-sm text-white md:ml-5 md:text-lg">Tech</span>
-            </a>
-            <!-- image - end -->
+                <!-- Navigation Buttons -->
+                <button
+                    class="absolute top-1/2 left-4 transform -translate-y-1/2 w-12 h-12 rounded-full bg-white/80 shadow-lg flex items-center justify-center text-gray-800 hover:text-[#608BC1] focus:outline-none transition">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button
+                    class="absolute top-1/2 right-4 transform -translate-y-1/2 w-12 h-12 rounded-full bg-white/80 shadow-lg flex items-center justify-center text-gray-800 hover:text-[#608BC1] focus:outline-none transition">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
 
-            <!-- image - start -->
-            <a href="#"
-                class="group relative flex h-48 items-end overflow-hidden rounded-lg bg-gray-100 shadow-lg md:col-span-2 md:h-80">
-                <img src="https://images.unsplash.com/photo-1610465299996-30f240ac2b1c?auto=format&q=75&fit=crop&w=1000"
-                    loading="lazy" alt="Photo by Martin Sanchez"
-                    class="absolute inset-0 h-full w-full object-cover object-center transition duration-200 group-hover:scale-110" />
-
-                <div
-                    class="pointer-events-none absolute inset-0 bg-gradient-to-t from-gray-800 via-transparent to-transparent opacity-50">
-                </div>
-
-                <span class="relative ml-4 mb-3 inline-block text-sm text-white md:ml-5 md:text-lg">Dev</span>
-            </a>
-            <!-- image - end -->
-
-            <!-- image - start -->
-            <a href="#"
-                class="group relative flex h-48 items-end overflow-hidden rounded-lg bg-gray-100 shadow-lg md:h-80">
-                <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&q=75&fit=crop&w=600"
-                    loading="lazy" alt="Photo by Lorenzo Herrera"
-                    class="absolute inset-0 h-full w-full object-cover object-center transition duration-200 group-hover:scale-110" />
-
-                <div
-                    class="pointer-events-none absolute inset-0 bg-gradient-to-t from-gray-800 via-transparent to-transparent opacity-50">
-                </div>
-
-                <span class="relative ml-4 mb-3 inline-block text-sm text-white md:ml-5 md:text-lg">Retro</span>
-            </a>
-            <!-- image - end -->
+            <div class="text-center mt-12">
+                <a href="#"
+                    class="inline-block bg-[#608BC1] hover:bg-[#133E87] text-gray-900 font-bold py-3 px-8 rounded-lg transition transform hover:-translate-y-1">
+                    Lihat Selengkapnya
+                </a>
+            </div>
         </div>
     </div>
+
+    {{-- <!-- How It Works -->
+    <div class="py-20 bg-gray-50">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">How It Works</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">From design to installation, we make the process simple and
+                    enjoyable.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <!-- Step 1 -->
+                <div class="text-center" x-data="{ visible: false }" x-intersect="visible = true">
+                    <div class="w-16 h-16 mx-auto mb-6 flex items-center justify-center bg-[#608BC1] text-white rounded-full text-2xl font-bold transition-all duration-700"
+                        :class="{ 'opacity-100 transform scale-100': visible, 'opacity-0 transform scale-50': !visible }">
+                        1
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Consultation</h3>
+                    <p class="text-gray-600">Discuss your vision, space requirements, and budget with our playset experts.
+                    </p>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="text-center" x-data="{ visible: false }" x-intersect="visible = true">
+                    <div class="w-16 h-16 mx-auto mb-6 flex items-center justify-center bg-[#608BC1] text-white rounded-full text-2xl font-bold transition-all duration-700 delay-300"
+                        :class="{ 'opacity-100 transform scale-100': visible, 'opacity-0 transform scale-50': !visible }">
+                        2
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Design</h3>
+                    <p class="text-gray-600">Customize your perfect playset with the features your children will love.</p>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="text-center" x-data="{ visible: false }" x-intersect="visible = true">
+                    <div class="w-16 h-16 mx-auto mb-6 flex items-center justify-center bg-[#608BC1] text-white rounded-full text-2xl font-bold transition-all duration-700 delay-600"
+                        :class="{ 'opacity-100 transform scale-100': visible, 'opacity-0 transform scale-50': !visible }">
+                        3
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Production</h3>
+                    <p class="text-gray-600">Your playset is carefully crafted using premium materials and expert
+                        craftsmanship.</p>
+                </div>
+
+                <!-- Step 4 -->
+                <div class="text-center" x-data="{ visible: false }" x-intersect="visible = true">
+                    <div class="w-16 h-16 mx-auto mb-6 flex items-center justify-center bg-[#608BC1] text-white rounded-full text-2xl font-bold transition-all duration-700 delay-900"
+                        :class="{ 'opacity-100 transform scale-100': visible, 'opacity-0 transform scale-50': !visible }">
+                        4
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Installation</h3>
+                    <p class="text-gray-600">Professional setup in your yard, ensuring safety and stability for years of
+                        play.</p>
+                </div>
+            </div>
+        </div>
+    </div> --}}
 @endsection

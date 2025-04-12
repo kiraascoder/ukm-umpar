@@ -6,9 +6,17 @@
     <div class="p-6 bg-gray-100 min-h-screen">
         <!-- Header Dashboard -->
         <div class="mb-6">
-            <h1 class="text-2xl font-semibold text-gray-800">Dashboard Admin UKM {{ $nama_ukm }}</h1>
-            <p class="text-gray-600">Selamat datang, {{ Auth::user()->name }}! Kelola data UKM dengan mudah.</p>
+            <h1 class="text-2xl font-semibold text-gray-800">Dashboard </h1>
         </div>
+
+        <div class="flex">
+            <div class="bg-white p-6 rounded-lg shadow-md mb-6">
+                <h2 class="text-lg font-semibold text-gray-800 mb-4">Selamat Datang Admin UKM {{ $nama_ukm }}!</h2>
+            </div>
+            .
+        </div>
+
+
 
         <!-- Statistik -->
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">

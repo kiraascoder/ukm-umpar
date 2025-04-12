@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminUKMController;
 use App\Http\Controllers\AnggotaController;
 use App\Http\Controllers\PendaftaranController;
 use App\Http\Controllers\ProkerController;
+use App\Http\Controllers\PublicController;
 use App\Http\Controllers\SuperAdminController;
 use App\Http\Controllers\SuratController;
 use App\Http\Controllers\UploadDokumentasi;
@@ -106,3 +107,9 @@ Route::middleware(['admin:admin'])->group(function () {
 //Log Out
 Route::post('admin/logout', [AdminSesiController::class, 'logout'])->name('admin.logout');
 Route::post('admin/logout', [AdminSesiController::class, 'logout'])->name('admin.logout');
+
+
+Route::get('/galeri', [PublicController::class, 'viewGallery'])->name('galeri');
+Route::get('/kegiatan', [PublicController::class, 'viewKegiatan'])->name('kegiatan');
+Route::get('/tentang', [PublicController::class, 'viewTentang'])->name('tentang');
+Route::get('/informasi', [PublicController::class, 'viewInformasi'])->name('informasi');
