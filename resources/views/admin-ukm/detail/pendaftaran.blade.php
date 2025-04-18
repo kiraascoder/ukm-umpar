@@ -1,36 +1,27 @@
 @extends('component.admin-layout')
 
-@section('title', 'Pendaftaran UKM')
+@section('title', 'Detail Pendaftaran')
 
 @section('content')
-    <div class="bg-gray-100 min-h-screen py-10">
-        <div class="container mx-auto px-4">
-            <h2 class="text-2xl font-bold mb-6">Detail Pendaftaran</h2>
+    <div x-data="{ openModal: null, selectedNama: '', deleteUrl: '' }" class="bg-gray-100 min-h-screen p-6">
+        <h1 class="text-2xl text-gray-800 mb-6">Detail Pendaftaran UKM</h1>
+        <div class="lg:col-span-3 w-full bg-white p-6 rounded-2xl shadow overflow-auto">
+            <div class="flex items-center justify-betweenn">
+                <h2 class="text-lg font-semibold text-gray-700">{{ $pendaftaran->pendaftaran }}</h2>
 
-            <div class="mb-4">
-                <p class="text-lg font-semibold">{{ $pendaftaran->pendaftaran }}</p>
-                <p class="text-gray-700">{{ $pendaftaran->batas_pendaftaran }}</p>
-                <p class="text-gray-700">{{ $pendaftaran->link_pendaftaran }}</p>
-                <p class="text-gray-700">{{ $pendaftaran->persyaratan }}</p>
-            </div>
-
-            @if ($pendaftaran->brosur)
-                <div class="mt-4">
-                    <img src="{{ asset('storage/' . $pendaftaran->brosur) }}" class="w-full max-w-3xl rounded-lg shadow-md"
-                        alt="Dokumentasi pendaftaran">
-                </div>
-            @endif
-
-            <div class="mt-6 flex gap-4">
-                <a href="{{ route('adminUkmPendaftaran') }}"
-                    class="bg-gray-500 text-white px-4 py-2 rounded-md hover:bg-gray-700">
-                    Back
-                </a>
                 <a href="{{ route('adminUkmEditPendaftaran', $pendaftaran->id) }}"
-                    class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-700">
-                    Edit
+                    class="inline-flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded-md shadow">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                        stroke="currentColor" class="size-5">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L6.832 19.82a4.5 4.5 0 0 1-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 0 1 1.13-1.897L16.863 4.487Zm0 0L19.5 7.125" />
+                    </svg>
+                    Edit Pendaftaran
                 </a>
             </div>
+            <p class="text-gray-600 mb-4">
+                Batas Pendaftaran : {{ Str::limit($pendaftaran->batas_pendaftaran, 100, '...') }}
+            </p>
         </div>
     </div>
 @endsection

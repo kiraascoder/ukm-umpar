@@ -17,6 +17,12 @@ class KegiatanController extends Controller
         return view('admin-ukm.kegiatan', compact('kegiatan'));
     }
 
+    public function editKegiatanView($id)
+    {
+        $kegiatan = Kegiatan::findOrFail($id);
+        return view('admin-ukm.edit.kegiatan', compact('kegiatan'));
+    }
+
     public function tambahKegiatanView()
     {
         return view('admin-ukm.tambah.kegiatan');
@@ -31,11 +37,19 @@ class KegiatanController extends Controller
 
     public function storeKegiatan(Request $request)
     {
-        $validateData = $request->validate([
-            'nama' => 'required|string|max:255',
-            'deskripsi' => 'required|string|min:10|max:700',
-            'tanggal' => 'required|date',
-        ],);
+        $validateData = $request->validate(
+            [
+                'nama' => 'required|string|max:255',
+                'deskripsi' => 'required|string|min:10|max:700',
+                'tanggal' => 'required|date',
+            ],
+            [
+                'nama.required' => 'Nama kegiatan harus diisi.',
+                'deskripsi.required' => 'Deskripsi kegiatan harus diisi.',
+                'tanggal.required' => 'Tanggal kegiatan harus diisi.',
+                'deskripsi.min' => 'Deskripsi kegiatan minimal harus 10 karakter.',
+            ]
+        );
 
         $user = Auth::user();
         $ukm = Ukm::where('admin_ukm_id', $user->id)->first();

@@ -11,7 +11,8 @@
             <div class="relative block w-full">
                 @if (Auth::user()->role == 'admin_ukm')
                     <a href="{{ route('adminUkmDashboard') }}"
-                        class="flex items-center justify-between w-full p-3 font-sans text-xl antialiased font-semibold leading-snug text-left transition-colors border-b-0 select-none border-b-blue-gray-100 text-blue-gray-700 hover:text-blue-gray-900">
+                        class="flex items-center w-full p-3 rounded-lg transition-all duration-300 mb-2
+                    {{ request()->routeIs('adminUkmDashboard') ? 'bg-blue-700 text-white' : 'text-white hover:bg-blue-600' }}">
                         <div class="grid mr-4 place-items-center">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                                 stroke="currentColor" class="size-6">
@@ -25,26 +26,21 @@
                         </p>
                     </a>
                     <a href="{{ route('adminUkmAnggota') }}"
-                        class="flex items-center w-full p-0 leading-tight transition-all rounded-lg outline-none text-start hover:bg-blue-gray-50 hover:bg-opacity-80 hover:text-blue-gray-900 focus:bg-blue-gray-50 focus:bg-opacity-80 focus:text-blue-gray-900 active:bg-blue-gray-50 active:bg-opacity-80 active:text-blue-gray-900">
-                        <button type="button"
-                            class="flex items-center justify-between w-full p-3 font-sans text-xl antialiased font-semibold leading-snug text-left transition-colors border-b-0 select-none border-b-blue-gray-100 text-blue-gray-700 hover:text-blue-gray-900">
-                            <div class="grid mr-4 place-items-center">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                    stroke-width="1.5" stroke="currentColor" class="size-6">
-                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                        d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
-                                </svg>
-
-                            </div>
-                            <p
-                                class="block mr-auto font-sans text-base antialiased font-normal leading-relaxed text-blue-gray-900">
-                                Anggota UKM
-                            </p>
-
-                        </button>
+                        class="flex items-center w-full p-3 rounded-lg transition-all duration-300 mb-2
+                    {{ request()->routeIs('adminUkmAnggota') ? 'bg-blue-700 text-white' : 'text-white hover:bg-blue-600' }} ">
+                        <div class="grid mr-4 place-items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                stroke-width="1.5" stroke="currentColor" class="size-6">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
+                            </svg>
+                        </div>
+                        Anggota
                     </a>
+
                     <a href="{{ route('adminUkmProfile') }}"
-                        class="flex items-center w-full p-3 leading-tight transition-all rounded-lg outline-none text-start hover:bg-blue-gray-50 hover:bg-opacity-80 hover:text-blue-gray-900 focus:bg-blue-gray-50 focus:bg-opacity-80 focus:text-blue-gray-900 active:bg-blue-gray-50 active:bg-opacity-80 active:text-blue-gray-900">
+                        class="flex items-center w-full p-3 rounded-lg transition-all duration-300 mb-2
+                    {{ request()->routeIs('adminUkmProfile') ? 'bg-blue-700 text-white' : 'text-white hover:bg-blue-600' }}">
                         <div class="grid mr-4 place-items-center">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                 stroke-width="1.5" stroke="currentColor" class="size-6">
@@ -56,7 +52,8 @@
                         Profil
                     </a>
                     <a href="{{ route('adminUkmArsipSurat') }}"
-                        class="flex items-center w-full p-3 leading-tight transition-all rounded-lg outline-none text-start hover:bg-blue-gray-50 hover:bg-opacity-80 hover:text-blue-gray-900 focus:bg-blue-gray-50 focus:bg-opacity-80 focus:text-blue-gray-900 active:bg-blue-gray-50 active:bg-opacity-80 active:text-blue-gray-900">
+                        class="flex items-center w-full p-3 rounded-lg transition-all duration-300 mb-2
+                    {{ request()->routeIs('adminUkmArsipSurat') ? 'bg-blue-700 text-white' : 'text-white hover:bg-blue-600' }}">
                         <div class="grid mr-4 place-items-center">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                 stroke-width="1.5" stroke="currentColor" class="size-6">
@@ -73,7 +70,8 @@
                         </div>
                     </a>
                     <a href="{{ route('adminUkmKeuangan') }}"
-                        class="flex items-center w-full p-3 leading-tight transition-all rounded-lg outline-none text-start hover:bg-blue-gray-50 hover:bg-opacity-80 hover:text-blue-gray-900 focus:bg-blue-gray-50 focus:bg-opacity-80 focus:text-blue-gray-900 active:bg-blue-gray-50 active:bg-opacity-80 active:text-blue-gray-900">
+                        class="flex items-center w-full p-3 rounded-lg transition-all duration-300 mb-2
+                    {{ request()->routeIs('adminUkmKeuangan') ? 'bg-blue-700 text-white' : 'text-white hover:bg-blue-600' }}">
                         <div class="grid mr-4 place-items-center">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                 stroke-width="1.5" stroke="currentColor" class="size-6">
@@ -84,7 +82,8 @@
                         Keuangan
                     </a>
                     <a href="{{ route('adminUkmKegiatan') }}"
-                        class="flex items-center w-full p-3 leading-tight transition-all rounded-lg outline-none text-start hover:bg-blue-gray-50 hover:bg-opacity-80 hover:text-blue-gray-900 focus:bg-blue-gray-50 focus:bg-opacity-80 focus:text-blue-gray-900 active:bg-blue-gray-50 active:bg-opacity-80 active:text-blue-gray-900">
+                        class="flex items-center w-full p-3 rounded-lg transition-all duration-300 mb-2
+                    {{ request()->routeIs('adminUkmKegiatan') ? 'bg-blue-700 text-white' : 'text-white hover:bg-blue-600' }}">
                         <div class="grid mr-4 place-items-center">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                 stroke-width="1.5" stroke="currentColor" class="size-6">
@@ -95,7 +94,8 @@
                         Kegiatan
                     </a>
                     <a href="{{ route('adminUkmPendaftaran') }}"
-                        class="flex items-center w-full p-3 leading-tight transition-all rounded-lg outline-none text-start hover:bg-blue-gray-50 hover:bg-opacity-80 hover:text-blue-gray-900 focus:bg-blue-gray-50 focus:bg-opacity-80 focus:text-blue-gray-900 active:bg-blue-gray-50 active:bg-opacity-80 active:text-blue-gray-900">
+                        class="flex items-center w-full p-3 rounded-lg transition-all duration-300 mb-2
+                    {{ request()->routeIs('adminUkmPendaftaran') ? 'bg-blue-700 text-white' : 'text-white hover:bg-blue-600' }}">
                         <div class="grid mr-4 place-items-center">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                 stroke-width="1.5" stroke="currentColor" class="size-6">
@@ -106,7 +106,8 @@
                         Pendaftaran
                     </a>
                     <a href="{{ route('adminUkmProker') }}"
-                        class="flex items-center w-full p-3 leading-tight transition-all rounded-lg outline-none text-start hover:bg-blue-gray-50 hover:bg-opacity-80 hover:text-blue-gray-900 focus:bg-blue-gray-50 focus:bg-opacity-80 focus:text-blue-gray-900 active:bg-blue-gray-50 active:bg-opacity-80 active:text-blue-gray-900">
+                        class="flex items-center w-full p-3 rounded-lg transition-all duration-300 mb-2
+                    {{ request()->routeIs('adminUkmProker') ? 'bg-blue-700 text-white' : 'text-white hover:bg-blue-600' }}">
                         <div class="grid mr-4 place-items-center">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                 stroke-width="1.5" stroke="currentColor" class="size-6">
@@ -118,23 +119,33 @@
                     </a>
                 @endif
                 @if (Auth::user()->role == 'admin')
-                    <a href="{{ route('superAdminDashboard') }}" class="flex items-center p-3 hover:bg-blue-gray-50">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                            stroke-width="1.5" stroke="currentColor" class="size-6">
+                    <a href="{{ route('superAdminDashboard') }}"
+                        class="flex items-center w-full p-3 rounded-lg
+                        transition-all duration-300 mb-2
+                        {{ request()->routeIs('superAdminDashboard') ? 'bg-blue-700 text-white' : 'text-white hover:bg-blue-600' }}"">
+                        <svg class="w-5 h-5 mr-4" xmlns="http://www.w3.org/2000/svg" fill="none"
+                            viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
                             <path stroke-linecap="round" stroke-linejoin="round"
                                 d="M8.25 9V5.25A2.25 2.25 0 0 1 10.5 3h6a2.25 2.25 0 0 1 2.25 2.25v13.5A2.25 2.25 0 0 1 16.5 21h-6a2.25 2.25 0 0 1-2.25-2.25V15m-3 0-3-3m0 0 3-3m-3 3H15" />
                         </svg>
-                        <p>Dashboard Superadmin</p>
+                        <p>Dashboard </p>
                     </a>
-                    <a href="{{ route('adminUkmProgram') }}" class="flex items-center p-3 hover:bg-blue-gray-50">
-                        <svg class="w-5 h-5 mr-4" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
-                            viewBox="0 0 24 24">
-                            <path fill-rule="evenodd" d="M4.5 3.75h15v16.5h-15V3.75Z" clip-rule="evenodd"></path>
+                    <a href="{{ route('adminUkmProgram') }}"
+                        class="flex items-center w-full p-3 rounded-lg
+                        transition-all duration-300 mb-2
+                        {{ request()->routeIs('adminUkmProgram') ? 'bg-blue-700 text-white' : 'text-white hover:bg-blue-600' }}">
+                        <svg class="w-5 h-5 mr-4" xmlns="http://www.w3.org/2000/svg" fill="none"
+                            viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M20.25 14.15v4.25c0 1.094-.787 2.036-1.872 2.18-2.087.277-4.216.42-6.378.42s-4.291-.143-6.378-.42c-1.085-.144-1.872-1.086-1.872-2.18v-4.25m16.5 0a2.18 2.18 0 0 0 .75-1.661V8.706c0-1.081-.768-2.015-1.837-2.175a48.114 48.114 0 0 0-3.413-.387m4.5 8.006c-.194.165-.42.295-.673.38A23.978 23.978 0 0 1 12 15.75c-2.648 0-5.195-.429-7.577-1.22a2.016 2.016 0 0 1-.673-.38m0 0A2.18 2.18 0 0 1 3 12.489V8.706c0-1.081.768-2.015 1.837-2.175a48.111 48.111 0 0 1 3.413-.387m7.5 0V5.25A2.25 2.25 0 0 0 13.5 3h-3a2.25 2.25 0 0 0-2.25 2.25v.894m7.5 0a48.667 48.667 0 0 0-7.5 0M12 12.75h.008v.008H12v-.008Z" />
                         </svg>
                         <p>Program UKM</p>
                     </a>
 
-                    <a href="{{ route('adminUkmList') }}" class="flex items-center p-3 hover:bg-blue-gray-50">
+                    <a href="{{ route('adminUkmList') }}"
+                        class="flex items-center w-full p-3 rounded-lg
+                        transition-all duration-300 mb-2
+                        {{ request()->routeIs('adminUkmList') ? 'bg-blue-700 text-white' : 'text-white hover:bg-blue-600' }}">
                         <svg class="w-5 h-5 mr-4" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
                             viewBox="0 0 24 24">
                             <path fill-rule="evenodd" d="M4 5h16v2H4V5Zm0 4h16v2H4V9Zm0 4h16v2H4v-2Zm0 4h16v2H4v-2Z"
@@ -146,7 +157,7 @@
                 <form method="POST" action="{{ route('admin.logout') }}">
                     @csrf
                     <button type="submit"
-                        class="flex items-center w-full p-3 leading-tight transition-all rounded-lg outline-none text-start hover:bg-blue-gray-50 hover:bg-opacity-80 hover:text-blue-gray-900 focus:bg-blue-gray-50 focus:bg-opacity-80 focus:text-blue-gray-900 active:bg-blue-gray-50 active:bg-opacity-80 active:text-blue-gray-900">
+                        class="flex items-center w-full p-3 rounded-lg transition-all duration-300 mb-2 text-white hover:bg-blue-600">
                         <div class="grid mr-4 place-items-center">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
                                 aria-hidden="true" class="w-5 h-5">

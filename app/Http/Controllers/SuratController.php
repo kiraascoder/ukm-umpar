@@ -59,12 +59,10 @@ class SuratController extends Controller
             return redirect()->back()->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
         }
     }
-
     public function editSurat(Request $request, $id)
     {
         $surat = Surat::findOrFail($id);
         $surat->update($request->all());
         return redirect('/admin/ukm/arsip-surat')->with('success', 'Surat Berhasil berhasil diperbarui.');
     }
-    
 }

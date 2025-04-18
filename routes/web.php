@@ -12,13 +12,15 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminSesiController;
 use App\Http\Controllers\KeuanganController;
 use App\Http\Controllers\KegiatanController;
+use App\Models\Keuangan;
 
-Route::get('/', function () {
-    return view('mahasiswa.home');
-});
+
+Route::get('/', [PublicController::class, 'index'])->name('home');
 
 // Super Admin Route
 Route::get('admin/dashboard', [AdminUKMController::class, 'adminDashboard'])->name('superadmin.dashboard')->middleware('admin:admin');
+
+
 
 // Auth
 Route::prefix('admin')->middleware('authenticated')->group(function () {
@@ -35,6 +37,9 @@ Route::middleware(['admin:admin_ukm'])->group(function () {
     Route::get('/admin/ukm/profile', [AdminUKMController::class, 'ukmProfile'])->name('adminUkmProfile');
     Route::get('/admin/ukm/{id}/edit-profile', [AdminUKMController::class, 'ukmEditProfile'])->name('adminUkmEditProfile');
     Route::put('/admin/ukm/store', [AdminUKMController::class, 'storeDataUkm'])->name('adminUkm.store');
+    Route::put('/admin/ukm/update-saldo/{id}', [KeuanganController::class, 'ukmUpdateSaldo'])->name('adminUkmUpdateSaldo.update');
+
+
 
     // View dan tambah anggota ukm
     Route::get('/admin/ukm/anggota', [AnggotaController::class, 'ukmAnggota'])->name('adminUkmAnggota');
@@ -112,4 +117,4 @@ Route::post('admin/logout', [AdminSesiController::class, 'logout'])->name('admin
 Route::get('/galeri', [PublicController::class, 'viewGallery'])->name('galeri');
 Route::get('/kegiatan', [PublicController::class, 'viewKegiatan'])->name('kegiatan');
 Route::get('/tentang', [PublicController::class, 'viewTentang'])->name('tentang');
-Route::get('/informasi', [PublicController::class, 'viewInformasi'])->name('informasi');
+Route::get('/daftar-ukm', [PublicController::class, 'viewUkm'])->name('daftar-ukm');

@@ -16,7 +16,7 @@
         </div>
     </div>
 
-    <!-- Featured Products -->
+
     <div class="py-20 bg-gray-50" id="featured">
         <div class="container mx-auto px-6">
             <div class="text-center mb-16">
@@ -25,85 +25,38 @@
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Product 1 -->
-                <div class="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300"
-                    x-data="{ hover: false }">
-                    <div class="relative overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1605276277265-84f97da7d47a?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
-                            alt="Adventure Playset" class="w-full h-64 object-cover transition-all duration-500"
-                            :class="{ 'transform scale-105': hover }">
-                        <div
-                            class="absolute top-4 right-4 bg-[#608BC1] text-white text-sm font-bold px-3 py-1 rounded-full">
-                            Popular
+                @foreach ($ukms as $ukm)
+                    <div class="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300">
+                        <div class="relative overflow-hidden">
+                            <img src="{{ $ukm->image_url ?? 'https://via.placeholder.com/800x400' }}"
+                                alt="{{ $ukm->nama }}" class="w-full h-64 object-cover transition-all duration-500">
+                            <div
+                                class="absolute top-4 right-4 bg-[#608BC1] text-white text-sm font-bold px-3 py-1 rounded-full">
+                                Popular
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2">{{ $ukm->nama }}</h3>
+                            <p class="text-gray-600 mb-4">{{ $ukm->deskripsi }}</p>
+                            <a href=""
+                                class="text-[#608BC1] font-medium hover:text-yellow-600 transition inline-flex items-center">
+                                <span>View Details</span>
+                                <i class="fas fa-arrow-right ml-2 text-sm"></i>
+                            </a>
                         </div>
                     </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold mb-2">Adventure World</h3>
-                        <p class="text-gray-600 mb-4">Packed with fun: slides, swings, climbing wall, and monkey bars in a
-                            compact design.</p>
-                        <a href="#"
-                            class="text-[#608BC1] font-medium hover:text-yellow-600 transition inline-flex items-center">
-                            <span>View Details</span>
-                            <i class="fas fa-arrow-right ml-2 text-sm"></i>
+                @endforeach
+                @if ($totalUkm > 3)
+                    <div class="text-center mt-12 col-span-full">
+                        <a href="{{ route('daftar-ukm') }}"
+                            class="inline-block bg-[#608BC1] hover:bg-[#133E87] text-gray-900 font-bold py-3 px-8 rounded-lg transition transform hover:-translate-y-1">
+                            Lihat Semua UKM
                         </a>
                     </div>
-                </div>
-
-                <!-- Product 2 -->
-                <div class="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300"
-                    x-data="{ hover: false }">
-                    <div class="relative overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1575783970733-1aaedde1db74?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
-                            alt="Castle Kingdom Playset" class="w-full h-64 object-cover transition-all duration-500"
-                            :class="{ 'transform scale-105': hover }">
-                        <div class="absolute top-4 right-4 bg-blue-500 text-white text-sm font-bold px-3 py-1 rounded-full">
-                            New
-                        </div>
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold mb-2">Castle Kingdom</h3>
-                        <p class="text-gray-600 mb-4">A royal playground with turrets, wave slides, and a spacious playhouse
-                            for imaginative play.</p>
-                        <a href="#"
-                            class="text-[#608BC1] font-medium hover:text-yellow-600 transition inline-flex items-center">
-                            <span>View Details</span>
-                            <i class="fas fa-arrow-right ml-2 text-sm"></i>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Product 3 -->
-                <div class="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300"
-                    x-data="{ hover: false }">
-                    <div class="relative overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1596461110761-b4e5d5ad49f8?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
-                            alt="Backyard Explorer Playset" class="w-full h-64 object-cover transition-all duration-500"
-                            :class="{ 'transform scale-105': hover }">
-                        <div
-                            class="absolute top-4 right-4 bg-green-500 text-white text-sm font-bold px-3 py-1 rounded-full">
-                            Best Value
-                        </div>
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold mb-2">Backyard Explorer</h3>
-                        <p class="text-gray-600 mb-4">Perfect for smaller yards with swing beam, slide, and climbing options
-                            at an affordable price.</p>
-                        <a href="#"
-                            class="text-[#608BC1] font-medium hover:text-yellow-600 transition inline-flex items-center">
-                            <span>View Details</span>
-                            <i class="fas fa-arrow-right ml-2 text-sm"></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="text-center mt-12">
-                <a href="#"
-                    class="inline-block bg-[#608BC1] hover:bg-[#133E87] text-gray-900 font-bold py-3 px-8 rounded-lg transition transform hover:-translate-y-1">
-                    View All Playsets
-                </a>
+                @endif
             </div>
         </div>
+    </div>
     </div>
 
     <!-- Testimonials -->
@@ -111,15 +64,12 @@
         <div class="container mx-auto px-6">
             <div class="text-center mb-16">
                 <h2 class="text-3xl md:text-4xl font-bold mb-4">Visi dan Misi</h2>
-                <p class="text-gray-600 max-w-2xl mx-auto">Join hundreds of happy families who've chosen SwingIt for their
-                    children's outdoor play.</p>
+                <p class="text-gray-600 max-w-2xl mx-auto">Berikut adalah Visi dan Misi setiap UKM yang ada</p>
             </div>
 
             <div class="max-w-4xl mx-auto" x-data="{ current: 0, testimonials: [0, 1, 2] }">
                 <div class="relative">
-                    <!-- Testimonial Slides -->
                     <div class="overflow-hidden relative h-80">
-                        <!-- Testimonial 1 -->
                         <div class="absolute inset-0 transition-all duration-500 ease-in-out p-8 bg-gray-50 rounded-xl flex flex-col justify-center"
                             :class="{
                                 'opacity-100 transform translate-x-0': current ===
@@ -133,9 +83,12 @@
                                 <i class="fas fa-star"></i>
                                 <i class="fas fa-star"></i>
                             </div>
-                            <p class="text-gray-600 italic mb-6 text-lg">"I love my swing set! SwingIt helped me with the
-                                design and planning and was so pleasant to work with. They helped me stay within my budget
-                                and time frame, and the delivery and installation was hassle-free. Such nice people to work
+                            <p class="text-gray-600 italic mb-6 text-lg">"I love my swing set! SwingIt helped me with
+                                the
+                                design and planning and was so pleasant to work with. They helped me stay within my
+                                budget
+                                and time frame, and the delivery and installation was hassle-free. Such nice people to
+                                work
                                 with!"</p>
                             <div class="flex items-center">
                                 <div class="w-12 h-12 rounded-full bg-gray-300 flex-shrink-0"></div>
@@ -145,62 +98,7 @@
                                 </div>
                             </div>
                         </div>
-
-                        <!-- Testimonial 2 -->
-                        <div class="absolute inset-0 transition-all duration-500 ease-in-out p-8 bg-gray-50 rounded-xl flex flex-col justify-center"
-                            :class="{
-                                'opacity-100 transform translate-x-0': current ===
-                                    1,
-                                'opacity-0 transform translate-x-full': current !== 1
-                            }">
-                            <div class="text-[#608BC1] mb-4">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                            </div>
-                            <p class="text-gray-600 italic mb-6 text-lg">"We are so very pleased and happy with our
-                                beautiful swing set! The process was super quick and easy and the customer service was
-                                unbeatable. Thank you for helping us get an incredible playset that will hopefully last us
-                                for many more years to come!"</p>
-                            <div class="flex items-center">
-                                <div class="w-12 h-12 rounded-full bg-gray-300 flex-shrink-0"></div>
-                                <div class="ml-4">
-                                    <h4 class="font-bold">Tzipora B.</h4>
-                                    <p class="text-gray-500 text-sm">Delighted Customer</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Testimonial 3 -->
-                        <div class="absolute inset-0 transition-all duration-500 ease-in-out p-8 bg-gray-50 rounded-xl flex flex-col justify-center"
-                            :class="{
-                                'opacity-100 transform translate-x-0': current ===
-                                    2,
-                                'opacity-0 transform translate-x-full': current !== 2
-                            }">
-                            <div class="text-[#608BC1] mb-4">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                            </div>
-                            <p class="text-gray-600 italic mb-6 text-lg">"Highly recommend. Amazing service, very
-                                high-quality set. Children are using and abusing it and it's in perfect condition several
-                                years later. Only regret is not purchasing an even larger one. Worth every penny."</p>
-                            <div class="flex items-center">
-                                <div class="w-12 h-12 rounded-full bg-gray-300 flex-shrink-0"></div>
-                                <div class="ml-4">
-                                    <h4 class="font-bold">Tzvi W.</h4>
-                                    <p class="text-gray-500 text-sm">Satisfied Parent</p>
-                                </div>
-                            </div>
-                        </div>
                     </div>
-
-                    <!-- Navigation Buttons -->
                     <button @click="current = (current - 1 + testimonials.length) % testimonials.length"
                         class="absolute top-1/2 left-0 -translate-y-1/2 -translate-x-6 w-12 h-12 rounded-full bg-white shadow-lg flex items-center justify-center text-gray-800 hover:text-[#608BC1] focus:outline-none transition">
                         <i class="fas fa-chevron-left"></i>
@@ -210,8 +108,6 @@
                         <i class="fas fa-chevron-right"></i>
                     </button>
                 </div>
-
-                <!-- Indicators -->
                 <div class="flex justify-center mt-8 space-x-2">
                     <template x-for="(_, index) in testimonials" :key="index">
                         <button @click="current = index"
@@ -253,8 +149,7 @@
                     <template x-for="(photo, index) in photos" :key="index">
                         <div class="rounded-lg overflow-hidden cursor-pointer transition-all"
                             :class="{ 'ring-2 ring-[#608BC1] ring-offset-2': current === index }">
-                            <img :src="photo" class="w-full h-24 object-cover"
-                                :alt="'Thumbnail ' + (index + 1)">
+                            <img :src="photo" class="w-full h-24 object-cover" :alt="'Thumbnail ' + (index + 1)">
                         </div>
                     </template>
                 </div>

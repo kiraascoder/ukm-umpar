@@ -21,8 +21,6 @@ class AdminSesiController extends Controller
         return view('auth.register');
     }
 
-
-
     public function login(Request $request)
     {
         $request->validate([
@@ -73,7 +71,7 @@ class AdminSesiController extends Controller
             'password.confirmed' => 'Konfirmasi password tidak sesuai',
             'phone.required' => 'Nomor telepon wajib diisi',
         ]);
-        
+
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,

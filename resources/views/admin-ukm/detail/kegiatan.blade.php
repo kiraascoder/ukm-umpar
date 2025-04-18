@@ -3,57 +3,20 @@
 @section('title', 'Detail Kegiatan')
 
 @section('content')
-    <div class="bg-gray-100 min-h-screen py-10">
-        <div class="container mx-auto px-4">
-            <h2 class="text-2xl font-bold mb-6">Detail Kegiatan</h2>
-
-            <div class="mb-4">
-                <p class="text-lg font-semibold">{{ $kegiatan->nama }}</p>
-                <p class="text-gray-700">{{ $kegiatan->tanggal }}</p>
-                <p class="text-gray-700">{{ $kegiatan->deskripsi }}</p>
-            </div>
-
-            @if ($kegiatanDokumentasi->count() > 0)
-                @foreach ($kegiatanDokumentasi as $dokumentasi)
-                    <div class="mt-4">
-                        <img src="{{ asset('storage/' . $dokumentasi->photo_path) }}"
-                            class="w-full max-w-3xl rounded-lg shadow-md" alt="Dokumentasi kegiatan">
-                    </div>
-                @endforeach
-            @else
-                <p class="text-gray-500 mt-4">Belum ada dokumentasi.</p>
-            @endif
-
-
-            <div class="bg-white p-8 shadow-lg rounded-lg">
-                <h2 class="text-2xl font-bold mb-6">Tambah Dokumentasi</h2>
-
-                @if (session('error'))
-                    <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
-                        <strong>{{ session('error') }}</strong>
-                    </div>
-                @endif
-
-                @if (session('success'))
-                    <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-4">
-                        <strong>{{ session('success') }}</strong>
-                    </div>
-                @endif
-
-                <form action="{{ route('adminUkmTambahDokumentasi.store') }}" method="POST" enctype="multipart/form-data">
-                    @csrf
-
-                    <input type="hidden" name="kegiatan_id" value="{{ $kegiatan->id }}">
-
-                    <div class="mb-4">
-                        <label class="block font-medium text-gray-700">Upload Dokumentasi</label>
-                        <input type="file" name="photo_path" class="mt-1 p-2 w-full border rounded-md">
-                    </div>
-
-                    <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded">
-                        Tambah Dokumentasi
-                    </button>
-                </form>
+    <div x-data="{ openModal: null, selectedNama: '', deleteUrl: '' }" class="bg-gray-100 min-h-screen p-6">
+        <h1 class="text-2xl text-gray-800 mb-6">Detail Kegiatan UKM</h1>
+        <div class="lg:col-span-3 w-full bg-white p-6 rounded-2xl shadow overflow-auto">
+            <div class="flex items-center justify-between mb-4">
+                <h2 class="text-lg font-semibold text-gray-700">{{ $kegiatan->nama }}</h2>
+                <a href="{{ route('adminUkmEditKegiatan', $kegiatan->id) }}"
+                    class="inline-flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded-md shadow">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                        stroke="currentColor" class="size-5">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L6.832 19.82a4.5 4.5 0 0 1-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 0 1 1.13-1.897L16.863 4.487Zm0 0L19.5 7.125" />
+                    </svg>
+                    Edit Kegiatan
+                </a>
             </div>
         </div>
     </div>

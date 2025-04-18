@@ -20,6 +20,7 @@ class AdminSeeder extends Seeder
             'role' => 'admin',
             'phone' => '082271641265',
             'status' => 'active',
-        ]);
+        ], 
+    );
     }
 }

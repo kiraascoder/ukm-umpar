@@ -21,7 +21,10 @@
                     </div>
                     <div>
                         <label class="block font-medium text-gray-700">Deskripsi Kegiatan</label>
-                        <textarea name="deskripsi" rows="4" class="mt-1 p-2 w-full border rounded-md"></textarea>
+                        <textarea name="deskripsi" rows="4" class="mt-1 p-2 w-full border rounded-md">{{ old('deskripsi') }}</textarea>
+                        @error('deskripsi')
+                            <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                        @enderror
                     </div>
                     <div>
                         <label class="block font-medium text-gray-700">Tanggal Kegiatan</label>

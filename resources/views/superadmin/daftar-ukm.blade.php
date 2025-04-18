@@ -3,44 +3,45 @@
 @section('title', 'Daftar UKM')
 
 @section('content')
-
-
-
     <div class="bg-gray-100 min-h-screen p-6">
-        <div class="mb-6">
-            <h1 class="text-2xl font-semibold text-gray-800">Daftar UKM</h1>
-        </div>
-        <div class="container mx-auto bg-white shadow rounded-lg p-6">
-            <div class="overflow-x-auto">
-                <table class="min-w-full bg-white border border-gray-200">
-                    <thead class="bg-gray-200">
-                        <tr>
-                            <th class="py-2 px-4 border">No</th>
-                            <th class="py-2 px-4 border">Nama UKM</th>
-                            <th class="py-2 px-4 border">Ketua Umum</th>
-                            <th class="py-2 px-4 border">Aksi</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @forelse ($anggota as $index => $item)
-                            <tr class="border-b text-center">
-                                <td class="py-2 px-4 border">{{ $index + 1 }}</td>
-                                <td class="py-2 px-4 border">{{ $item->ukm->nama }}</td>
-                                <td class="py-2 px-4 border capitalize">{{ $item->jabatan }}</td>
-                                <td class="py-2 px-4 border">
-                                    <a href="{{ route('detailUkm', $item->ukm_id) }}"
-                                        class="text-blue-500 hover:underline">Detail</a>
-                                </td>
-                            </tr>
-                        @empty
-                            <tr>
-                                <td colspan="4" class="text-center py-4 text-gray-600">Belum Ada UKM Terdaftar
-                                </td>
-                            </tr>
-                        @endforelse
-                    </tbody>
-                </table>
+        <h1 class="text-2xl text-gray-800 mb-6">Daftar UKM</h1>
+        <div class="lg:col-span-3 w-full bg-white p-6 rounded-2xl shadow overflow-auto">
+            <div class="flex items-center justify-between mb-4">
+                <h2 class="text-lg font-semibold text-gray-700">Daftar Program Kerja UKM</h2>
+                <a href="{{ route('adminUkmTambahProker') }}"
+                    class="inline-flex items-center px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded-md shadow">
+                    <i class="fas fa-plus mr-2"></i> Tambah Program Kerja
+                </a>
             </div>
+
+            <table class="min-w-full divide-y divide-gray-200 text-sm">
+                <thead class="bg-gray-50">
+                    <tr>
+                        <th class="px-6 py-3 text-left font-medium text-gray-600 uppercase tracking-wider">No</th>
+                        <th class="px-6 py-3 text-left font-medium text-gray-600 uppercase tracking-wider">Nama UKM</th>
+                        <th class="px-6 py-3 text-left font-medium text-gray-600 uppercase tracking-wider">Ketua Umum</th>
+                        <th class="px-6 py-3 text-left font-medium text-gray-600 uppercase tracking-wider">Aksi</th>
+                    </tr>
+                </thead>
+                <tbody class="bg-white divide-y divide-gray-100">
+                    @foreach ($anggota as $index => $item)
+                        <tr class="hover:bg-gray-50">
+                            <td class="px-6 py-4 text-gray-700">{{ $index + 1 }}</td>
+                            <td class="px-6 py-4 text-gray-700">{{ $item->ukm->nama }}</td>
+                            <td class="px-6 py-4 text-gray-700">{{ $item->nama }}</td>
+                            <td class="px-6 py-4 flex gap-2">
+                                <a href="{{ route('detailUkm', $item->ukm_id) }}"
+                                    class="text-blue-600 hover:text-blue-800 text-xs font-medium">Detail</a>
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+            @if ($anggota->isEmpty())
+                <div class="text-center text-gray-500 py-10">
+                    Belum ada Surat.
+                </div>
+            @endif
         </div>
     </div>
 @endsection

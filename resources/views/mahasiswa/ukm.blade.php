@@ -6,7 +6,7 @@
     <div class="py-20 bg-gray-50" id="featured">
         <div class="container mx-auto px-6">
             <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-4xl font-bold mb-4">Daftar Kegiatan UKM UMPAR</h2>
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Daftar UKM UMPAR</h2>
                 <p class="text-gray-600 max-w-2xl mx-auto">Endless adventures start with a SwingIt playset.</p>
             </div>
 

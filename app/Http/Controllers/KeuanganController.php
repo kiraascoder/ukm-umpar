@@ -16,7 +16,7 @@ class KeuanganController extends Controller
         $ukm = Ukm::where('admin_ukm_id', $user->id)->first();
         $keuangan = $ukm ? $ukm->keuangan()->get() : collect();
         $ukmSaldo = $ukm ? $ukm->saldo : 0;
-        return view('admin-ukm.keuangan', compact('keuangan', 'ukmSaldo'));
+        return view('admin-ukm.keuangan', compact('keuangan', 'ukmSaldo', 'ukm'));
     }
 
     public function viewEditKeuangan($id)
@@ -151,5 +151,21 @@ class KeuanganController extends Controller
         $keuangan->update($validateData);
 
         return redirect('/admin/ukm/keuangan')->with('success', 'Transaksi berhasil diperbarui.');
+    }
+    public function ukmUpdateSaldo(Request $request, $id)
+    {
+        $request->validate([
+            'saldo' => 'required|numeric|min:0',
+        ]);
+        $ukm = Ukm::findOrFail($id);
+        $ukm->saldo = $request->saldo;
+        $ukm->save();
+        return redirect()->route('adminUkmKeuangan')->with('success', 'Saldo awal berhasil diperbarui.');
+    }
+
+    public function ukmUpdateSaldoView($id)
+    {
+        $ukm = Ukm::findOrFail($id);
+        return view('admin-ukm.edit.saldo', compact('ukm'));
     }
 }
