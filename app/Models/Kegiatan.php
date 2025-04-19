@@ -13,6 +13,8 @@ class Kegiatan extends Model
         'nama',
         'deskripsi',
         'tanggal',
+        'foto_sampul',
+        'link_dokumentasi'
     ];
 
     public function dokumentasi()

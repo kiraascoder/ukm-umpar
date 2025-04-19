@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Anggota;
 use App\Models\Ukm;
 use Auth;
 use Illuminate\Http\Request;
@@ -10,7 +9,7 @@ use Storage;
 
 class AdminUKMController extends Controller
 {
-    
+
 
     public function ukmProfile()
     {
@@ -50,6 +49,7 @@ class AdminUKMController extends Controller
             'visi' => 'nullable|string',
             'misi' => 'nullable|string',
             'struktur_organisasi' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:10048',
+            'foto_pengurus' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:10048',
             'media_sosial' => 'nullable|array',
             'media_sosial.instagram' => 'nullable|string',
             'media_sosial.facebook' => 'nullable|string',
@@ -62,6 +62,9 @@ class AdminUKMController extends Controller
             'struktur_organisasi.image' => 'File harus berupa gambar.',
             'struktur_organisasi.mimes' => 'Format gambar yang diperbolehkan: jpeg, png, jpg, gif, svg.',
             'struktur_organisasi.max' => 'Ukuran gambar maksimal 10MB.',
+            'foto_pengurus.image' => 'File harus berupa gambar.',
+            'foto_pengurus.mimes' => 'Format gambar yang diperbolehkan: jpeg, png, jpg, gif, svg.',
+            'foto_pengurus.max' => 'Ukuran gambar maksimal 10MB.',
         ]);
 
 
@@ -84,6 +87,14 @@ class AdminUKMController extends Controller
             $validatedData['logo'] = $ukm->logo;
         }
 
+        if ($request->hasFile('foto_pengurus')) {
+            if ($ukm->foto_pengurus) {
+                Storage::disk('public')->delete($ukm->foto_pengurus);
+            }
+            $validatedData['foto_pengurus'] = $request->file('foto_pengurus')->store('ukm_foto_pengurus', 'public');
+        } else {
+            $validatedData['foto_pengurus'] = $ukm->foto_pengurus;
+        }
 
         if ($request->hasFile('struktur_organisasi')) {
 
@@ -97,7 +108,6 @@ class AdminUKMController extends Controller
 
 
         $media_sosial = json_decode($ukm->media_sosial, true) ?? [];
-
         $media_sosial = json_encode([
             'instagram' => $validatedData['media_sosial']['instagram'] ?? $media_sosial['instagram'] ?? null,
             'facebook' => $validatedData['media_sosial']['facebook'] ?? $media_sosial['facebook'] ?? null,
@@ -113,6 +123,7 @@ class AdminUKMController extends Controller
             'visi' => $validatedData['visi'] ?? $ukm->visi,
             'misi' => $validatedData['misi'] ?? $ukm->misi,
             'struktur_organisasi' => $validatedData['struktur_organisasi'],
+            'foto_pengurus' => $validatedData['foto_pengurus'],
             'media_sosial' => $media_sosial
         ]);
 

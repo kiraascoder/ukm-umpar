@@ -17,19 +17,48 @@
                     @csrf
                     <div>
                         <label class="block font-medium text-gray-700">Nama Kegiatan</label>
-                        <input type="text" name="nama" class="mt-1 p-2 w-full border rounded-md">
+                        <input type="text" name="nama" value="{{ old('nama') }}"
+                            class="mt-1 p-2 w-full border rounded-md @error('nama') border-red-500 @enderror">
+                        @error('nama')
+                            <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                        @enderror
                     </div>
+
                     <div>
                         <label class="block font-medium text-gray-700">Deskripsi Kegiatan</label>
-                        <textarea name="deskripsi" rows="4" class="mt-1 p-2 w-full border rounded-md">{{ old('deskripsi') }}</textarea>
+                        <textarea name="deskripsi" rows="4"
+                            class="mt-1 p-2 w-full border rounded-md @error('deskripsi') border-red-500 @enderror">{{ old('deskripsi') }}</textarea>
                         @error('deskripsi')
                             <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                         @enderror
                     </div>
+
                     <div>
                         <label class="block font-medium text-gray-700">Tanggal Kegiatan</label>
-                        <input type="date" name="tanggal" class="mt-1 p-2 w-full border rounded-md">
+                        <input type="date" name="tanggal" value="{{ old('tanggal') }}"
+                            class="mt-1 p-2 w-full border rounded-md @error('tanggal') border-red-500 @enderror">
+                        @error('tanggal')
+                            <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                        @enderror
                     </div>
+
+                    <div>
+                        <label class="block font-medium text-gray-700">Upload Foto Sampul Kegiatan</label>
+                        <input type="file" name="foto_sampul"
+                            class="mt-1 p-2 w-full border rounded-md @error('foto_sampul') border-red-500 @enderror">
+                        @error('foto_sampul')
+                            <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                        @enderror
+                    </div>
+                    <div>
+                        <label class="block font-medium text-gray-700">Link Dokumentasi YouTube/Tiktok</label>
+                        <input type="text" name="link_dokumentasi" value="{{ old('link_dokumentasi') }}"
+                            class="mt-1 p-2 w-full border rounded-md @error('nama') border-red-500 @enderror">
+                        @error('link_dokumentasi')
+                            <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                        @enderror
+                    </div>
+
                     <div class="text-center">
                         <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded">Tambah
                             Kegiatan

@@ -6,9 +6,8 @@
     <div x-data="{ openModal: null, selectedNama: '', deleteUrl: '' }" class="bg-gray-100 min-h-screen p-6">
         <h1 class="text-2xl text-gray-800 mb-6">Detail Pendaftaran UKM</h1>
         <div class="lg:col-span-3 w-full bg-white p-6 rounded-2xl shadow overflow-auto">
-            <div class="flex items-center justify-betweenn">
+            <div class="flex items-center justify-between ">
                 <h2 class="text-lg font-semibold text-gray-700">{{ $pendaftaran->pendaftaran }}</h2>
-
                 <a href="{{ route('adminUkmEditPendaftaran', $pendaftaran->id) }}"
                     class="inline-flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded-md shadow">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -22,6 +21,12 @@
             <p class="text-gray-600 mb-4">
                 Batas Pendaftaran : {{ Str::limit($pendaftaran->batas_pendaftaran, 100, '...') }}
             </p>
+        </div>
+        <div class="w-full bg-white p-6 rounded-2xl shadow mt-4">
+            <h3 class="text-lg font-semibold text-gray-700 mb-4">Informasi</h3>
+        </div>
+        <div class="w-full bg-white p-6 rounded-2xl shadow mt-4">
+            <h3 class="text-lg font-semibold text-gray-700 mb-4">Brosur</h3>
         </div>
     </div>
 @endsection

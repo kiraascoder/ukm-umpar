@@ -99,6 +99,19 @@
                 <p class="text-center text-gray-500">Belum ada gambar struktur organisasi.</p>
             @endif
         </div>
+        <div class="bg-white rounded-2xl shadow p-6">
+            <div class="flex items-center mb-4 justify-center">
+                <h3 class="text-lg font-semibold text-gray-800">Foto Pengurus</h3>
+            </div>
+
+            @if ($ukm->foto_pengurus)
+                <div class="flex justify-center">
+                    <img src="{{ asset('storage/' . $ukm->foto_pengurus) }}" class="w-[800px] h-auto rounded shadow">
+                </div>
+            @else
+                <p class="text-center text-gray-500">Belum ada gambar struktur organisasi.</p>
+            @endif
+        </div>
     </div>
     <div id="imagePreviewModal"
         class="fixed inset-0 hidden items-center justify-center bg-black bg-opacity-60 z-50 transition duration-200">

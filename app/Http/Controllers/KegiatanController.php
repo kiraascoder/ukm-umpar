@@ -6,6 +6,7 @@ use Auth;
 use Illuminate\Http\Request;
 use App\Models\Ukm;
 use App\Models\Kegiatan;
+use Illuminate\Support\Facades\Storage;
 
 class KegiatanController extends Controller
 {
@@ -42,12 +43,15 @@ class KegiatanController extends Controller
                 'nama' => 'required|string|max:255',
                 'deskripsi' => 'required|string|min:10|max:700',
                 'tanggal' => 'required|date',
+                'foto_sampul' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+                'link_dokumentasi' => 'string|max:255'
             ],
             [
                 'nama.required' => 'Nama kegiatan harus diisi.',
                 'deskripsi.required' => 'Deskripsi kegiatan harus diisi.',
                 'tanggal.required' => 'Tanggal kegiatan harus diisi.',
                 'deskripsi.min' => 'Deskripsi kegiatan minimal harus 10 karakter.',
+                'foto_sampul.max' => "Foto Tidak Boleh Lebih Dari 2MB"
             ]
         );
 
@@ -58,11 +62,22 @@ class KegiatanController extends Controller
             return redirect()->back()->with('error', 'Anda tidak memiliki UKM yang terdaftar.');
         }
 
+        if ($request->hasFile('foto_sampul')) {
+            if (!empty($ukm->foto_sampul) && is_string($ukm->foto_sampul)) {
+                Storage::disk('public')->delete($ukm->foto_sampul);
+            }
+            $validateData['foto_sampul'] = $request->file('foto_sampul')->store('foto_sampuls', 'public');
+        } else {
+            $validateData['foto_sampul'] = $ukm->foto_sampul;
+        }
+
         try {
             $kegiatan = $ukm->kegiatan()->create([
                 'nama' => $validateData['nama'],
                 'deskripsi' => $validateData['deskripsi'],
-                'tanggal' => $validateData['tanggal']
+                'tanggal' => $validateData['tanggal'],
+                'foto_sampul' => $validateData['foto_sampul'],
+                'link_dokumentasi' => $validateData['link_dokumentasi'],
             ]);
 
             return redirect('/admin/ukm/kegiatan')->with('success', 'Kegiatan berhasil ditambahkan.');
@@ -71,12 +86,14 @@ class KegiatanController extends Controller
         }
     }
 
+
     public function updateKegiatan(Request $request, $id)
     {
         $validateData = $request->validate([
             'nama' => 'required|string|max:255',
             'deskripsi' => 'required|string|min:10|max:700',
             'tanggal' => 'required|date',
+            'link_dokumentasi' => 'string|max:255'
         ]);
 
         $kegiatan = Kegiatan::findOrFail($id);
@@ -84,10 +101,12 @@ class KegiatanController extends Controller
         $kegiatan->update([
             'nama' => $validateData['nama'],
             'deskripsi' => $validateData['deskripsi'],
-            'tanggal' => $validateData['tanggal']
+            'tanggal' => $validateData['tanggal'],
+            'link_dokumentasi' => $validateData['link_dokumentasi']
         ]);
 
-        return redirect('/admin/ukm/kegiatan')->with('success', 'Kegiatan berhasil diperbarui.');
+        return redirect()->route('adminUkmDetailKegiatan', $id)
+            ->with('success', 'Kegiatan berhasil diperbarui.');
     }
 
     public function deleteKegiatan($id)

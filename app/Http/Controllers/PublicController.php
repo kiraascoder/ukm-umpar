@@ -10,7 +10,7 @@ class PublicController extends Controller
 
     public function index()
     {
-        $ukms = Ukm::take(3)->get();        
+        $ukms = Ukm::with('ketuaUmum')->take(3)->get();
         $totalUkm = Ukm::count();
         return view('mahasiswa.home', compact('ukms', 'totalUkm'));
     }
@@ -23,12 +23,18 @@ class PublicController extends Controller
     {
         return view('mahasiswa.kegiatan');
     }
-    public function viewTentang()
+    public function viewInformasi()
     {
-        return view('mahasiswa.tentang');
+        return view('mahasiswa.informasi');
     }
     public function viewUkm()
     {
-        return view('mahasiswa.ukm');
+        $ukms = Ukm::all();
+        return view('mahasiswa.ukm', compact('ukms'));
+    }
+    public function detailUkm($id)
+    {
+        $ukm = Ukm::findOrFail($id);
+        return view('mahasiswa.detail-ukm', compact('ukm'));
     }
 }

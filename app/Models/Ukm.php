@@ -18,6 +18,7 @@ class Ukm extends Model
         'visi',
         'misi',
         'struktur_organisasi',
+        'foto_pengurus',
         'media_sosial',
         'admin_ukm_id',
         'saldo'
@@ -51,5 +52,10 @@ class Ukm extends Model
     public function proker()
     {
         return $this->hasMany(Proker::class);
+    }
+
+    public function ketuaUmum()
+    {
+        return $this->hasOne(Anggota::class)->where('jabatan', 'Ketua Umum');
     }
 }

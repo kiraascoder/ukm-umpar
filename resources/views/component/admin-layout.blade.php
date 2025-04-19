@@ -15,7 +15,7 @@
     @vite('resources/css/app.css')
 </head>
 
-<body class="bg-gray-100 min-h-screen flex">
+<body class="bg-gradient-to-b from-sky-50 to-white min-h-screen flex">
     <aside class="w-64 text-white h-screen fixed shadow-lg">
         @include('component.sidebar')
     </aside>

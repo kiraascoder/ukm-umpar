@@ -3,15 +3,18 @@
 @section('title', 'UKM UMPAR')
 
 @section('content')
-    <div class="py-20 bg-gray-50" id="featured">
+    <div class="py-20 bg-gradient-to-b from-sky-50 to-white" id="featured">
         <div class="container mx-auto px-6">
             <div class="text-center mb-16">
                 <h2 class="text-3xl md:text-4xl font-bold mb-4">Daftar Kegiatan UKM UMPAR</h2>
-                <p class="text-gray-600 max-w-2xl mx-auto">Endless adventures start with a SwingIt playset.</p>
+                <p class="text-gray-600 max-w-4xl text-center mx-auto mb-4">UKM di Universitas Muhammadiyah Parepare secara
+                    rutin mengadakan
+                    berbagai kegiatan yang mendukung pengembangan diri mahasiswa. Mulai dari pelatihan, seminar, perlombaan,
+                    hingga kegiatan sosial kemasyarakatan — semua dirancang untuk membentuk karakter, meningkatkan soft
+                    skill, dan memperluas jaringan pertemanan antar mahasiswa lintas jurusan</p>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Product 1 -->
                 <div class="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300"
                     x-data="{ hover: false }">
                     <div class="relative overflow-hidden">
@@ -34,8 +37,6 @@
                         </a>
                     </div>
                 </div>
-
-                <!-- Product 2 -->
                 <div class="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300"
                     x-data="{ hover: false }">
                     <div class="relative overflow-hidden">
@@ -56,9 +57,7 @@
                             <i class="fas fa-arrow-right ml-2 text-sm"></i>
                         </a>
                     </div>
-                </div>
-
-                <!-- Product 3 -->
+                </div>        
                 <div class="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300"
                     x-data="{ hover: false }">
                     <div class="relative overflow-hidden">
@@ -81,13 +80,6 @@
                         </a>
                     </div>
                 </div>
-            </div>
-
-            <div class="text-center mt-12">
-                <a href="#"
-                    class="inline-block bg-[#608BC1] hover:bg-[#133E87] text-gray-900 font-bold py-3 px-8 rounded-lg transition transform hover:-translate-y-1">
-                    More
-                </a>
             </div>
         </div>
     </div>

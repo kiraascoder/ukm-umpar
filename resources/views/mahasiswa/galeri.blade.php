@@ -3,11 +3,18 @@
 @section('title', 'UKM UMPAR')
 
 @section('content')
-    <div class="mb-6
+    <div class="mb-6">
         <div class="container mx-auto px-4 py-8">
-            <h1 class="text-4xl font-bold text-center mb-8">Galeri Kegiatan UKM UMPAR</h1>
+            <h1 class="text-4xl font-bold text-center mb-4">Galeri Kegiatan UKM UMPAR</h1>
+            <p class="text-gray-600 max-w-4xl text-center mx-auto mb-4">Potret semangat, kreativitas, dan kebersamaan
+                mahasiswa
+                dalam
+                berbagai
+                kegiatan Unit Kegiatan Mahasiswa (UKM). Dari ajang perlombaan, latihan rutin, hingga pengabdian masyarakat —
+                setiap momen mencerminkan dedikasi mahasiswa dalam mengembangkan minat dan bakat di luar perkuliahan.</p>
             <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
-                <!-- Large item -->
+
+
                 <div class="md:col-span-2 md:row-span-2 relative overflow-hidden rounded-2xl shadow-lg group">
                     <img src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NzEyNjZ8MHwxfHNlYXJjaHwxfHxuYXR1cmV8ZW58MHwwfHx8MTcyMTA0MjYwMXww&ixlib=rb-4.0.3&q=80&w=1080"
                         alt="Nature" class="w-full h-full object-cover">

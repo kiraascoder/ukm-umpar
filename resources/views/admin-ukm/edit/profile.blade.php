@@ -41,6 +41,11 @@
                     <input type="file" name="struktur_organisasi"
                         class="mt-1 p-2 w-full border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-[#6A64F1] focus:border-transparent">
                 </div>
+                <div class="col-span-2">
+                    <label class="block text-sm font-medium text-[#07074D]">Foto Pengurus</label>
+                    <input type="file" name="foto_pengurus"
+                        class="mt-1 p-2 w-full border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-[#6A64F1] focus:border-transparent">
+                </div>
                 <div class="col-span-2 grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
                         <label class="block text-sm font-medium text-[#07074D]">Facebook</label>

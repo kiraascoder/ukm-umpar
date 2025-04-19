@@ -75,7 +75,7 @@ Route::middleware(['admin:admin_ukm'])->group(function () {
     Route::post('/admin/ukm/kegiatan/tambah-kegiatan', [KegiatanController::class, 'storeKegiatan'])->name('adminUkmTambahKegiatan.store');
     Route::get('/admin/ukm/kegiatan/{id}/edit', [KegiatanController::class, 'editKegiatanView'])->name('adminUkmEditKegiatan');
     Route::get('/admin/ukm/kegiatan/{id}/detail', [KegiatanController::class, 'detailKegiatanView'])->name('adminUkmDetailKegiatan');
-    Route::put('/admin/ukm/kegiatan/{id}', [KegiatanController::class, 'editKegiatan'])->name('adminUkmEditKegiatan.edit');
+    Route::put('/admin/ukm/kegiatan/{id}', [KegiatanController::class, 'updateKegiatan'])->name('adminUkmEditKegiatan.update');
     Route::delete('/admin/ukm/kegiatan/{id}/delete', [KegiatanController::class, 'deleteKegiatan'])->name('adminUkmKegiatan.delete');
 
     // View dan tambah pendaftaran
@@ -99,6 +99,8 @@ Route::middleware(['admin:admin_ukm'])->group(function () {
 
     // Upload Dokumentasi Kegiatan
     Route::post('/admin/ukm/kegiatan/tambah-dokumentasi', [UploadDokumentasi::class, 'storeDokumentasi'])->name('adminUkmTambahDokumentasi.store');
+    Route::post('/admin/ukm/dokumentasi/update/{id}', [UploadDokumentasi::class, 'updateDokumentasi'])->name('adminUkmDokumentasi.update');
+    Route::delete('/admin/ukm/dokumentasi/delete/{id}', [UploadDokumentasi::class, 'deleteDokumentasi'])->name('adminUkmDokumentasi.delete');
 });
 
 Route::middleware(['admin:admin'])->group(function () {
@@ -113,8 +115,9 @@ Route::middleware(['admin:admin'])->group(function () {
 Route::post('admin/logout', [AdminSesiController::class, 'logout'])->name('admin.logout');
 Route::post('admin/logout', [AdminSesiController::class, 'logout'])->name('admin.logout');
 
-
+// Public Route
+Route::get('/ukm/{id}/detail', [PublicController::class, 'detailUkm'])->name('detail-ukm');
 Route::get('/galeri', [PublicController::class, 'viewGallery'])->name('galeri');
 Route::get('/kegiatan', [PublicController::class, 'viewKegiatan'])->name('kegiatan');
-Route::get('/tentang', [PublicController::class, 'viewTentang'])->name('tentang');
+Route::get('/informasi', [PublicController::class, 'viewInformasi'])->name('informasi');
 Route::get('/daftar-ukm', [PublicController::class, 'viewUkm'])->name('daftar-ukm');

@@ -4,7 +4,7 @@
     @if (Request::is('/'))
         <!-- Full-width background image khusus halaman home -->
         <div class="absolute inset-0 bg-cover bg-center z-0"
-            style="background-image: url({{ asset('img/bg-umpar.jpg') }}); height: 85vh;">
+            style="background-image: url({{ asset('img/bg-umpar.png') }}); height: 85vh;">
             <div class="absolute inset-0 bg-black opacity-20"></div>
         </div>
     @endif
@@ -19,7 +19,7 @@
             <a href="{{ route('daftar-ukm') }}" class="hover:text-white transition">UKM</a>
             <a href="{{ route('galeri') }}" class="hover:text-white transition">Galeri</a>
             <a href="{{ route('kegiatan') }}" class="hover:text-white transition">Kegiatan</a>
-            <a href="{{ route('tentang') }}" class="hover:text-white transition">Tentang</a>
+            <a href="{{ route('informasi') }}" class="hover:text-white transition">Informasi</a>
         </div>
         <div class="md:hidden" x-data="{ open: false }">
             <button class="text-white focus:outline-none" @click="open = !open">
@@ -32,15 +32,13 @@
                     <a href="{{ route('daftar-ukm') }}" class="hover:text-white transition">UKM</a>
                     <a href="{{ route('galeri') }}" class="hover:text-white transition">Galeri</a>
                     <a href="{{ route('kegiatan') }}" class="hover:text-white transition">Kegiatan</a>
-                    <a href="{{ route('tentang') }}" class="hover:text-white transition">Tentang</a>
+                    <a href="{{ route('informasi') }}" class="hover:text-white transition">Informasi</a>
 
                 </div>
             </div>
         </div>
     </nav>
-
     @if (Request::is('/'))
-        <!-- Hero Content khusus halaman home -->
         <div class="container mx-auto px-6 pt-32 pb-48 relative z-10" x-data="{ fadeIn: false }" x-init="setTimeout(() => fadeIn = true, 500)">
             <div class="max-w-3xl transition-all duration-1000"
                 :class="fadeIn ? 'opacity-100 transform translate-y-0' : 'opacity-0 transform translate-y-10'">
