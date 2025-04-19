@@ -16,6 +16,9 @@ use App\Models\Keuangan;
 
 
 Route::get('/', [PublicController::class, 'index'])->name('home');
+Route::get('/unauthorized', function () {
+    return view('errors.unauthorized');
+})->name('unauthorized');
 
 // Super Admin Route
 Route::get('admin/dashboard', [AdminUKMController::class, 'adminDashboard'])->name('superadmin.dashboard')->middleware('admin:admin');
@@ -24,6 +27,7 @@ Route::get('admin/dashboard', [AdminUKMController::class, 'adminDashboard'])->na
 
 // Auth
 Route::prefix('admin')->middleware('authenticated')->group(function () {
+    Route::get('login', [AdminSesiController::class, 'adminLoginView'])->name('admin.login');
     Route::get('login', [AdminSesiController::class, 'adminLoginView'])->name('admin.login');
     Route::post('login', [AdminSesiController::class, 'login'])->name('admin.login.submit');
     Route::get('register', [AdminSesiController::class, 'registerView'])->name('admin.register');

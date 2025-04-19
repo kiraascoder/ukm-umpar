@@ -18,6 +18,6 @@ class Admin
         if (auth()->check() && auth()->user()->role == $role) {
             return $next($request);
         }
-        return response()->json(['message' => 'Unauthorized'], 403);
+        return redirect()->route('unauthorized')->with('timeout', true);
     }
 }

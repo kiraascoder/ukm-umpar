@@ -32,10 +32,19 @@ class AdminUKMController extends Controller
     public function adminDashboardUkm()
     {
         $user = Auth::user();
-
+        $ukm = Ukm::where('admin_ukm_id', $user->id)->first();
+        $keuangan = $ukm ? $ukm->keuangan()->get() : collect();
+        $semuaSurat = $ukm ? $ukm->surat : collect();
+        $jumlahSuratMasuk = $semuaSurat->where('jenis_surat', 'masuk')->count();
+        $jumlahSuratKeluar = $semuaSurat->where('jenis_surat', 'keluar')->count();
+        $proker = $ukm ? $ukm->proker()->get() : collect();
+        $prokerSelesai = $proker->where('status', 'selesai')->count();
+        $prokerBelumSelesai = $proker->where('status', 'belum selesai')->count();
+        $kegiatanTerbaru = $ukm ? $ukm->kegiatan()->orderBy('created_at', 'desc')->first() : null;
+        $ukmSaldo = $ukm ? $ukm->saldo : 0;
         if ($user->role === 'admin_ukm') {
             $nama_ukm = $user->ukm ? $user->ukm->nama : 'Belum terdaftar di UKM';
-            return view('admin-ukm.dashboard', compact('nama_ukm'));
+            return view('admin-ukm.dashboard', compact('nama_ukm', 'keuangan', 'ukmSaldo', 'semuaSurat', 'jumlahSuratMasuk', 'jumlahSuratKeluar', 'proker', 'prokerSelesai', 'prokerBelumSelesai', 'kegiatanTerbaru'));
         }
         return abort(403, 'Akses ditolak');
     }

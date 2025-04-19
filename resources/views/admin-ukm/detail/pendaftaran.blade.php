@@ -4,7 +4,13 @@
 
 @section('content')
     <div x-data="{ openModal: null, selectedNama: '', deleteUrl: '' }" class="bg-gray-100 min-h-screen p-6">
-        <h1 class="text-2xl text-gray-800 mb-6">Detail Pendaftaran UKM</h1>
+        <div class="flex items-center justify-between mb-6">
+            <h1 class="text-2xl text-gray-800">Detail Pendaftaran UKM</h1>
+            <a href="{{ route('adminUkmPendaftaran') }}"
+                class="inline-block px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded-md shadow-sm transition duration-200">
+                Kembali
+            </a>
+        </div>
         <div class="lg:col-span-3 w-full bg-white p-6 rounded-2xl shadow overflow-auto">
             <div class="flex items-center justify-between ">
                 <h2 class="text-lg font-semibold text-gray-700">{{ $pendaftaran->pendaftaran }}</h2>
@@ -24,9 +30,24 @@
         </div>
         <div class="w-full bg-white p-6 rounded-2xl shadow mt-4">
             <h3 class="text-lg font-semibold text-gray-700 mb-4">Informasi</h3>
+            <p class="text-gray-600 mb-4">
+                Link Pendaftaran : {{ Str::limit($pendaftaran->link_pendaftaran, 100, '...') }}
+                Persyaratan : {{ Str::limit($pendaftaran->persyaratan, 100, '...') }}
+            </p>
+            <p class="text-gray-600 mb-4">
+                Persyaratan : {{ Str::limit($pendaftaran->persyaratan, 100, '...') }}
+            </p>
         </div>
         <div class="w-full bg-white p-6 rounded-2xl shadow mt-4">
             <h3 class="text-lg font-semibold text-gray-700 mb-4">Brosur</h3>
+            @if ($pendaftaran->brosur)
+                <div class="flex justify-center">
+                    <img src="{{ asset('storage/' . $pendaftaran->brosur) }}" class="w-[800px] h-auto rounded shadow">
+                </div>
+            @else
+                <p class="text-center text-gray-500">Belum ada gambar brosur.</p>
+            @endif
+
         </div>
     </div>
 @endsection

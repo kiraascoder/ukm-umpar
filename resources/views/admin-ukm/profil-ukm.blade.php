@@ -3,8 +3,7 @@
 @section('title', 'Profil UKM')
 
 @section('content')
-    <div class="p-6 space-y-6">
-
+    <div class=" bg-gray-100 p-6 space-y-6">
         <div class="flex items-center justify-between gap-2">
             <h1 class="text-2xl text-gray-800">Profil UKM</h1>
             <div class="flex gap-2">

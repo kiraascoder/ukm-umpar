@@ -5,11 +5,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', 'Login Admin')</title>
-    <link rel="icon" href="{{ asset('favicon.png') }}" type="image/png">
+    <link rel="icon" href="{{ asset('umpar.png') }}" type="image/png">
     @vite('resources/css/app.css')
+    <style>
+        /* CSS untuk animasi fade-in */
+        .fade-in {
+            opacity: 0;
+            animation: fadeInAnimation 1.5s forwards;
+        }
+
+        @keyframes fadeInAnimation {
+            0% {
+                opacity: 0;
+            }
+
+            100% {
+                opacity: 1;
+            }
+        }
+    </style>
 </head>
 
-<body>
+<body class="fade-in">
 
     <div class="min-h-screen bg-gray-100 text-gray-900 flex justify-center">
         <div class="max-w-screen-xl m-0 sm:m-10 bg-white shadow sm:rounded-lg flex justify-center flex-1">
@@ -67,7 +84,7 @@
             </div>
             <div class="flex-1 bg-indigo-100 text-center hidden lg:flex">
                 <div class="w-full h-full bg-cover bg-center bg-no-repeat"
-                    style="background-image: url('{{ asset('img/auth.jpg') }}');">
+                    style="background-image: url('{{ asset('img/auth.png') }}');">
                 </div>
             </div>
         </div>
@@ -79,13 +96,13 @@
 
             if (passwordInput.type === "password") {
                 passwordInput.type = "text";
-                eyeIcon.innerHTML = `
+                eyeIcon.innerHTML = `  
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                         d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.269-2.943-9.543-7a9.963 9.963 0 012.036-3.292M6.1 6.1A9.964 9.964 0 0112 5c4.477 0 8.268 2.943 9.542 7a9.97 9.97 0 01-4.187 5.411M15 12a3 3 0 00-3-3M3 3l18 18" />
                 `;
             } else {
                 passwordInput.type = "password";
-                eyeIcon.innerHTML = `
+                eyeIcon.innerHTML = `  
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                         d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"

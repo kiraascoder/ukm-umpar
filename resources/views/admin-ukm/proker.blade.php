@@ -3,6 +3,8 @@
 @section('title', 'Program Kerja UKM')
 
 @section('content')
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+
     <div class="bg-gray-100 min-h-screen p-6">
         <h1 class="text-2xl text-gray-800 mb-6">Program Kerja UKM</h1>
         <div class="lg:col-span-3 w-full bg-white p-6 rounded-2xl shadow overflow-auto">
@@ -31,7 +33,7 @@
                 </thead>
                 <tbody class="bg-white divide-y divide-gray-100">
                     @foreach ($proker as $index => $item)
-                        <tr class="hover:bg-gray-50">
+                        <tr class="hover:bg-gray-50" x-data="{ showDeleteModal{{ $item->id }}: false }">
                             <td class="px-6 py-4 text-gray-700">{{ $index + 1 }}</td>
                             <td class="px-6 py-4 text-gray-700">{{ $item->nama }}</td>
                             <td class="px-6 py-4 text-gray-700">{{ $item->bidang }}</td>
@@ -40,18 +42,55 @@
                             <td class="px-6 py-4 flex gap-2">
                                 <a href="{{ route('adminUkmEditProker', $item->id) }}"
                                     class="text-blue-600 hover:text-blue-800 text-xs font-medium">Edit</a>
-                                <form action="{{ route('adminUkmProker', $item->id) }}" method="POST"
-                                    onsubmit="return confirm('Yakin ingin menghapus anggota ini?')">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit"
-                                        class="text-red-600 hover:text-red-800 text-xs font-medium">Hapus</button>
-                                </form>
+
+                                <!-- Trigger Tombol Modal -->
+                                <button @click="showDeleteModal{{ $item->id }} = true"
+                                    class="text-red-600 hover:text-red-800 text-xs font-medium">
+                                    Hapus
+                                </button>
+
+                                <!-- Modal Hapus -->
+                                <div x-show="showDeleteModal{{ $item->id }}" x-cloak
+                                    x-transition:enter="transition ease-out duration-300"
+                                    x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100"
+                                    x-transition:leave="transition ease-in duration-200"
+                                    x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0"
+                                    class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+                                    <div @click.away="showDeleteModal{{ $item->id }} = false"
+                                        x-show="showDeleteModal{{ $item->id }}"
+                                        x-transition:enter="transition transform ease-out duration-300"
+                                        x-transition:enter-start="scale-90 opacity-0"
+                                        x-transition:enter-end="scale-100 opacity-100"
+                                        x-transition:leave="transition transform ease-in duration-200"
+                                        x-transition:leave-start="scale-100 opacity-100"
+                                        x-transition:leave-end="scale-90 opacity-0"
+                                        class="bg-white rounded-lg p-6 w-full max-w-md shadow-xl">
+                                        <h2 class="text-xl font-semibold text-gray-800 mb-4">Konfirmasi Hapus</h2>
+                                        <p class="text-gray-600 mb-6">Yakin ingin menghapus <b>{{ $item->nama }}</b>?
+                                            Tindakan ini tidak bisa dibatalkan.</p>
+
+                                        <div class="flex justify-end space-x-3">
+                                            <button @click="showDeleteModal{{ $item->id }} = false"
+                                                class="px-4 py-2 bg-gray-300 text-gray-800 rounded hover:bg-gray-400">
+                                                Batal
+                                            </button>
+                                            <form action="{{ route('adminUkmProker', $item->id) }}" method="POST">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit"
+                                                    class="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700">
+                                                    Hapus
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
                             </td>
                         </tr>
                     @endforeach
                 </tbody>
             </table>
+
             @if ($proker->isEmpty())
                 <div class="text-center text-gray-500 py-10">
                     Belum ada Surat.

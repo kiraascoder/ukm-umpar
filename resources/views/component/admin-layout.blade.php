@@ -5,8 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', 'ADMIN UKM UMPAR')</title>
-    <link rel="icon" href="{{ asset('favicon.png') }}" type="image/png">
+    <link rel="icon" href="{{ asset('umpar.png') }}" type="image/png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+
     <style>
         [x-cloak] {
             display: none !important;
@@ -25,6 +26,7 @@
         </main>
     </div>
     <script src="//unpkg.com/alpinejs" defer></script>
+
 </body>
 
 </html>

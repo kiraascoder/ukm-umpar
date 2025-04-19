@@ -3,62 +3,70 @@
 @section('title', 'Edit Surat UKM')
 
 @section('content')
-    <div class="bg-gray-100 min-h-screen py-10">
-        <div class="container mx-auto">
-            <div class="max-w-3xl mx-auto bg-white p-8 shadow-lg rounded-lg">
-                <h2 class="text-2xl mb-6 text-center">Edit Surat</h2>
+    <div class="bg-gray-50 min-h-screen py-12">
+        <div class="container mx-auto px-4">
+            <div
+                class="max-w-3xl mx-auto bg-white shadow-xl rounded-xl p-10 transform transition-all duration-500 ease-in-out hover:scale-[1.005]">
+                <h2
+                    class="text-3xl font-semibold text-center text-gray-800 mb-8 transition-opacity duration-500 ease-in-out">
+                    Edit Surat UKM</h2>
+
                 <form action="{{ route('adminUkmArsipSurat.edit', $surat->id) }}" method="POST" enctype="multipart/form-data"
-                    class="space-y-4">
+                    class="space-y-6">
                     @csrf
                     @method('PUT')
-                    <div>
-                        <label class="block font-medium text-gray-700">Judul</label>
+
+                    {{-- Judul --}}
+                    <div class="transition duration-300 ease-in-out">
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Judul Surat</label>
                         <input value="{{ old('judul', $surat->judul ?? '') }}" type="text" name="judul"
-                            class="mt-1 p-2 w-full border rounded-md">
+                            class="block w-full border border-gray-300 rounded-lg shadow-sm p-3 transition duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                            required>
                     </div>
 
-                    <div>
-                        <label class="block font-medium text-gray-700">Jenis Surat</label>
+                    {{-- Jenis Surat --}}
+                    <div class="transition duration-300 ease-in-out">
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Jenis Surat</label>
                         <select name="jenis_surat" id="jenis_surat"
-                            class="mt-2 w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            class="block w-full border border-gray-300 rounded-lg shadow-sm p-3 transition duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                             required>
                             <option value="" disabled
-                                {{ old('jenis_surat', $surat->jenis_surat ?? '') == '' ? 'selected' : '' }}>
-                                Pilih Jenis Surat
-                            </option>
+                                {{ old('jenis_surat', $surat->jenis_surat ?? '') == '' ? 'selected' : '' }}>Pilih Jenis
+                                Surat</option>
                             <option value="masuk"
-                                {{ old('jenis_surat', $surat->jenis_surat ?? '') == 'masuk' ? 'selected' : '' }}>
-                                Surat Masuk
+                                {{ old('jenis_surat', $surat->jenis_surat ?? '') == 'masuk' ? 'selected' : '' }}>Surat Masuk
                             </option>
                             <option value="keluar"
-                                {{ old('jenis_surat', $surat->jenis_surat ?? '') == 'keluar' ? 'selected' : '' }}>
-                                Surat Keluar
-                            </option>
+                                {{ old('jenis_surat', $surat->jenis_surat ?? '') == 'keluar' ? 'selected' : '' }}>Surat
+                                Keluar</option>
                         </select>
                     </div>
 
-                    <div>
-                        <label class="block font-medium text-gray-700">Upload Surat</label>
-                        <input type="file" name="file_path" class="mt-1 p-2 w-full border rounded-md">
+                    {{-- Upload Surat --}}
+                    <div class="transition duration-300 ease-in-out">
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Upload File Surat</label>
+                        <input type="file" name="file_path"
+                            class="block w-full border border-gray-300 rounded-lg shadow-sm p-3 transition duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
                         @if (!empty($surat->file_path))
-                            <p class="text-sm text-gray-500 mt-1">
-                                File saat ini: <a href="{{ asset('storage/' . $surat->file_path) }}" target="_blank"
-                                    class="text-blue-500 underline">Lihat Surat</a>
+                            <p class="text-sm text-gray-500 mt-2 transition-opacity duration-300">
+                                File saat ini:
+                                <a href="{{ asset('storage/' . $surat->file_path) }}" target="_blank"
+                                    class="text-blue-600 hover:underline transition duration-200">Lihat Surat</a>
                             </p>
                         @endif
                     </div>
 
-
-                    <div class="text-center flex justify-center space-x-4 mt-4">
+                    {{-- Tombol Aksi --}}
+                    <div class="flex justify-center gap-4 pt-6">
                         <a href="{{ route('adminUkmArsipSurat') }}"
-                            class="bg-gray-500 text-white px-4 py-2 rounded-md hover:bg-gray-700">
-                            Back
+                            class="bg-gray-400 hover:bg-gray-500 text-white font-medium px-5 py-2 rounded-lg transition-all duration-300 ease-in-out transform hover:scale-105">
+                            Kembali
                         </a>
-                        <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded">
-                            Edit Surat
+                        <button type="submit"
+                            class="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-2 rounded-lg shadow transition-all duration-300 ease-in-out transform hover:scale-105">
+                            Simpan Perubahan
                         </button>
                     </div>
-
                 </form>
             </div>
         </div>

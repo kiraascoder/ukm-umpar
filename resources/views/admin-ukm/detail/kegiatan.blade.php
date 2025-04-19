@@ -4,7 +4,13 @@
 
 @section('content')
     <div class="bg-gray-100 min-h-screen p-6" x-data="{ openModal: false, selectedNama: '', deleteUrl: '' }" @keydown.window.escape="openModal = false">
-        <h1 class="text-2xl font-bold text-gray-800 mb-6">Detail Kegiatan UKM</h1>
+        <div class="flex items-center justify-between mb-6">
+            <h1 class="text-2xl text-gray-800">Detail Kegiatan UKM</h1>
+            <a href="{{ route('adminUkmKegiatan') }}"
+                class="inline-block px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded-md shadow-sm transition duration-200">
+                Kembali
+            </a>
+        </div>
         <div class="w-full bg-white p-6 rounded-2xl shadow mb-6">
             <div class="flex items-center justify-between mb-4">
                 <h2 class="text-xl font-semibold text-gray-700">{{ $kegiatan->nama }}</h2>
@@ -84,7 +90,7 @@
                 @endforelse
             </div>
 
-            {{-- Form Tambah Dokumentasi --}}
+
             @if ($kegiatanDokumentasi->count() < 5)
                 <form action="{{ route('adminUkmTambahDokumentasi.store') }}" method="POST" enctype="multipart/form-data"
                     class="space-y-4 mt-6">
