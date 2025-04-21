@@ -27,11 +27,16 @@ class PublicController extends Controller
     {
         return view('mahasiswa.informasi');
     }
+    public function viewContact()
+    {
+        return view('mahasiswa.contact');
+    }
     public function viewUkm()
     {
         $ukms = Ukm::all();
         return view('mahasiswa.ukm', compact('ukms'));
     }
+
     public function detailUkm($id)
     {
         $ukm = Ukm::findOrFail($id);

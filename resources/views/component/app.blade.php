@@ -14,9 +14,7 @@
 
 <body class="font-sans text-gray-800 bg-gradient-to-b from-sky-50 to-white">
     @include('component.navbar')
-    <div class="container mx-auto px-6">
-        @yield('content')
-    </div>
+    @yield('content')
     @include('component.footer')
     <script>
         document.addEventListener('alpine:init', () => {

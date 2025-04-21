@@ -120,6 +120,7 @@ Route::post('admin/logout', [AdminSesiController::class, 'logout'])->name('admin
 Route::post('admin/logout', [AdminSesiController::class, 'logout'])->name('admin.logout');
 
 // Public Route
+Route::get('/contact', [PublicController::class, 'viewContact'])->name('kontak');
 Route::get('/ukm/{id}/detail', [PublicController::class, 'detailUkm'])->name('detail-ukm');
 Route::get('/galeri', [PublicController::class, 'viewGallery'])->name('galeri');
 Route::get('/kegiatan', [PublicController::class, 'viewKegiatan'])->name('kegiatan');
