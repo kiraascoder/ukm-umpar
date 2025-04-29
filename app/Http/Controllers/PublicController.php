@@ -40,6 +40,11 @@ class PublicController extends Controller
     public function detailUkm($id)
     {
         $ukm = Ukm::findOrFail($id);
-        return view('mahasiswa.detail-ukm', compact('ukm'));
+        $anggota = $ukm->anggota()
+            ->whereIn('jabatan', ['Ketua Umum', 'Sekretaris', 'Bendahara'])
+            ->whereNotNull('foto')
+            ->where('foto', '!=', '')
+            ->get();
+        return view('mahasiswa.detail-ukm', compact('ukm', 'anggota'));
     }
 }

@@ -4,107 +4,111 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@yield('title', 'Admin Dashboard')</title>
+    <title>@yield('title', 'Register')</title>
     <link rel="icon" href="{{ asset('umpar.png') }}" type="image/png">
     @vite('resources/css/app.css')
 </head>
 
-<body>
-    <div class="p-10">
-        <h1 class="mb-8 font-bold text-4xl">Register</h1>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<body class="min-h-screen flex items-center justify-center bg-gray-100">
+    <div class="bg-white p-8 rounded-xl shadow-lg w-full max-w-3xl">
+        <h1 class="mb-6 text-center font-bold text-3xl text-indigo-600">Register</h1>
 
-            <form action={{ route('admin.register.submit') }} method="POST">
-                @csrf
-                <div>
-                    <label class="block font-semibold" for="name">Masukan Nama Anda</label>
-                    <input
-                        class="shadow-inner bg-gray-100 rounded-lg placeholder-black text-2xl p-4 border-none block mt-1 w-full"
-                        id="name" type="text" name="name" required="required" autofocus="autofocus">
-                </div>
+        <form action="{{ route('admin.register.submit') }}" method="POST" class="space-y-5">
+            @csrf
+            <div>
+                <label class="block text-sm font-semibold mb-1" for="name">Nama Anda</label>
+                <input
+                    class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-400"
+                    id="name" type="text" name="name" required autofocus>
+            </div>
 
-                <div class="mt-4">
-                    <label class="block font-semibold" for="name">Masukan Nama UKM</label>
-                    <input
-                        class="shadow-inner bg-gray-100 rounded-lg placeholder-black text-2xl p-4 border-none block mt-1 w-full"
-                        id="nama_ukm" type="text" name="nama_ukm" required="required" autofocus="autofocus">
-                </div>
+            <div>
+                <label class="block text-sm font-semibold mb-1" for="nama_ukm">Nama UKM</label>
+                <input
+                    class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-400"
+                    id="nama_ukm" type="text" name="nama_ukm" required>
+            </div>
 
-                <div class="mt-4">
-                    <label class="block font-semibold" for="name">No Handphone (Nomor WhatsApp Aktif) </label>
-                    <input
-                        class="shadow-inner bg-gray-100 rounded-lg placeholder-black text-2xl p-4 border-none block mt-1 w-full"
-                        id="phone" type="phone" name="phone" required="required" autofocus="autofocus">
-                </div>
+            <div>
+                <label class="block text-sm font-semibold mb-1" for="phone">No Handphone (WhatsApp Aktif)</label>
+                <input
+                    class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-400"
+                    id="phone" type="tel" name="phone" required>
+            </div>
 
-                <div class="mt-4">
-                    <label class="block font-semibold" for="email">Email Aktif</label>
-                    <input
-                        class="shadow-inner bg-gray-100 rounded-lg placeholder-black text-2xl p-4 border-none block mt-1 w-full"
-                        id="email" type="email" name="email" required="required">
-                </div>
-                <div class="mt-4 relative">
-                    <label class="block font-semibold" for="password">Masukkan Password</label>
-                    <input
-                        class="w-full shadow-inner bg-gray-100 rounded-lg placeholder-black text-2xl p-4 pr-12 border-none block mt-1"
-                        id="password" type="password" name="password" required autocomplete="new-password">
-                    <div class="absolute top-[52px] right-4 cursor-pointer"
-                        onclick="togglePassword('password', 'eyeIcon1')">
-                        <svg id="eyeIcon1" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-600"
-                            fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M2.458 12C3.732 7.943 7.523 5 12 5c4.477 0 8.268 2.943 9.542 7-1.274 4.057-5.065 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                        </svg>
-                    </div>
-                </div>
+            <div>
+                <label class="block text-sm font-semibold mb-1" for="email">Email Aktif</label>
+                <input
+                    class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-400"
+                    id="email" type="email" name="email" required>
+            </div>
 
-                <div class="mt-4 relative">
-                    <label class="block font-semibold" for="password_confirmation">Konfirmasi Password</label>
-                    <input
-                        class="w-full shadow-inner bg-gray-100 rounded-lg placeholder-black text-2xl p-4 pr-12 border-none block mt-1"
-                        id="password_confirmation" type="password" name="password_confirmation" required
-                        autocomplete="new-password">
-                    <div class="absolute top-[52px] right-4 cursor-pointer"
-                        onclick="togglePassword('password_confirmation', 'eyeIcon2')">
-                        <svg id="eyeIcon2" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-600"
-                            fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M2.458 12C3.732 7.943 7.523 5 12 5c4.477 0 8.268 2.943 9.542 7-1.274 4.057-5.065 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                        </svg>
-                    </div>
+            <div class="relative">
+                <label class="block text-sm font-semibold mb-1" for="password">Password</label>
+                <input
+                    class="w-full border border-gray-300 rounded-lg px-4 py-2 pr-10 focus:outline-none focus:ring-2 focus:ring-indigo-400"
+                    id="password" type="password" name="password" required autocomplete="new-password">
+                <div class="absolute top-9 right-3 cursor-pointer" onclick="togglePassword('password', 'eyeIcon1')">
+                    <svg id="eyeIcon1" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" fill="none"
+                        viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5
+                            c4.477 0 8.268 2.943 9.542 7
+                            -1.274 4.057-5.065 7-9.542 7
+                            -4.477 0-8.268-2.943-9.542-7z" />
+                    </svg>
                 </div>
-                <div class="flex items-center justify-between mt-8">
-                    <button type="submit"
-                        class="flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 md:py-4 md:text-lg md:px-10">Register</button>
-                    <a class="font-semibold" href="{{ route('admin.login') }}">
-                        Already registered?
-                    </a>
-                </div>
-            </form>
+            </div>
 
-            <aside class="">
-                <div class="bg-gray-100 p-8 rounded">
-                    <h2 class="font-bold text-2xl">Instructions</h2>
-                    <ul class="list-disc mt-4 list-inside">
-                        <li>All users must provide a valid email address and password to create an account.</li>
-                        <li>Users must not use offensive, vulgar, or otherwise inappropriate language in their username
-                            or profile information</li>
-                        <li>Users must not create multiple accounts for the same person.</li>
-                    </ul>
+            <div class="relative">
+                <label class="block text-sm font-semibold mb-1" for="password_confirmation">Konfirmasi Password</label>
+                <input
+                    class="w-full border border-gray-300 rounded-lg px-4 py-2 pr-10 focus:outline-none focus:ring-2 focus:ring-indigo-400"
+                    id="password_confirmation" type="password" name="password_confirmation" required
+                    autocomplete="new-password">
+                <div class="absolute top-9 right-3 cursor-pointer"
+                    onclick="togglePassword('password_confirmation', 'eyeIcon2')">
+                    <svg id="eyeIcon2" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" fill="none"
+                        viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5
+                            c4.477 0 8.268 2.943 9.542 7
+                            -1.274 4.057-5.065 7-9.542 7
+                            -4.477 0-8.268-2.943-9.542-7z" />
+                    </svg>
                 </div>
-            </aside>
+            </div>
 
+            <div class="flex items-center justify-between">
+                <button type="submit"
+                    class="w-full py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded-lg shadow-md transition duration-300">
+                    Register
+                </button>
+            </div>
+
+            <div class="text-center mt-4">
+                <a href="{{ route('admin.login') }}" class="text-indigo-600 hover:underline text-sm">
+                    Already registered? Login
+                </a>
+            </div>
+        </form>
+
+        <div class="mt-10">
+            <h2 class="font-bold text-lg mb-2 text-indigo-500">Instructions</h2>
+            <ul class="list-disc pl-5 text-gray-600 text-sm space-y-1">
+                <li>Gunakan email aktif dan password yang kuat.</li>
+                <li>Nama UKM dan nama pengguna harus sopan dan sesuai.</li>
+                <li>Dilarang membuat akun ganda untuk 1 orang.</li>
+            </ul>
         </div>
     </div>
+
     <script>
         function togglePassword(inputId, iconId) {
             const input = document.getElementById(inputId);
             const icon = document.getElementById(iconId);
-
             if (input.type === "password") {
                 input.type = "text";
                 icon.innerHTML = `

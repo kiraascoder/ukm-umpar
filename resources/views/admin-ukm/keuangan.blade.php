@@ -39,6 +39,13 @@
                         </svg>
                         Edit Saldo Awal
                     </button>
+                    <div class="flex gap-2">
+                        <a href="{{ route('adminUkmKeuangan.download') }}"
+                            class="inline-flex items-center gap-2 px-4 py-2 bg-green-600 hover:bg-green-700 text-white text-sm font-medium rounded-md shadow">
+                            Download Rekap Keuangan (CSV)
+                        </a>
+
+                    </div>
                 </div>
             </div>
 
@@ -77,6 +84,7 @@
                                     Hapus
                                 </button>
                             </td>
+
                         </tr>
                     @empty
                         <tr>
@@ -107,6 +115,7 @@
                     <button @click="showDeleteModal = false"
                         class="px-4 py-2 bg-gray-300 hover:bg-gray-400 text-gray-800 rounded-md">Batal</button>
                 </div>
+
             </div>
         </div>
 

@@ -1,62 +1,29 @@
-<div class="relative">
-    @if (Request::is('/'))
-        <div class="absolute inset-0 bg-cover bg-center z-0"
-            style="background-image: url({{ asset('img/bg-umpar.png') }}); height: 85vh;">
-            <div class="absolute inset-0 bg-black opacity-20"></div>
-        </div>
-    @endif
-    <nav class="container mx-auto px-6 py-4 flex justify-between items-center relative z-10">
-        <div class="text-white font-bold text-2xl">
-            <img src="{{ asset('img/umpar.png') }}" alt="" class="w-16">
-        </div>
-        <div class="hidden md:flex space-x-10 text-dark font-medium">
-            <a href="/" class="hover:text-white transition">Home</a>
-            <a href="{{ route('daftar-ukm') }}" class="hover:text-white transition">UKM</a>
-            <a href="{{ route('galeri') }}" class="hover:text-white transition">Galeri</a>
-            <a href="{{ route('kegiatan') }}" class="hover:text-white transition">Kegiatan</a>
-            <a href="{{ route('informasi') }}" class="hover:text-white transition">Informasi</a>
-        </div>
-        <div class="md:hidden" x-data="{ open: false }">
-            <button class="text-white focus:outline-none" @click="open = !open">
-                <i class="fa fa-bars text-2xl"></i>
-            </button>
-            <div x-show="open" @click.away="open = false"
-                class="absolute top-20 right-6 bg-white shadow-lg rounded-lg p-6 w-48 z-50">
-                <div class="flex flex-col space-y-4">
-                    <a href="/" class="hover:text-yellow-500 transition">Home</a>
-                    <a href="{{ route('daftar-ukm') }}" class="hover:text-white transition">UKM</a>
-                    <a href="{{ route('galeri') }}" class="hover:text-white transition">Galeri</a>
-                    <a href="{{ route('kegiatan') }}" class="hover:text-white transition">Kegiatan</a>
-                    <a href="{{ route('informasi') }}" class="hover:text-white transition">Informasi</a>
-
-                </div>
+<!-- resources/views/component/navbar.blade.php -->
+<nav class="container mx-auto px-6 py-4 flex justify-between items-center relative z-10">
+    <div class="text-white font-bold text-2xl">
+        <img src="{{ asset('img/umpar.png') }}" alt="Logo UMPAR" class="w-16">
+    </div>
+    <div class="hidden md:flex space-x-10 font-medium 
+    {{ Request::is('/') ? 'text-white' : 'text-gray-900' }}">
+        <a href="/" class="hover:text-yellow-300 transition">Home</a>
+        <a href="{{ route('daftar-ukm') }}" class="hover:text-yellow-300 transition">UKM</a>
+        <a href="{{ route('galeri') }}" class="hover:text-yellow-300 transition">Galeri</a>
+        <a href="{{ route('kegiatan') }}" class="hover:text-yellow-300 transition">Kegiatan</a>
+        <a href="{{ route('informasi') }}" class="hover:text-yellow-300 transition">Informasi</a>
+    </div>
+    <div class="md:hidden" x-data="{ open: false }">
+        <button class="text-white focus:outline-none" @click="open = !open">
+            <i class="fa fa-bars text-2xl"></i>
+        </button>
+        <div x-show="open" @click.away="open = false"
+            class="absolute top-20 right-6 bg-white text-gray-800 shadow-lg rounded-lg p-6 w-48 z-50">
+            <div class="flex flex-col space-y-4">
+                <a href="/" class="hover:text-blue-600">Home</a>
+                <a href="{{ route('daftar-ukm') }}" class="hover:text-blue-600">UKM</a>
+                <a href="{{ route('galeri') }}" class="hover:text-blue-600">Galeri</a>
+                <a href="{{ route('kegiatan') }}" class="hover:text-blue-600">Kegiatan</a>
+                <a href="{{ route('informasi') }}" class="hover:text-blue-600">Informasi</a>
             </div>
         </div>
-    </nav>
-    @if (Request::is('/'))
-        <div class="container mx-auto px-6 pt-32 pb-48 relative z-10" x-data="{ fadeIn: false }" x-init="setTimeout(() => fadeIn = true, 500)">
-            <div class="max-w-3xl transition-all duration-1000"
-                :class="fadeIn ? 'opacity-100 transform translate-y-0' : 'opacity-0 transform translate-y-10'">
-                <h1 class="text-4xl md:text-6xl font-bold text-white leading-tight mb-6">Selamat<br>Datang Mahasiswa
-                    !</h1>
-                <p class="text-xl text-white mb-8 md:pr-12">
-                    Sistem informasi UKM yang dirancang untuk memudahkan pengelolaan dan pengembangan UKM di kampus,
-                    memfasilitasi berbagai kegiatan dan informasi yang dibutuhkan.
-                </p>
-
-                <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
-                    <a href="/infomasi"
-                        class="bg-[#608BC1] hover:bg-[#133E87] text-gray-900 font-bold py-3 px-8 rounded-lg transition transform hover:-translate-y-1 inline-flex items-center justify-center">
-                        <span>Lihat Informasi</span>
-                        <i class="fas fa-arrow-right ml-2"></i>
-                    </a>
-                    <a href="/contact"
-                        class="bg-transparent border-2 border-white text-white hover:bg-white hover:text-gray-900 font-bold py-3 px-8 rounded-lg transition transform hover:-translate-y-1 inline-flex items-center justify-center">
-                        <span>Hubungi Kami</span>
-                    </a>
-                </div>
-
-            </div>
-        </div>
-    @endif
-</div>
+    </div>
+</nav>

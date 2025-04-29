@@ -1,12 +1,13 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Exports\KeuanganExport;
 use Auth;
 use Illuminate\Http\Request;
 use App\Models\Keuangan;
 use App\Models\Ukm;
 use Illuminate\Support\Facades\Storage;
+use Maatwebsite\Excel\Facades\Excel;
 
 class KeuanganController extends Controller
 {
@@ -167,5 +168,9 @@ class KeuanganController extends Controller
     {
         $ukm = Ukm::findOrFail($id);
         return view('admin-ukm.edit.saldo', compact('ukm'));
+    }
+    public function download()
+    {
+        return Excel::download(new KeuanganExport, 'rekap_keuangan_ukm.csv');
     }
 }

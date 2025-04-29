@@ -72,6 +72,10 @@ Route::middleware(['admin:admin_ukm'])->group(function () {
     Route::put('/admin/ukm/keuangan/{id}/', [KeuanganController::class, 'editKeuangan'])->name('adminUkmKeuangan.edit');
     Route::delete('/admin/ukm/keuangan/{id}/delete', [KeuanganController::class, 'hapusKeuangan'])->name('adminUkmKeuangan.delete');
 
+    // Download Rekap Keuangan
+    Route::get('/keuangan/download', [KeuanganController::class, 'download'])->name('adminUkmKeuangan.download');
+
+
 
     // View dan tambah kegiatan
     Route::get('/admin/ukm/kegiatan', [KegiatanController::class, 'ukmKegiatan'])->name('adminUkmKegiatan');

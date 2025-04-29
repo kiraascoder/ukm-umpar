@@ -18,7 +18,7 @@ return new class extends Migration
             $table->text('deskripsi')->nullable();
             $table->text('sejarah')->nullable();
             $table->text('visi')->nullable();
-            $table->text('misi')->nullable();
+            $table->json('misi')->nullable();
             $table->string('struktur_organisasi')->nullable();
             $table->json('media_sosial')->nullable();
             $table->foreignId('admin_ukm_id')->constrained('users')->onDelete('cascade');

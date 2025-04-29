@@ -56,10 +56,11 @@
                     <span class="font-medium">Visi:</span>
                     <div>{{ $ukm->visi }}</div>
                 </div>
-                <div>
-                    <span class="font-medium">Misi:</span>
-                    <div>{{ $ukm->misi }}</div>
-                </div>
+                <ul class="list-disc ml-6 text-gray-700">
+                    @foreach (json_decode($ukm->misi, true) as $item)
+                        <li>{{ $item }}</li>
+                    @endforeach
+                </ul>
             </div>
         </div>
         <div class="bg-white rounded-2xl shadow p-6">

@@ -57,7 +57,7 @@
                             <i class="fas fa-arrow-right ml-2 text-sm"></i>
                         </a>
                     </div>
-                </div>        
+                </div>
                 <div class="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300"
                     x-data="{ hover: false }">
                     <div class="relative overflow-hidden">
@@ -80,6 +80,12 @@
                         </a>
                     </div>
                 </div>
+            </div>
+            <div class="text-center mt-12">
+                <a href="#"
+                    class="inline-block bg-[#608BC1] hover:bg-[#133E87] text-white font-bold py-3 px-8 rounded-lg transition transform hover:-translate-y-1">
+                    Lihat Selengkapnya
+                </a>
             </div>
         </div>
     </div>

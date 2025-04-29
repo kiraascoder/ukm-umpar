@@ -3,109 +3,121 @@
 @section('title', 'UKM UMPAR')
 
 @section('content')
-    <div class=" p-4 min-h-screen">
-        <div class="max-w-7xl mx-auto h-max px-6 md:px-12 xl:px-6">
-            <div class="md:w-2/3 lg:w-1/2">
-
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 text-gray-100">
-                    <path fill-rule="evenodd"
-                        d="M9 4.5a.75.75 0 01.721.544l.813 2.846a3.75 3.75 0 002.576 2.576l2.846.813a.75.75 0 010 1.442l-2.846.813a3.75 3.75 0 00-2.576 2.576l-.813 2.846a.75.75 0 01-1.442 0l-.813-2.846a3.75 3.75 0 00-2.576-2.576l-2.846-.813a.75.75 0 010-1.442l2.846-.813A3.75 3.75 0 007.466 7.89l.813-2.846A.75.75 0 019 4.5zM18 1.5a.75.75 0 01.728.568l.258 1.036c.236.94.97 1.674 1.91 1.91l1.036.258a.75.75 0 010 1.456l-1.036.258c-.94.236-1.674.97-1.91 1.91l-.258 1.036a.75.75 0 01-1.456 0l-.258-1.036a2.625 2.625 0 00-1.91-1.91l-1.036-.258a.75.75 0 010-1.456l1.036-.258a2.625 2.625 0 001.91-1.91l.258-1.036A.75.75 0 0118 1.5zM16.5 15a.75.75 0 01.712.513l.394 1.183c.15.447.5.799.948.948l1.183.395a.75.75 0 010 1.422l-1.183.395c-.447.15-.799.5-.948.948l-.395 1.183a.75.75 0 01-1.422 0l-.395-1.183a1.5 1.5 0 00-.948-.948l-1.183-.395a.75.75 0 010-1.422l1.183-.395c.447-.15.799-.5.948-.948l.395-1.183A.75.75 0 0116.5 15z"
-                        clip-rule="evenodd"></path>
-                </svg>
-                <h2 class="my-6 text-2xl font-bold text-dark md:text-4xl text">About Us?</h2>
-                <p class="text-dark text-justify">Unit Kegiatan Mahasiswa (UKM) adalah wadah bagi mahasiswa untuk
-                    mengembangkan minat,
-                    bakat, serta potensi diri di luar kegiatan akademik. Kami percaya bahwa kehidupan kampus bukan hanya
-                    tentang belajar di kelas, tetapi juga tentang bertumbuh, berkarya, dan berkontribusi.
-                    UKM kami hadir sebagai ruang berkumpulnya mahasiswa yang memiliki visi dan semangat yang sama dalam
-                    bidang [sebutkan bidang, misalnya seni, olahraga, jurnalistik, keagamaan, teknologi, dll]. Melalui
-                    berbagai kegiatan positif, kami berkomitmen untuk menciptakan lingkungan yang inklusif, produktif, dan
-                    inspiratif.</p>
+    <section class="bg-gradient-to-b from-sky-50 to-white" id="contact">
+        <div class="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 lg:py-20">
+            <div class="mb-4">
+                <div class="mb-6 max-w-3xl text-center sm:text-center md:mx-auto md:mb-12">
+                    <p class="text-base font-semibold uppercase tracking-wide text-dark dark:text-dark-200">
+                        Contact
+                    </p>
+                    <h2 class="font-heading mb-4 font-bold tracking-tight text-gray-900 text-3xl sm:text-5xl">
+                        Get in Touch
+                    </h2>
+                    <p class="mx-auto mt-4 max-w-3xl text-xl text-gray-800">Hubungi UKM UMPAR untuk
+                        memperoleh informasi lebih lanjut tentang UKM UMPAR.
+                    </p>
+                </div>
             </div>
-            <div
-                class="mt-16 grid divide-x divide-y  divide-gray-700 overflow-hidden rounded-3xl border text-gray-600 border-gray-700 sm:grid-cols-2 lg:grid-cols-4  lg:divide-y-0 xl:grid-cols-4">
-                <div class="group relative bg-gray-800 transition hover:z-[1] hover:shadow-2xl hover:shadow-gray-600/10">
-                    <div class="relative space-y-8 py-12 p-8">
-                        <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24"
-                            stroke-linecap="round" stroke-linejoin="round" color="white" style="color:white" height="50"
-                            width="50" xmlns="http://www.w3.org/2000/svg">
-                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                            <path
-                                d="M19.875 6.27a2.225 2.225 0 0 1 1.125 1.948v7.284c0 .809 -.443 1.555 -1.158 1.948l-6.75 4.27a2.269 2.269 0 0 1 -2.184 0l-6.75 -4.27a2.225 2.225 0 0 1 -1.158 -1.948v-7.285c0 -.809 .443 -1.554 1.158 -1.947l6.75 -3.98a2.33 2.33 0 0 1 2.25 0l6.75 3.98h-.033z">
-                            </path>
-                            <path d="M10 10l2 -2v8"></path>
-                        </svg>
-                        <div class="space-y-2">
-                            <h5 class="text-xl font-semibold text-white transition">Initial Discussion</h5>
-                            <p class="text-gray-300">We will have discussions on the requirements to ensure your MVP
-                                (Minimum Viable
-                                Product) is ready for the initial launch</p>
-                        </div>
+            <div class="flex items-stretch justify-center">
+                <div class="grid md:grid-cols-2">
+                    <div class="h-full pr-6">
+                        <p class="mt-3 mb-12 text-lg text-gray-800">
+                            Terima kasih telah mengunjungi sistem informasi UKM kami. Jika Anda memiliki pertanyaan, saran,
+                            atau membutuhkan bantuan lebih lanjut, jangan ragu untuk menghubungi kami. Kami siap membantu
+                            Anda dengan segala kebutuhan terkait pengembangan usaha kecil dan menengah.
+                        </p>
+                        <ul class="mb-6 md:mb-0">
+                            <li class="flex">
+                                <div class="flex h-10 w-10 items-center justify-center rounded bg-blue-900 text-gray-50">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round" class="h-6 w-6">
+                                        <path d="M9 11a3 3 0 1 0 6 0a3 3 0 0 0 -6 0"></path>
+                                        <path
+                                            d="M17.657 16.657l-4.243 4.243a2 2 0 0 1 -2.827 0l-4.244 -4.243a8 8 0 1 1 11.314 0z">
+                                        </path>
+                                    </svg>
+                                </div>
+                                <div class="ml-4 mb-4">
+                                    <h3 class="mb-2 text-lg font-medium leading-6 text-gray-900">Our
+                                        Address
+                                    </h3>
+                                    <p class="text-gray-800">1230 Maecenas Street Donec Road</p>
+                                    <p class="text-gray-800">New York, EEUU</p>
+                                </div>
+                            </li>
+                            <li class="flex">
+                                <div class="flex h-10 w-10 items-center justify-center rounded bg-blue-900 text-gray-50">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round" class="h-6 w-6">
+                                        <path
+                                            d="M5 4h4l2 5l-2.5 1.5a11 11 0 0 0 5 5l1.5 -2.5l5 2v4a2 2 0 0 1 -2 2a16 16 0 0 1 -15 -15a2 2 0 0 1 2 -2">
+                                        </path>
+                                        <path d="M15 7a2 2 0 0 1 2 2"></path>
+                                        <path d="M15 3a6 6 0 0 1 6 6"></path>
+                                    </svg>
+                                </div>
+                                <div class="ml-4 mb-4">
+                                    <h3 class="mb-2 text-lg font-medium leading-6 text-gray-900">Contact
+                                    </h3>
+                                    <p class="text-gray-800">Mobile: +1 (123) 456-7890</p>
+                                    <p class="text-gray-800">Mail: tailnext@gmail.com</p>
+                                </div>
+                            </li>
+                            <li class="flex">
+                                <div class="flex h-10 w-10 items-center justify-center rounded bg-blue-900 text-gray-50">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round" class="h-6 w-6">
+                                        <path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0"></path>
+                                        <path d="M12 7v5l3 3"></path>
+                                    </svg>
+                                </div>
+                                <div class="ml-4 mb-4">
+                                    <h3 class="mb-2 text-lg font-medium leading-6 text-gray-900">Working
+                                        hours</h3>
+                                    <p class="text-gray-800">Monday - Friday: 08:00 - 17:00</p>
+                                    <p class="text-gray-800">Saturday &amp; Sunday: 08:00 - 12:00
+                                    </p>
+                                </div>
+                            </li>
+                        </ul>
                     </div>
-                </div>
-                <div class="group relative bg-gray-800 transition hover:z-[1] hover:shadow-2xl hover:shadow-gray-600/10">
-                    <div class="relative space-y-8 py-12 p-8">
-                        <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24"
-                            stroke-linecap="round" stroke-linejoin="round" color="white" style="color:white" height="50"
-                            width="50" xmlns="http://www.w3.org/2000/svg">
-                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                            <path
-                                d="M19.875 6.27a2.225 2.225 0 0 1 1.125 1.948v7.284c0 .809 -.443 1.555 -1.158 1.948l-6.75 4.27a2.269 2.269 0 0 1 -2.184 0l-6.75 -4.27a2.225 2.225 0 0 1 -1.158 -1.948v-7.285c0 -.809 .443 -1.554 1.158 -1.947l6.75 -3.98a2.33 2.33 0 0 1 2.25 0l6.75 3.98h-.033z">
-                            </path>
-                            <path d="M10 8h3a1 1 0 0 1 1 1v2a1 1 0 0 1 -1 1h-2a1 1 0 0 0 -1 1v2a1 1 0 0 0 1 1h3"></path>
-                        </svg>
-                        <div class="space-y-2">
-                            <h5 class="text-xl font-semibold text-white transition group-hover:text-secondary">Deal
-                                Finalized</h5>
-                            <p class="text-gray-300">Once we agree on what to build, We will start working on it right away.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="group relative bg-gray-800 transition hover:z-[1] hover:shadow-2xl hover:shadow-gray-600/10">
-                    <div class="relative space-y-8 py-12 p-8">
-                        <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24"
-                            stroke-linecap="round" stroke-linejoin="round" color="white" style="color:white" height="50"
-                            width="50" xmlns="http://www.w3.org/2000/svg">
-                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                            <path
-                                d="M19.875 6.27a2.225 2.225 0 0 1 1.125 1.948v7.284c0 .809 -.443 1.555 -1.158 1.948l-6.75 4.27a2.269 2.269 0 0 1 -2.184 0l-6.75 -4.27a2.225 2.225 0 0 1 -1.158 -1.948v-7.285c0 -.809 .443 -1.554 1.158 -1.947l6.75 -3.98a2.33 2.33 0 0 1 2.25 0l6.75 3.98h-.033z">
-                            </path>
-                            <path
-                                d="M10 9a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1v2a1 1 0 0 1 -1 1h-2h2a1 1 0 0 1 1 1v2a1 1 0 0 1 -1 1h-2a1 1 0 0 1 -1 -1">
-                            </path>
-                        </svg>
-                        <div class="space-y-2">
-                            <h5 class="text-xl font-semibold text-white transition group-hover:text-secondary">Product
-                                Delivery</h5>
-                            <p class="text-gray-300">We will develop your product MVP in 15 days (more time required
-                                depending on the
-                                complexity of the project)</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="group relative bg-gray-800 transition hover:z-[1] hover:shadow-2xl hover:shadow-gray-600/10">
-                    <div class="relative space-y-8 py-12 p-8">
-                        <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24"
-                            stroke-linecap="round" stroke-linejoin="round" color="white" style="color:white" height="50"
-                            width="50" xmlns="http://www.w3.org/2000/svg">
-                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                            <path
-                                d="M19.875 6.27a2.225 2.225 0 0 1 1.125 1.948v7.284c0 .809 -.443 1.555 -1.158 1.948l-6.75 4.27a2.269 2.269 0 0 1 -2.184 0l-6.75 -4.27a2.225 2.225 0 0 1 -1.158 -1.948v-7.285c0 -.809 .443 -1.554 1.158 -1.947l6.75 -3.98a2.33 2.33 0 0 1 2.25 0l6.75 3.98h-.033z">
-                            </path>
-                            <path d="M10 8v3a1 1 0 0 0 1 1h3"></path>
-                            <path d="M14 8v8"></path>
-                        </svg>
-                        <div class="space-y-2">
-                            <h5 class="text-xl font-semibold text-white transition group-hover:text-secondary">Celebrate
-                                your Launch
-                            </h5>
-                            <p class="text-gray-300">We love Celebrations. We will celebrate your launch on our Social
-                                Profiles.</p>
-                        </div>
+                    <div class="card h-fit max-w-6xl p-5 md:p-12" id="form">
+                        <h2 class="mb-4 text-2xl font-bold text-dark">Silahkan Masukan Data Anda</h2>
+                        <form id="contactForm">
+                            <div class="mb-6">
+                                <div class="mx-0 mb-1 sm:mb-4">
+                                    <div class="mx-0 mb-1 sm:mb-4">
+                                        <label for="name" class="pb-1 text-xs uppercase tracking-wider"></label><input
+                                            type="text" id="name" autocomplete="given-name" placeholder="Your name"
+                                            class="mb-2 w-full rounded-md border border-gray-400 py-2 pl-2 pr-4 shadow-md text-gray-800 sm:mb-0"
+                                            name="name">
+                                    </div>
+                                    <div class="mx-0 mb-1 sm:mb-4">
+                                        <label for="email" class="pb-1 text-xs uppercase tracking-wider"></label><input
+                                            type="email" id="email" autocomplete="email"
+                                            placeholder="Your email address"
+                                            class="mb-2 w-full rounded-md border border-gray-400 py-2 pl-2 pr-4 shadow-md text-gray-800 sm:mb-0"
+                                            name="email">
+                                    </div>
+                                </div>
+                                <div class="mx-0 mb-1 sm:mb-4">
+                                    <label for="textarea" class="pb-1 text-xs uppercase tracking-wider"></label>
+                                    <textarea id="textarea" name="textarea" cols="30" rows="5" placeholder="Write your message..."
+                                        class="mb-2 w-full rounded-md border border-gray-400 py-2 pl-2 pr-4 shadow-md text-gray-800 sm:mb-0"></textarea>
+                                </div>
+                            </div>
+                            <div class="text-center">
+                                <button type="submit"
+                                    class="w-full bg-blue-800 text-white px-6 py-3 font-xl rounded-md sm:mb-0">Send
+                                    Message</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    </section>
 @endsection
