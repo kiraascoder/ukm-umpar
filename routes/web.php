@@ -130,3 +130,7 @@ Route::get('/galeri', [PublicController::class, 'viewGallery'])->name('galeri');
 Route::get('/kegiatan', [PublicController::class, 'viewKegiatan'])->name('kegiatan');
 Route::get('/informasi', [PublicController::class, 'viewInformasi'])->name('informasi');
 Route::get('/daftar-ukm', [PublicController::class, 'viewUkm'])->name('daftar-ukm');
+
+
+// Ukm Route
+Route::get('/kegiatan/{id}/detail', [PublicController::class, 'viewDetailKegiatan'])->name('detail-kegiatan');

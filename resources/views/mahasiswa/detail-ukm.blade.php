@@ -11,7 +11,6 @@
         <div class="relative container mx-auto px-4">
             <div class="flex flex-col md:flex-row items-center justify-between">
                 <div class="md:w-1/2 mb-8 md:mb-0">
-                    <h1 class="text-white font-bold text-5xl leading-tight mb-6">UKM {{ $ukm->nama }}</h1>
                 </div>
                 <div class="md:w-1/2">
                     <img src="{{ asset('storage/' . $ukm->foto_pengurus) }}" alt="Foto Pengurus"
@@ -28,7 +27,6 @@
     <section class="py-20 bg-gray-50">
         <div class="container mx-auto px-4">
             <div class="flex flex-col md:flex-row gap-10">
-
                 <div class="w-full md:w-1/2">
                     <h2 class="text-3xl md:text-4xl font-bold mb-4 text-center md:text-left">Deskripsi</h2>
                     <p class="text-gray-600">
@@ -54,7 +52,7 @@
             <p class="text-gray-600 max-w-2xl mx-auto mt-4">
                 <strong>Misi:</strong>
             <ul class="list-disc text-left mx-auto max-w-xl">
-                
+                {{-- {{ $ukm->misi }} --}}
             </ul>
             </p>
         </div>
@@ -151,10 +149,6 @@
             @endif
         </div>
     </section>
-
-
-
-    <!-- Kegiatan Section -->
     <section class="py-20  container mx-auto px-6">
         <div class="text-center mb-8">
             <h2 class="text-3xl md:text-4xl font-bold mb-4">Kegiatan</h2>
@@ -163,74 +157,41 @@
                 yang melibatkan mahasiswa dari berbagai latar belakang.
             </p>
         </div>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <div class="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300"
-                x-data="{ hover: false }">
-                <div class="relative overflow-hidden">
-                    <img src="https://images.unsplash.com/photo-1605276277265-84f97da7d47a?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
-                        alt="Adventure Playset" class="w-full h-64 object-cover transition-all duration-500"
-                        :class="{ 'transform scale-105': hover }">
-                    <div class="absolute top-4 right-4 bg-[#608BC1] text-white text-sm font-bold px-3 py-1 rounded-full">
-                        Popular
+        <div class="container mx-auto px-4 py-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                @foreach ($kegiatans as $kegiatan)
+                    <div class="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300">
+                        <div class="relative overflow-hidden">
+                            <img src="{{ asset('storage/' . $kegiatan->foto_sampul) }}" alt="Belum ada Gambar"
+                                class="w-full h-64 object-cover transition-all duration-500 hover:scale-105">
+                            <div
+                                class="absolute top-4 right-4 bg-[#608BC1] text-white text-sm font-bold px-3 py-1 rounded-full">
+                                Popular
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2">{{ $kegiatan->nama }}</h3>
+                            <p class="text-gray-600 mb-4">{{ $kegiatan->deskripsi }}</p>
+                            <a href="{{ route('detail-kegiatan', $kegiatan->id) }}"
+                                class="text-[#608BC1] font-medium hover:text-yellow-600 transition inline-flex items-center">
+                                <span>Lihat Selengkapnya</span>
+                                <i class="fas fa-arrow-right ml-2 text-sm"></i>
+                            </a>
+                        </div>
                     </div>
-                </div>
-                <div class="p-6">
-                    <h3 class="text-xl font-bold mb-2">Adventure World</h3>
-                    <p class="text-gray-600 mb-4">Packed with fun: slides, swings, climbing wall, and monkey bars in a
-                        compact design.</p>
-                    <a href="#"
-                        class="text-[#608BC1] font-medium hover:text-yellow-600 transition inline-flex items-center">
-                        <span>View Details</span>
-                        <i class="fas fa-arrow-right ml-2 text-sm"></i>
-                    </a>
-                </div>
-            </div>
-            <div class="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300"
-                x-data="{ hover: false }">
-                <div class="relative overflow-hidden">
-                    <img src="https://images.unsplash.com/photo-1575783970733-1aaedde1db74?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
-                        alt="Castle Kingdom Playset" class="w-full h-64 object-cover transition-all duration-500"
-                        :class="{ 'transform scale-105': hover }">
-                    <div class="absolute top-4 right-4 bg-blue-500 text-white text-sm font-bold px-3 py-1 rounded-full">
-                        New
+                @endforeach
+                @if ($totalKegiatan > 3)
+                    <div class="text-center mt-12 col-span-full">
+                        <a href="{{ route('daftar-ukm') }}"
+                            class="inline-block bg-[#608BC1] hover:bg-[#133E87] text-gray-900 font-bold py-3 px-8 rounded-lg transition transform hover:-translate-y-1">
+                            Lihat Semua UKM
+                        </a>
                     </div>
-                </div>
-                <div class="p-6">
-                    <h3 class="text-xl font-bold mb-2">Castle Kingdom</h3>
-                    <p class="text-gray-600 mb-4">A royal playground with turrets, wave slides, and a spacious playhouse
-                        for imaginative play.</p>
-                    <a href="#"
-                        class="text-[#608BC1] font-medium hover:text-yellow-600 transition inline-flex items-center">
-                        <span>View Details</span>
-                        <i class="fas fa-arrow-right ml-2 text-sm"></i>
-                    </a>
-                </div>
-            </div>
-            <div class="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300"
-                x-data="{ hover: false }">
-                <div class="relative overflow-hidden">
-                    <img src="https://images.unsplash.com/photo-1596461110761-b4e5d5ad49f8?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
-                        alt="Backyard Explorer Playset" class="w-full h-64 object-cover transition-all duration-500"
-                        :class="{ 'transform scale-105': hover }">
-                    <div class="absolute top-4 right-4 bg-green-500 text-white text-sm font-bold px-3 py-1 rounded-full">
-                        Best Value
-                    </div>
-                </div>
-                <div class="p-6">
-                    <h3 class="text-xl font-bold mb-2">Backyard Explorer</h3>
-                    <p class="text-gray-600 mb-4">Perfect for smaller yards with swing beam, slide, and climbing options
-                        at an affordable price.</p>
-                    <a href="#"
-                        class="text-[#608BC1] font-medium hover:text-yellow-600 transition inline-flex items-center">
-                        <span>View Details</span>
-                        <i class="fas fa-arrow-right ml-2 text-sm"></i>
-                    </a>
-                </div>
+                @endif
             </div>
         </div>
     </section>
 
-    <!-- Galeri Section -->
     <section class="py-20">
         <div class="text-center mb-8">
             <h2 class="text-3xl md:text-4xl font-bold mb-4">Galeri</h2>
@@ -238,10 +199,7 @@
                 Berikut adalah beberapa dokumentasi kegiatan yang telah kami lakukan di UKM UMPAR.
             </p>
             <div class="container mx-auto px-4 py-8">
-
-
                 <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
-                    <!-- Large item -->
                     <div class="md:col-span-2 md:row-span-2 relative overflow-hidden rounded-2xl shadow-lg group">
                         <img src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NzEyNjZ8MHwxfHNlYXJjaHwxfHxuYXR1cmV8ZW58MHwwfHx8MTcyMTA0MjYwMXww&ixlib=rb-4.0.3&q=80&w=1080"
                             alt="Nature" class="w-full h-full object-cover">
@@ -253,8 +211,6 @@
                             </div>
                         </div>
                     </div>
-
-                    <!-- Two small items -->
                     <div class="relative overflow-hidden rounded-2xl shadow-lg group">
                         <img src="https://images.unsplash.com/photo-1493770348161-369560ae357d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NzEyNjZ8MHwxfHNlYXJjaHw2fHxmb29kfGVufDB8MHx8fDE3MjEwNDI2MTR8MA&ixlib=rb-4.0.3&q=80&w=1080"
                             alt="Food" class="w-full h-48 object-cover">
@@ -275,8 +231,6 @@
                             </div>
                         </div>
                     </div>
-
-                    <!-- Three medium items -->
                     <div class="relative overflow-hidden rounded-2xl shadow-lg group">
                         <img src="https://images.unsplash.com/photo-1503220317375-aaad61436b1b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NzEyNjZ8MHwxfHNlYXJjaHw1fHx0cmF2ZWx8ZW58MHwwfHx8MTcyMTA0MjY0MXww&ixlib=rb-4.0.3&q=80&w=1080"
                             alt="Travel" class="w-full h-48 object-cover">

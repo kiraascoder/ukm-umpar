@@ -7,8 +7,6 @@
         <div class="absolute inset-0 bg-cover bg-center z-0" style="background-image: url({{ asset('img/bg-umpar.png') }});">
             <div class="absolute inset-0 bg-black opacity-20"></div>
         </div>
-
-        <!-- Navbar -->
         <nav class="container mx-auto px-6 py-4 flex justify-between items-center relative z-10">
             <div class="text-white font-bold text-2xl">
                 <img src="{{ asset('img/umpar.png') }}" alt="Logo UMPAR" class="w-16">
@@ -184,8 +182,7 @@
     </div>
 
 
-    <!-- Gallery Section -->
-    <!-- Galeri Section -->
+
     <div class="py-20 bg-white" id="gallery">
         <div class="container mx-auto px-6">
             <div class="text-center mb-16">
@@ -241,7 +238,6 @@
         </div>
     </div>
 
-    <!-- Tambahkan di akhir body -->
     <script>
         function gallery() {
             return {

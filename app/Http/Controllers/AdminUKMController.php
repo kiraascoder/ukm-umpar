@@ -56,7 +56,7 @@ class AdminUKMController extends Controller
             'deskripsi' => 'nullable|string',
             'sejarah' => 'nullable|string',
             'visi' => 'nullable|string',
-            'misi' => 'nullable|string',
+            'misi' => 'nullable|array',
             'struktur_organisasi' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:10048',
             'foto_pengurus' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:10048',
             'media_sosial' => 'nullable|array',

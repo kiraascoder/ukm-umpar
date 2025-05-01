@@ -110,34 +110,6 @@
                 <p class="mt-4 text-sm text-red-500">Maksimal 5 dokumentasi telah diunggah.</p>
             @endif
         </div>
-
-        <div x-show="openModal" x-transition:enter="transition ease-out duration-300"
-            x-transition:enter-start="opacity-0 scale-90" x-transition:enter-end="opacity-100 scale-100"
-            x-transition:leave="transition ease-in duration-200" x-transition:leave-start="opacity-100 scale-100"
-            x-transition:leave-end="opacity-0 scale-90"
-            class="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
-            <div @click.away="openModal = false" class="bg-white p-6 rounded-lg shadow-lg w-full max-w-md">
-
-                <h2 class="text-lg font-bold mb-4">Konfirmasi Hapus</h2>
-                <p>Apakah kamu yakin ingin menghapus <span class="font-semibold" x-text="selectedNama"></span>?</p>
-
-                <div class="mt-6 flex justify-end gap-2">
-                    <button @click="openModal = false"
-                        class="px-4 py-2 bg-gray-200 text-gray-800 rounded hover:bg-gray-300 transition">
-                        Batal
-                    </button>
-
-                    <form :action="deleteUrl" method="POST">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700 transition">
-                            Hapus
-                        </button>
-                    </form>
-                </div>
-            </div>
-        </div>
-
         <div class="w-full bg-white p-6 rounded-2xl shadow mt-4">
             <h3 class="text-lg font-semibold text-gray-700 mb-4">Video Dokumentasi</h3>
 
@@ -173,7 +145,26 @@
                 <p class="text-center text-gray-500">Belum ada Video Dokumentasi.</p>
             @endif
         </div>
-
-
+    </div>
+    {{-- Modal Konfirmasi Hapus --}}
+    <div x-show="openModal" x-cloak class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50"
+        x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0"
+        x-transition:enter-end="opacity-100" x-transition:leave="transition ease-in duration-200"
+        x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0">
+        <div class="bg-white rounded-xl shadow-lg w-96 p-6 relative">
+            <button @click="openModal = false"
+                class="absolute top-2 right-2 text-gray-500 hover:text-gray-800 text-xl">&times;</button>
+            <h2 class="text-lg font-semibold mb-4 text-gray-800">Konfirmasi Hapus</h2>
+            <p class="text-gray-600">Apakah Anda yakin ingin menghapus <strong x-text="selectedNama"></strong> ini?</p>
+            <div class="mt-6 flex justify-end gap-2">
+                <button @click="openModal = false"
+                    class="px-4 py-2 text-sm bg-gray-300 hover:bg-gray-400 text-gray-800 rounded-md">
+                    Batal
+                </button>
+                <a :href="deleteUrl" class="px-4 py-2 text-sm bg-red-600 hover:bg-red-700 text-white rounded-md">
+                    Ya, Hapus
+                </a>
+            </div>
+        </div>
     </div>
 @endsection

@@ -33,7 +33,7 @@
                 </div>
                 <div class="col-span-2">
                     <label class="block text-sm font-medium text-[#07074D]">Misi</label>
-                    <textarea name="misi"
+                    <textarea name="misi[]"
                         class="mt-1 p-2 w-full border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-[#6A64F1] focus:border-transparent">{{ old('misi', $ukm->misi) }}</textarea>
                 </div>
                 <div class="col-span-2">

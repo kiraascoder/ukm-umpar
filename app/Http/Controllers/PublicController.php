@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Ukm;
 use Illuminate\Http\Request;
+use App\Models\Kegiatan;
 
 class PublicController extends Controller
 {
@@ -45,6 +46,14 @@ class PublicController extends Controller
             ->whereNotNull('foto')
             ->where('foto', '!=', '')
             ->get();
-        return view('mahasiswa.detail-ukm', compact('ukm', 'anggota'));
+        $kegiatans = $ukm->kegiatan()->get();
+        $totalKegiatan = $ukm->kegiatan()->count();
+        return view('mahasiswa.detail-ukm', compact('ukm', 'anggota', 'kegiatans', 'totalKegiatan'));
+    }
+
+    public function viewDetailKegiatan($id)
+    {
+        $kegiatan = Kegiatan::findOrFail($id);
+        return view('mahasiswa.detail-kegiatan', compact('kegiatan'));
     }
 }
