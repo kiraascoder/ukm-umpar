@@ -134,3 +134,4 @@ Route::get('/daftar-ukm', [PublicController::class, 'viewUkm'])->name('daftar-uk
 
 // Ukm Route
 Route::get('/kegiatan/{id}/detail', [PublicController::class, 'viewDetailKegiatan'])->name('detail-kegiatan');
+Route::get('/kegiatan/load-more', [PublicController::class, 'loadMore']);

@@ -146,7 +146,7 @@
             @endif
         </div>
     </div>
-    {{-- Modal Konfirmasi Hapus --}}
+
     <div x-show="openModal" x-cloak class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50"
         x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0"
         x-transition:enter-end="opacity-100" x-transition:leave="transition ease-in duration-200"

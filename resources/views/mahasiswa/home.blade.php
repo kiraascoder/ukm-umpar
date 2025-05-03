@@ -84,7 +84,7 @@
 
             <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
 
-                <div class="text-center" x-data="{ visible: false }" x-intersect="visible = true">
+                <div class="text-center">
                     <div class="w-16 h-16 mx-auto mb-4 flex items-center justify-center bg-[#608BC1] text-white rounded-full transition-all duration-700"
                         :class="{ 'opacity-100 transform scale-100': visible, 'opacity-0 transform scale-50': !visible }">
                         <svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
@@ -97,7 +97,7 @@
                 </div>
 
                 <!-- Step 2: Pelatihan -->
-                <div class="text-center" x-data="{ visible: false }" x-intersect="visible = true">
+                <div class="text-center">
                     <div class="w-16 h-16 mx-auto mb-4 flex items-center justify-center bg-[#608BC1] text-white rounded-full transition-all duration-700 delay-300"
                         :class="{ 'opacity-100 transform scale-100': visible, 'opacity-0 transform scale-50': !visible }">
                         <svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
@@ -111,7 +111,7 @@
                 </div>
 
                 <!-- Step 3: Pelaksanaan -->
-                <div class="text-center" x-data="{ visible: false }" x-intersect="visible = true">
+                <div class="text-center">
                     <div class="w-16 h-16 mx-auto mb-4 flex items-center justify-center bg-[#608BC1] text-white rounded-full transition-all duration-700 delay-600"
                         :class="{ 'opacity-100 transform scale-100': visible, 'opacity-0 transform scale-50': !visible }">
                         <svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
@@ -124,7 +124,7 @@
                 </div>
 
                 <!-- Step 4: Informasi -->
-                <div class="text-center" x-data="{ visible: false }" x-intersect="visible = true">
+                <div class="text-center">
                     <div class="w-16 h-16 mx-auto mb-4 flex items-center justify-center bg-[#608BC1] text-white rounded-full transition-all duration-700 delay-900"
                         :class="{ 'opacity-100 transform scale-100': visible, 'opacity-0 transform scale-50': !visible }">
                         <svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
@@ -143,9 +143,9 @@
         <div class="container mx-auto px-6">
             <div class="text-center mb-16">
                 <h2 class="text-3xl md:text-4xl font-bold mb-4">Daftar UKM UMPAR</h2>
-                <p class="text-gray-600 max-w-2xl mx-auto">Endless adventures start with a SwingIt playset.</p>
+                <p class="text-gray-600 max-w-2xl mx-auto">Berikut adalah UKM yang ada di Universitas Muhammadiyah Parepare
+                </p>
             </div>
-
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 @foreach ($ukms as $ukm)
                     <div class="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300">
@@ -180,9 +180,6 @@
         </div>
     </div>
     </div>
-
-
-
     <div class="py-20 bg-white" id="gallery">
         <div class="container mx-auto px-6">
             <div class="text-center mb-16">
@@ -190,9 +187,7 @@
                 <p class="text-gray-600 max-w-2xl mx-auto">Lihat keseruan kegiatan UKM kami melalui dokumentasi berikut.
                 </p>
             </div>
-
             <div class="relative" x-data="gallery()">
-                <!-- Main Image -->
                 <div class="rounded-xl overflow-hidden shadow-xl mb-4">
                     <template x-for="(photo, index) in photos" :key="index">
                         <div x-show="current === index" x-transition:enter="transition ease-out duration-300"
@@ -206,8 +201,6 @@
                         </div>
                     </template>
                 </div>
-
-                <!-- Thumbnails -->
                 <div class="grid grid-cols-4 gap-4 mt-4">
                     <template x-for="(photo, index) in photos" :key="index">
                         <div @click="current = index" class="rounded-lg overflow-hidden cursor-pointer transition-all"
@@ -217,8 +210,6 @@
                         </div>
                     </template>
                 </div>
-
-                <!-- Navigation Buttons -->
                 <button @click="prev"
                     class="absolute top-1/2 left-4 transform -translate-y-1/2 w-12 h-12 rounded-full bg-white/80 shadow-lg flex items-center justify-center text-gray-800 hover:text-[#608BC1] focus:outline-none transition">
                     <i class="fas fa-chevron-left"></i>
@@ -237,24 +228,22 @@
             </div>
         </div>
     </div>
-
     <script>
         function gallery() {
             return {
                 current: 0,
-                photos: [
-                    'https://images.unsplash.com/photo-1605276374104-dee2a0ed3cd6?auto=format&fit=crop&w=800&q=80',
-                    'https://images.unsplash.com/photo-1615484477651-e2c3bde0fd63?auto=format&fit=crop&w=800&q=80',
-                    'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80',
-                    'https://images.unsplash.com/photo-1475721027785-f74eccf877e2?auto=format&fit=crop&w=800&q=80',
-                ],
-                prev() {
-                    this.current = (this.current === 0) ? this.photos.length - 1 : this.current - 1;
-                },
+                photos: @json(
+                    $gallery->map(function ($item) {
+                        return asset('storage/' . $item->photo_path);
+                    })),
                 next() {
-                    this.current = (this.current === this.photos.length - 1) ? 0 : this.current + 1;
+                    this.current = (this.current + 1) % this.photos.length;
+                },
+                prev() {
+                    this.current = (this.current - 1 + this.photos.length) % this.photos.length;
                 }
-            };
+            }
         }
     </script>
+
 @endsection
