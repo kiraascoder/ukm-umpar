@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminSesiController;
 use App\Http\Controllers\KeuanganController;
 use App\Http\Controllers\KegiatanController;
-use App\Models\Keuangan;
+
 
 
 Route::get('/', [PublicController::class, 'index'])->name('home');
@@ -21,9 +21,7 @@ Route::get('/unauthorized', function () {
 })->name('unauthorized');
 
 // Super Admin Route
-Route::get('admin/dashboard', [AdminUKMController::class, 'adminDashboard'])->name('superadmin.dashboard')->middleware('admin:admin');
-
-
+Route::get('admin/dashboard', [AdminUKMController::class, 'adminDashboard'])->middleware('admin:admin')->name('superadmin.dashboard');
 
 // Auth
 Route::prefix('admin')->middleware('authenticated')->group(function () {
@@ -35,7 +33,7 @@ Route::prefix('admin')->middleware('authenticated')->group(function () {
 });
 
 // Admin Ukm Route
-Route::middleware(['admin:admin_ukm'])->group(function () {
+Route::middleware(['admin:admin_ukm', 'checkUserStatus'])->group(function () {
     Route::get('/admin/ukm/dashboard', [AdminUKMController::class, 'adminDashboardUkm'])->name('adminUkmDashboard');
     // Profile Simpan Data UKM
     Route::get('/admin/ukm/profile', [AdminUKMController::class, 'ukmProfile'])->name('adminUkmProfile');
@@ -117,6 +115,9 @@ Route::middleware(['admin:admin'])->group(function () {
     Route::get('/admin/daftar-ukm', [SuperAdminController::class, 'daftarUkm'])->name('adminUkmList');
     Route::get('/admin/proker-ukm/{id}/detail', [SuperAdminController::class, 'detailProkerUkm'])->name('prokerUkm');
     Route::get('/admin/daftar-ukm/{id}/detail', [SuperAdminController::class, 'detailUkm'])->name('detailUkm');
+    Route::get('/admin/kegiatan/{id}/detail', [SuperAdminController::class, 'detailKegiatan'])->name('detailKegiatan');
+    Route::get('/admin/verifikasi-ukm', [SuperAdminController::class, 'viewVerifikasiUkm'])->name('verifikasiUkm');
+    Route::patch('/admin/{id}/verifikasi', [SuperAdminController::class, 'verifikasiUkm'])->name('verifikasiUkm.update');
 });
 
 //Log Out
@@ -135,3 +136,7 @@ Route::get('/daftar-ukm', [PublicController::class, 'viewUkm'])->name('daftar-uk
 // Ukm Route
 Route::get('/kegiatan/{id}/detail', [PublicController::class, 'viewDetailKegiatan'])->name('detail-kegiatan');
 Route::get('/kegiatan/load-more', [PublicController::class, 'loadMore']);
+
+Route::get('/login', function () {
+    return redirect('admin/login');
+});

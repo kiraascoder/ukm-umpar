@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Middleware\CheckUserStatus;
 use App\Http\Middleware\RedirectIfAuthenticated;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
@@ -18,6 +19,7 @@ return Application::configure(basePath: dirname(__DIR__))
             [
                 'admin' => Admin::class,
                 'authenticated' => RedirectIfAuthenticated::class,
+                'checkUserStatus' => CheckUserStatus::class,
             ]
             );
     })

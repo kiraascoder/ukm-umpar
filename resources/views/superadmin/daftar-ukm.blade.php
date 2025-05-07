@@ -8,10 +8,6 @@
         <div class="lg:col-span-3 w-full bg-white p-6 rounded-2xl shadow overflow-auto">
             <div class="flex items-center justify-between mb-4">
                 <h2 class="text-lg font-semibold text-gray-700">Daftar Program Kerja UKM</h2>
-                <a href="{{ route('adminUkmTambahProker') }}"
-                    class="inline-flex items-center px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded-md shadow">
-                    <i class="fas fa-plus mr-2"></i> Tambah Program Kerja
-                </a>
             </div>
 
             <table class="min-w-full divide-y divide-gray-200 text-sm">

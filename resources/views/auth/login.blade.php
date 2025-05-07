@@ -7,26 +7,9 @@
     <title>@yield('title', 'Login Admin')</title>
     <link rel="icon" href="{{ asset('umpar.png') }}" type="image/png">
     @vite('resources/css/app.css')
-    <style>
-        /* CSS untuk animasi fade-in */
-        .fade-in {
-            opacity: 0;
-            animation: fadeInAnimation 1.5s forwards;
-        }
-
-        @keyframes fadeInAnimation {
-            0% {
-                opacity: 0;
-            }
-
-            100% {
-                opacity: 1;
-            }
-        }
-    </style>
 </head>
 
-<body class="fade-in">
+<body>
 
     <div class="min-h-screen bg-gray-100 text-gray-900 flex justify-center">
         <div class="max-w-screen-xl m-0 sm:m-10 bg-white shadow sm:rounded-lg flex justify-center flex-1">
@@ -39,12 +22,20 @@
                         <form action="{{ route('admin.login.submit') }}" method="POST">
                             @csrf
                             <div class="mx-auto max-w-xs">
-                                <input
-                                    class="w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
-                                    type="email" placeholder="Email" name="email" />
+                                <!-- Error handling for email -->
                                 @error('email')
                                     <div class="text-red-500 text-sm">{{ $message }}</div>
                                 @enderror
+
+                                <input
+                                    class="w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
+                                    type="email" placeholder="Email" name="email" value="{{ old('email') }}" />
+
+                                <!-- Error handling for password -->
+                                @error('password')
+                                    <div class="text-red-500 text-sm">{{ $message }}</div>
+                                @enderror
+
                                 <div class="relative mt-5">
                                     <input id="password"
                                         class="w-full px-8 py-4 pr-10 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
@@ -61,9 +52,14 @@
                                         </svg>
                                     </div>
                                 </div>
-                                @error('password')
-                                    <div class="text-red-500 text-sm">{{ $message }}</div>
-                                @enderror
+
+                                <!-- Error handling for login -->
+                                @if ($errors->has('login'))
+                                    <div class="text-red-500 text-sm mt-2">
+                                        {{ $errors->first('login') }}
+                                    </div>
+                                @endif
+
                                 <button
                                     class="mt-5 tracking-wide w-full py-4 transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded-md shadow"
                                     type="submit">
@@ -71,6 +67,7 @@
                                         Masuk
                                     </span>
                                 </button>
+
                                 <div class="mt-6 text-md text-gray-600 text-center">
                                     <p>Belum Punya Akun?
                                         <a href="{{ route('admin.register') }}" class="underline text-indigo-600">Daftar
@@ -89,6 +86,7 @@
             </div>
         </div>
     </div>
+
     <script>
         function togglePassword() {
             const passwordInput = document.getElementById('password');

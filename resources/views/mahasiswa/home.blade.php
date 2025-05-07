@@ -187,37 +187,23 @@
                 <p class="text-gray-600 max-w-2xl mx-auto">Lihat keseruan kegiatan UKM kami melalui dokumentasi berikut.
                 </p>
             </div>
-            <div class="relative" x-data="gallery()">
-                <div class="rounded-xl overflow-hidden shadow-xl mb-4">
-                    <template x-for="(photo, index) in photos" :key="index">
-                        <div x-show="current === index" x-transition:enter="transition ease-out duration-300"
-                            x-transition:enter-start="opacity-0 transform scale-95"
-                            x-transition:enter-end="opacity-100 transform scale-100"
-                            x-transition:leave="transition ease-in duration-200"
-                            x-transition:leave-start="opacity-100 transform scale-100"
-                            x-transition:leave-end="opacity-0 transform scale-95">
-                            <img :src="photo" class="w-full h-96 md:h-[500px] object-cover"
-                                :alt="'Gallery image ' + (index + 1)">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                @foreach ($gallery as $index => $dok)
+                    <div
+                        class="@if ($index === 0) md:col-span-2 md:row-span-2 @endif relative overflow-hidden rounded-2xl shadow-lg group">
+                        <img src="{{ asset('storage/' . $dok->photo_path) }}"
+                            alt="{{ $dok->kegiatan->nama_kegiatan ?? 'Dokumentasi' }}"
+                            class="w-full {{ $index === 0 ? 'h-full' : 'h-48' }} object-cover">
+                        <div
+                            class="absolute inset-0 bg-black bg-opacity-60 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            <div class="absolute bottom-0 left-0 right-0 p-4">
+                                <h4 class="text-xl font-bold text-white">{{ $dok->kegiatan->nama ?? 'Kegiatan' }}
+                                </h4>
+                                <p class="text-white">{{ $dok->kegiatan->ukm->nama ?? 'UKM Tidak Dikenal' }}</p>
+                            </div>
                         </div>
-                    </template>
-                </div>
-                <div class="grid grid-cols-4 gap-4 mt-4">
-                    <template x-for="(photo, index) in photos" :key="index">
-                        <div @click="current = index" class="rounded-lg overflow-hidden cursor-pointer transition-all"
-                            :class="{ 'ring-2 ring-[#608BC1] ring-offset-2': current === index }">
-                            <img :src="photo" class="w-full h-24 object-cover"
-                                :alt="'Thumbnail ' + (index + 1)">
-                        </div>
-                    </template>
-                </div>
-                <button @click="prev"
-                    class="absolute top-1/2 left-4 transform -translate-y-1/2 w-12 h-12 rounded-full bg-white/80 shadow-lg flex items-center justify-center text-gray-800 hover:text-[#608BC1] focus:outline-none transition">
-                    <i class="fas fa-chevron-left"></i>
-                </button>
-                <button @click="next"
-                    class="absolute top-1/2 right-4 transform -translate-y-1/2 w-12 h-12 rounded-full bg-white/80 shadow-lg flex items-center justify-center text-gray-800 hover:text-[#608BC1] focus:outline-none transition">
-                    <i class="fas fa-chevron-right"></i>
-                </button>
+                    </div>
+                @endforeach
             </div>
 
             <div class="text-center mt-12">

@@ -16,7 +16,7 @@
         <form action="{{ route('admin.register.submit') }}" method="POST" class="space-y-5">
             @csrf
             <div>
-                <label class="block text-sm font-semibold mb-1" for="name">Nama Anda</label>
+                <label class="block text-sm font-semibold mb-1" for="name">Nama Ketua UKM</label>
                 <input
                     class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-400"
                     id="name" type="text" name="name" required autofocus>

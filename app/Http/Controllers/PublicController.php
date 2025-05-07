@@ -56,7 +56,6 @@ class PublicController extends Controller
     public function detailUkm($id)
     {
         $ukm = Ukm::with('kegiatan.dokumentasi')->findOrFail($id);
-
         $anggota = $ukm->anggota()
             ->whereIn('jabatan', ['Ketua Umum', 'Sekretaris', 'Bendahara'])
             ->whereNotNull('foto')
@@ -70,24 +69,23 @@ class PublicController extends Controller
     }
 
     public function viewDetailKegiatan($id)
-{
-    $kegiatan = Kegiatan::findOrFail($id);
-    $dokumentasi = $kegiatan->dokumentasi()->get();
+    {
+        $kegiatan = Kegiatan::findOrFail($id);
+        $dokumentasi = $kegiatan->dokumentasi()->get();
 
-    $gambar1 = $dokumentasi->get(0);
-    $gambar2 = $dokumentasi->get(1);
-    $gambar3 = $dokumentasi->get(2);
-    $gambar4 = $dokumentasi->get(3);
-    $gambar5 = $dokumentasi->get(4);
+        $gambar1 = $dokumentasi->get(0);
+        $gambar2 = $dokumentasi->get(1);
+        $gambar3 = $dokumentasi->get(2);
+        $gambar4 = $dokumentasi->get(3);
+        $gambar5 = $dokumentasi->get(4);
 
-    return view('mahasiswa.detail-kegiatan', compact(
-        'kegiatan',
-        'gambar1',
-        'gambar2',
-        'gambar3',
-        'gambar4',
-        'gambar5'
-    ));
-}
-
+        return view('mahasiswa.detail-kegiatan', compact(
+            'kegiatan',
+            'gambar1',
+            'gambar2',
+            'gambar3',
+            'gambar4',
+            'gambar5'
+        ));
+    }
 }
