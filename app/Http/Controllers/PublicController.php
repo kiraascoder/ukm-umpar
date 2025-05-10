@@ -26,17 +26,11 @@ class PublicController extends Controller
     }
     public function viewKegiatan()
     {
-        $kegiatans = Kegiatan::latest()->take(3)->get();
-        $totalKegiatan = Kegiatan::count();
-        return view('mahasiswa.kegiatan', compact('kegiatans', 'totalKegiatan'));
+        $kegiatans = Kegiatan::latest()->take(9)->get();
+        return view('mahasiswa.kegiatan', compact('kegiatans'));
     }
-    public function loadMore(Request $request)
-    {
-        if ($request->ajax()) {
-            $kegiatans = Kegiatan::latest()->skip($request->offset)->take(3)->get();
-            return view('mahasiswa.partials.kegiatan-card', compact('kegiatans'))->render();
-        }
-    }
+
+
     public function viewInformasi()
     {
         $pendaftaran = Pendaftaran::with('ukm')->latest()->take(3)->get();

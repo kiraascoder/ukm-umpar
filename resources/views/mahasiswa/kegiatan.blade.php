@@ -7,38 +7,35 @@
         <div class="container mx-auto px-6">
             <div class="text-center mb-16">
                 <h2 class="text-3xl md:text-4xl font-bold mb-4">Daftar Kegiatan UKM UMPAR</h2>
-                <p class="text-gray-600 max-w-4xl text-center mx-auto mb-4">UKM di Universitas Muhammadiyah Parepare secara
-                    rutin mengadakan
-                    berbagai kegiatan yang mendukung pengembangan diri mahasiswa. Mulai dari pelatihan, seminar, perlombaan,
-                    hingga kegiatan sosial kemasyarakatan — semua dirancang untuk membentuk karakter, meningkatkan soft
-                    skill, dan memperluas jaringan pertemanan antar mahasiswa lintas jurusan</p>
+                <p class="text-gray-600 max-w-4xl text-center mx-auto mb-4">
+                    UKM di Universitas Muhammadiyah Parepare secara rutin mengadakan berbagai kegiatan yang mendukung
+                    pengembangan diri mahasiswa. Mulai dari pelatihan, seminar, perlombaan, hingga kegiatan sosial
+                    kemasyarakatan — semua dirancang untuk membentuk karakter, meningkatkan soft skill, dan memperluas
+                    jaringan pertemanan antar mahasiswa lintas jurusan.
+                </p>
             </div>
+
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="kegiatan-container">
-                @include('mahasiswa.partials.kegiatan-card', ['kegiatans' => $kegiatans])
+                @foreach ($kegiatans as $kegiatan)
+                    <div class="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300"
+                        x-data="{ hover: false }">
+                        <div class="relative overflow-hidden">
+                            <img src="{{ asset('storage/' . $kegiatan->foto_sampul) }}" alt="{{ $kegiatan->nama }}"
+                                class="w-full h-64 object-cover transition-all duration-500"
+                                :class="{ 'transform scale-105': hover }">
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2">{{ $kegiatan->nama }}</h3>
+                            <p class="text-gray-600 mb-4">{{ Str::limit($kegiatan->deskripsi, 100) }}</p>
+                            <a href="{{ route('detail-kegiatan', $kegiatan->id) }}"
+                                class="text-[#608BC1] font-medium hover:text-yellow-600 transition inline-flex items-center">
+                                <span>View Details</span>
+                                <i class="fas fa-arrow-right ml-2 text-sm"></i>
+                            </a>
+                        </div>
+                    </div>
+                @endforeach
             </div>
-            @if ($kegiatans->count() < $totalKegiatan)
-                <div class="text-center mt-12">
-                    <button id="loadMoreBtn"
-                        class="inline-block bg-[#608BC1] hover:bg-[#29303d] text-white font-bold py-3 px-8 rounded-lg transition transform hover:-translate-y-1">
-                        Lihat Selengkapnya
-                    </button>
-                </div>
-            @endif
         </div>
     </div>
-    <script>
-        let offset = {{ $kegiatans->count() }};
-        document.getElementById('loadMoreBtn').addEventListener('click', function() {
-            fetch(`{{ url('/kegiatan/load-more') }}?offset=${offset}`)
-                .then(res => res.text())
-                .then(html => {
-                    if (html.trim() !== '') {
-                        document.getElementById('kegiatan-container').insertAdjacentHTML('beforeend', html);
-                        offset += 3;
-                    } else {
-                        document.getElementById('loadMoreBtn').remove();
-                    }
-                });
-        });
-    </script>
 @endsection
