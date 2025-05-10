@@ -115,4 +115,5 @@ class KegiatanController extends Controller
         $kegiatan->delete();
         return redirect('/admin/ukm/kegiatan')->with('success', 'Kegiatan Berhasil berhasil dihapus.');
     }
+    
 }

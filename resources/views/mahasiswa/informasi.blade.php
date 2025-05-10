@@ -26,7 +26,7 @@
                         <div class="p-6">
                             <h3 class="text-xl font-bold mb-2"> UKM {{ $item->ukm->nama }}</h3>
                             <p class="text-gray-600 mb-4">Batas Pendaftaran : {{ $item->batas_pendaftaran }}</p>
-                            <a href="#"
+                            <a href="{{ route('detailInformasi', $item->id) }}"
                                 class="text-[#608BC1] font-medium hover:text-yellow-600 transition inline-flex items-center">
                                 <span>Lihat Detail</span>
                                 <i class="fas fa-arrow-right ml-2 text-sm"></i>

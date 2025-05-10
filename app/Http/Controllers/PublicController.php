@@ -88,4 +88,9 @@ class PublicController extends Controller
             'gambar5'
         ));
     }
+    public function detailInformasi($id)
+    {
+        $informasi = Pendaftaran::findOrFail($id);
+        return view('mahasiswa.detail-informasi', compact('informasi'));
+    }
 }

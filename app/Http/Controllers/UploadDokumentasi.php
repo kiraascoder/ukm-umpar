@@ -13,7 +13,7 @@ class UploadDokumentasi extends Controller
     public function storeDokumentasi(Request $request)
     {
         $validatedData = $request->validate([
-            'photo_path' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'photo_path' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', // Maksimal 2MB
             'kegiatan_id' => 'required|exists:kegiatan,id'
         ]);
 
@@ -31,6 +31,7 @@ class UploadDokumentasi extends Controller
         if (!$kegiatan) {
             return redirect()->back()->with('error', 'Kegiatan tidak ditemukan.');
         }
+
         $jumlahDokumentasi = $kegiatan->dokumentasi()->count();
         if ($jumlahDokumentasi >= 5) {
             return redirect()->back()->with('error', 'Maksimal 5 dokumentasi diperbolehkan.');
@@ -51,6 +52,7 @@ class UploadDokumentasi extends Controller
 
         return redirect()->back()->with('error', 'File dokumentasi tidak ditemukan.');
     }
+
     public function updateDokumentasi(Request $request, $id)
     {
         $validatedData = $request->validate([

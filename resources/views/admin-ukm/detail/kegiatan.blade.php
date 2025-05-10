@@ -22,7 +22,7 @@
             <p class="text-gray-600 mb-2"><span class="font-medium">Tanggal Pelaksanaan:</span> {{ $kegiatan->tanggal }}</p>
         </div>
 
-        {{-- Gambar + Deskripsi --}}
+
         <div class="w-full bg-white p-6 rounded-2xl shadow mb-6 flex flex-col lg:flex-row gap-6">
             <div class="lg:w-1/3 w-full">
                 <img src="{{ asset('storage/' . $kegiatan->foto_sampul) }}" alt="Gambar Kegiatan"
@@ -36,7 +36,7 @@
             </div>
         </div>
 
-        {{-- Dokumentasi --}}
+
         <div class="w-full bg-white p-6 rounded-2xl shadow">
             <h3 class="text-lg font-semibold text-gray-700 mb-4">Dokumentasi Kegiatan</h3>
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
@@ -46,7 +46,6 @@
                         <img src="{{ asset('storage/' . $dokumentasi->photo_path) }}" alt="Dokumentasi"
                             class="w-full h-40 object-cover">
 
-                        {{-- Tombol Aksi --}}
                         <div class="absolute top-2 right-2 flex gap-2">
                             <button type="button"
                                 @click="document.getElementById('editModal-{{ $dokumentasi->id }}').classList.remove('hidden')"
@@ -61,7 +60,6 @@
                         </div>
                     </div>
 
-                    {{-- Modal Edit --}}
                     <div id="editModal-{{ $dokumentasi->id }}"
                         class="hidden fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
                         <div class="bg-white p-6 rounded-xl shadow-xl w-96 relative">
@@ -93,13 +91,15 @@
 
             @if ($kegiatanDokumentasi->count() < 5)
                 <form action="{{ route('adminUkmTambahDokumentasi.store') }}" method="POST" enctype="multipart/form-data"
-                    class="space-y-4 mt-6">
+                    class="space-y-4 mt-6" onsubmit="return validateFileSize()">
                     @csrf
                     <input type="hidden" name="kegiatan_id" value="{{ $kegiatan->id }}">
                     <div>
                         <label for="image" class="block text-sm font-medium text-gray-700">Upload Gambar</label>
                         <input type="file" name="photo_path" id="image" accept="image/*"
                             class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500">
+                        <span id="error-message" class="text-sm text-red-500 hidden">File terlalu besar. Maksimal
+                            2MB.</span>
                     </div>
                     <button type="submit"
                         class="inline-flex items-center gap-2 px-4 py-2 bg-green-600 hover:bg-green-700 text-white text-sm font-medium rounded-md shadow">
@@ -167,4 +167,19 @@
             </div>
         </div>
     </div>
+    <script>
+        function validateFileSize() {
+            const fileInput = document.getElementById('image');
+            const errorMessage = document.getElementById('error-message');
+            const file = fileInput.files[0];
+
+            if (file && file.size > 2 * 1024 * 1024) {
+                errorMessage.classList.remove('hidden');
+                return false; 
+            } else {
+                errorMessage.classList.add('hidden');
+                return true;
+            }
+        }
+    </script>
 @endsection
