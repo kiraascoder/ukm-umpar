@@ -122,6 +122,8 @@ Route::middleware(['admin:admin'])->group(function () {
     Route::get('/admin/kegiatan/{id}/detail', [SuperAdminController::class, 'detailKegiatan'])->name('detailKegiatan');
     Route::get('/admin/verifikasi-ukm', [SuperAdminController::class, 'viewVerifikasiUkm'])->name('verifikasiUkm');
     Route::patch('/admin/{id}/verifikasi', [SuperAdminController::class, 'verifikasiUkm'])->name('verifikasiUkm.update');
+    Route::get('/admin/proker/download', [SuperAdminController::class, 'downloadProker'])->name('adminUkmProker.download');
+    Route::get('/admin/proker/{id}/download', [SuperAdminController::class, 'downloadDetailProker'])->name('adminUkmDetailProker.download');
 });
 
 //Log Out

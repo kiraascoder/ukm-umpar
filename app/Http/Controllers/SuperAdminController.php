@@ -7,6 +7,7 @@ use App\Models\Kegiatan;
 use App\Models\Proker;
 use App\Models\Ukm;
 use App\Models\User;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 
 class SuperAdminController extends Controller
@@ -38,7 +39,7 @@ class SuperAdminController extends Controller
     }
     public function detailProkerUkm($id)
     {
-        $proker = Proker::findOrFail($id);
+        $proker = Proker::with('ukm')->findOrFail($id);
         return view('superadmin.detail.proker', compact('proker'));
     }
     public function detailUkm($id)
@@ -79,5 +80,18 @@ class SuperAdminController extends Controller
         $user->status = $user->status === 'active' ? 'inactive' : 'active';
         $user->save();
         return redirect()->back()->with('success', 'Status berhasil diperbarui.');
+    }
+
+    public function downloadProker()
+    {
+        $proker = Proker::with('ukm')->get();
+        $pdf = Pdf::loadView('superadmin.pdf.proker-pdf', compact('proker'));
+        return $pdf->download('daftar-proker-ukm.pdf');
+    }
+    public function downloadDetailProker($id)
+    {
+        $proker = Proker::with('ukm')->findOrFail($id);
+        $pdf = Pdf::loadView('superadmin.pdf.detail-proker-pdf', compact('proker'));
+        return $pdf->download('detail-proker-ukm.pdf');
     }
 }

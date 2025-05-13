@@ -8,7 +8,17 @@
         <div class="lg:col-span-3 w-full bg-white p-6 rounded-2xl shadow overflow-auto">
             <div class="flex items-center justify-between mb-4">
                 <h2 class="text-lg font-semibold text-gray-700">Daftar Program Kerja UKM</h2>
+
+                <a href="{{ route('adminUkmProker.download') }}"
+                    class="inline-flex items-center gap-2 px-4 py-2 bg-red-600 text-white rounded-full text-sm hover:bg-red-700 transition">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+                    </svg>
+                    Download PDF
+                </a>
             </div>
+
 
             <table class="min-w-full divide-y divide-gray-200 text-sm">
                 <thead class="bg-gray-50">
