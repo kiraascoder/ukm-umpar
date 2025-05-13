@@ -8,6 +8,13 @@
         <div class="lg:col-span-3 w-full bg-white p-6 rounded-2xl shadow overflow-auto">
             <div class="flex items-center justify-between mb-4">
                 <h2 class="text-lg font-semibold text-gray-700">Daftar Program Kerja UKM</h2>
+                <div class="flex gap-2">
+                    <a href="{{ route('adminUkmKeuangan.download') }}"
+                        class="inline-flex items-center gap-2 px-4 py-2 bg-green-600 hover:bg-green-700 text-white text-sm font-medium rounded-md shadow">
+                        Download Rekap Keuangan (CSV)
+                    </a>
+
+                </div>
             </div>
 
             <table class="min-w-full divide-y divide-gray-200 text-sm">

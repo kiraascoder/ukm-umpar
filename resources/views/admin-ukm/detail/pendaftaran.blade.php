@@ -32,7 +32,6 @@
             <h3 class="text-lg font-semibold text-gray-700 mb-4">Informasi</h3>
             <p class="text-gray-600 mb-4">
                 Link Pendaftaran : {{ Str::limit($pendaftaran->link_pendaftaran, 100, '...') }}
-                Persyaratan : {{ Str::limit($pendaftaran->persyaratan, 100, '...') }}
             </p>
             <p class="text-gray-600 mb-4">
                 Persyaratan : {{ Str::limit($pendaftaran->persyaratan, 100, '...') }}

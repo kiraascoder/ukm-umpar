@@ -95,7 +95,7 @@
             </table>
         </div>
 
-        <!-- Modal Konfirmasi Hapus -->
+
         <div x-show="showDeleteModal" x-transition:enter="transition ease-out duration-200"
             x-transition:enter-start="opacity-0 scale-90" x-transition:enter-end="opacity-100 scale-100"
             x-transition:leave="transition ease-in duration-150" x-transition:leave-start="opacity-100 scale-100"
@@ -119,7 +119,7 @@
             </div>
         </div>
 
-        <!-- Modal Edit Saldo -->
+
         <div x-show="openEditSaldo" x-transition:enter="transition ease-out duration-200"
             x-transition:enter-start="opacity-0 scale-90" x-transition:enter-end="opacity-100 scale-100"
             x-transition:leave="transition ease-in duration-150" x-transition:leave-start="opacity-100 scale-100"
@@ -129,6 +129,7 @@
                 <h2 class="text-lg font-semibold text-gray-800 mb-4">Edit Saldo Awal</h2>
                 <form action="{{ route('adminUkmUpdateSaldo.update', $ukm->id) }}" method="POST">
                     @csrf
+                    @method('PUT')
                     <div class="mb-4">
                         <label class="block text-gray-700 text-sm mb-1">Saldo Awal</label>
                         <input type="number" name="saldo" value="{{ $ukmSaldo }}"

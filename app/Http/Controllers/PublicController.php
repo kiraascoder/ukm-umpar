@@ -85,6 +85,7 @@ class PublicController extends Controller
     public function detailInformasi($id)
     {
         $informasi = Pendaftaran::findOrFail($id);
-        return view('mahasiswa.detail-informasi', compact('informasi'));
+        $ukmTerkait = $informasi->ukm;
+        return view('mahasiswa.detail-informasi', compact('informasi', 'ukmTerkait'));
     }
 }

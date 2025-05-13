@@ -41,6 +41,12 @@ class PendaftaranController extends Controller
             'link_pendaftaran' => 'required|string|max:255',
             'persyaratan' => 'required|string|max:255',
 
+        ], [
+            'brosur.image' => 'File harus berupa gambar.',
+            'brosur.mimes' => 'Format gambar yang diperbolehkan: jpeg, png, jpg, gif, svg.',
+            'brosur.max' => 'Ukuran gambar maksimal 10MB.',
+            'link_pendaftaran.string' => 'Link pendaftaran harus berupa URL.',
+            'persyaratan.string' => 'Persyaratan harus berupa teks.',
         ]);
 
         $user = Auth::user();

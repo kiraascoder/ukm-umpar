@@ -43,13 +43,13 @@
                                 <a href="{{ route('adminUkmEditProker', $item->id) }}"
                                     class="text-blue-600 hover:text-blue-800 text-xs font-medium">Edit</a>
 
-                                <!-- Trigger Tombol Modal -->
+
                                 <button @click="showDeleteModal{{ $item->id }} = true"
                                     class="text-red-600 hover:text-red-800 text-xs font-medium">
                                     Hapus
                                 </button>
 
-                                <!-- Modal Hapus -->
+
                                 <div x-show="showDeleteModal{{ $item->id }}" x-cloak
                                     x-transition:enter="transition ease-out duration-300"
                                     x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100"
@@ -74,7 +74,8 @@
                                                 class="px-4 py-2 bg-gray-300 text-gray-800 rounded hover:bg-gray-400">
                                                 Batal
                                             </button>
-                                            <form action="{{ route('adminUkmProker', $item->id) }}" method="POST">
+                                            <form action="{{ route('adminUkmDeleteProker.delete', $item->id) }}"
+                                                method="POST">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit"

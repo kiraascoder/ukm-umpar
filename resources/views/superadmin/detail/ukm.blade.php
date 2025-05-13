@@ -32,11 +32,11 @@
 
             <div>
                 <h3 class="text-lg font-semibold text-gray-700 mb-1">Misi</h3>
-                <ul class="list-disc list-inside text-gray-600">
-                    @foreach (json_decode($ukm->misi, true) as $item)
-                        <li>{{ $item }}</li>
-                    @endforeach
-                </ul>
+
+                <div class="mt-2">
+                    {!! nl2br(e($ukm->misi)) !!}
+                </div>
+
             </div>
         </div>
 

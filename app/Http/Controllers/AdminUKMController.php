@@ -9,15 +9,14 @@ use Storage;
 
 class AdminUKMController extends Controller
 {
-
-
     public function ukmProfile()
     {
 
         $user = Auth::user();
         $ukm = Ukm::where('admin_ukm_id', $user->id)->first();
         $ukm->media_sosial = json_decode($ukm->media_sosial, true);
-        return view('admin-ukm.profil-ukm', compact('ukm'));
+        $ukm->admin = $user;
+        return view('admin-ukm.profil-ukm', compact('ukm', 'user'));
     }
 
     public function ukmEditProfile()
@@ -56,7 +55,7 @@ class AdminUKMController extends Controller
             'deskripsi' => 'nullable|string',
             'sejarah' => 'nullable|string',
             'visi' => 'nullable|string',
-            'misi' => 'nullable|array',
+            'misi' => 'nullable|string',
             'struktur_organisasi' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:10048',
             'foto_pengurus' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:10048',
             'media_sosial' => 'nullable|array',
@@ -74,6 +73,10 @@ class AdminUKMController extends Controller
             'foto_pengurus.image' => 'File harus berupa gambar.',
             'foto_pengurus.mimes' => 'Format gambar yang diperbolehkan: jpeg, png, jpg, gif, svg.',
             'foto_pengurus.max' => 'Ukuran gambar maksimal 10MB.',
+            'media_sosial.instagram.string' => 'Link Instagram harus berupa URL.',
+            'media_sosial.facebook.string' => 'Link Facebook harus berupa URL.',
+            'media_sosial.twitter.string' => 'Link Twitter harus berupa URL.',
+            'media_sosial.tiktok.string' => 'Link TikTok harus berupa URL.',            
         ]);
 
 
@@ -137,5 +140,33 @@ class AdminUKMController extends Controller
         ]);
 
         return redirect('/admin/ukm/profile')->with('success', 'Data Berhasil Diperbarui');
+    }
+
+    public function ukmEditEmail(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|email|unique:users,email',
+        ]);
+
+        $user = Auth::user();
+        $user->update([
+            'email' => $request->email
+        ]);
+
+        return redirect('/admin/ukm/profile')->with('success', 'Email Berhasil Diperbarui');
+    }
+
+    public function ukmEditPhone(Request $request)
+    {
+        $request->validate([
+            'phone' => 'required|numeric',
+        ]);
+
+        $user = Auth::user();
+        $user->update([
+            'phone' => $request->phone
+        ]);
+
+        return redirect('/admin/ukm/profile')->with('success', 'Email Berhasil Diperbarui');
     }
 }

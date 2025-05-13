@@ -25,6 +25,18 @@
             <div>
                 <h2 class="text-xl font-semibold text-gray-800">UKM {{ $ukm->nama }}</h2>
                 <p class="text-sm text-gray-500 mt-1">Informasi lengkap organisasi UKM Anda</p>
+                <p class="text-sm text-gray-500 mt-1">No Hp : {{ $user->phone }}</p>
+                <p class="text-sm text-gray-500 mt-1">Email : {{ $user->email }}</p>
+                <div class="flex gap-2 mt-3">
+                    <button onclick="toggleModal('modalNoHP')"
+                        class="px-3 py-1 text-sm bg-yellow-400 hover:bg-yellow-500 text-white rounded shadow">
+                        Ubah No HP
+                    </button>
+                    <button onclick="toggleModal('modalEmail')"
+                        class="px-3 py-1 text-sm bg-blue-500 hover:bg-blue-600 text-white rounded shadow">
+                        Ubah Email
+                    </button>
+                </div>
             </div>
         </div>
 
@@ -54,11 +66,15 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm text-gray-700">
                 <div>
                     <span class="font-medium">Visi:</span>
-                    <div>{{ $ukm->visi }}</div>
+                    <div class="mt-2">
+                        {{ $ukm->visi }}
+                    </div>
                 </div>
                 <div>
                     <span class="font-medium">Misi:</span>
-                    {{-- <div>{{ $ukm->misi }}</div> --}}
+                    <div class="mt-2">
+                        {!! nl2br(e($ukm->misi)) !!}
+                    </div>
                 </div>
             </div>
         </div>
@@ -123,6 +139,43 @@
         </div>
     </div>
 
+    <div id="modalNoHP" class="fixed inset-0 hidden items-center justify-center bg-black bg-opacity-50 z-50">
+        <div class="bg-white p-6 rounded-lg shadow-md max-w-md w-full relative">
+            <button onclick="toggleModal('modalNoHP')"
+                class="absolute top-2 right-4 text-gray-500 hover:text-gray-800 text-xl">&times;</button>
+            <h2 class="text-lg font-semibold mb-4">Ubah Nomor HP</h2>
+            <form action="{{ route('adminUkmEditPhone', $ukm->id) }}" method="POST">
+                @csrf
+                @method('PUT')
+                <input type="text" name="phone" class="w-full border-gray-300 rounded-md shadow-sm p-2 mb-4"
+                    placeholder="Masukkan No HP baru" value="{{ $user->phone }}" required>
+                <div class="flex justify-end">
+                    <button type="submit"
+                        class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Simpan</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="modalEmail" class="fixed inset-0 hidden items-center justify-center bg-black bg-opacity-50 z-50">
+        <div class="bg-white p-6 rounded-lg shadow-md max-w-md w-full relative">
+            <button onclick="toggleModal('modalEmail')"
+                class="absolute top-2 right-4 text-gray-500 hover:text-gray-800 text-xl">&times;</button>
+            <h2 class="text-lg font-semibold mb-4">Ubah Email</h2>
+            <form action="{{ route('adminUkmEditEmail', $ukm->id) }}" method="POST">
+                @csrf
+                @method('PUT')
+                <input type="email" name="email" class="w-full border-gray-300 rounded-md shadow-sm p-2 mb-4"
+                    placeholder="Masukkan email baru" value="{{ $user->email }}" required>
+                <div class="flex justify-end">
+                    <button type="submit"
+                        class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Simpan</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
     <style>
         [x-cloak] {
             display: none !important;
@@ -146,5 +199,11 @@
             imagePreviewModal.classList.add('hidden');
             imagePreviewModal.classList.remove('flex');
         });
+
+        function toggleModal(id) {
+            const modal = document.getElementById(id);
+            modal.classList.toggle('hidden');
+            modal.classList.toggle('flex');
+        }
     </script>
 @endsection

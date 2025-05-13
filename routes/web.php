@@ -107,6 +107,10 @@ Route::middleware(['admin:admin_ukm', 'checkUserStatus'])->group(function () {
     Route::post('/admin/ukm/kegiatan/tambah-dokumentasi', [UploadDokumentasi::class, 'storeDokumentasi'])->name('adminUkmTambahDokumentasi.store');
     Route::post('/admin/ukm/dokumentasi/update/{id}', [UploadDokumentasi::class, 'updateDokumentasi'])->name('adminUkmDokumentasi.update');
     Route::delete('/admin/ukm/dokumentasi/delete/{id}', [UploadDokumentasi::class, 'deleteDokumentasi'])->name('adminUkmDokumentasi.delete');
+
+    // Email & Phone
+    Route::put('/admin/ukm/{id}/edit-email', [AdminUKMController::class, 'ukmEditEmail'])->name('adminUkmEditEmail');
+    Route::put('/admin/ukm/{id}/edit-phone', [AdminUKMController::class, 'ukmEditPhone'])->name('adminUkmEditPhone');
 });
 
 Route::middleware(['admin:admin'])->group(function () {

@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Exports\KeuanganExport;
 use Auth;
 use Illuminate\Http\Request;
@@ -114,6 +115,10 @@ class KeuanganController extends Controller
             'jumlah' => 'required|numeric',
             'tanggal' => 'required|date',
             'bukti_transaksi' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:10048',
+        ], [
+            'bukti_transaksi.image' => 'File harus berupa gambar.',
+            'bukti_transaksi.mimes' => 'Format gambar yang diperbolehkan: jpeg, png, jpg, gif, svg.',
+            'bukti_transaksi.max' => 'Ukuran gambar maksimal 10MB.',
         ]);
 
         $keuangan = Keuangan::findOrFail($id);

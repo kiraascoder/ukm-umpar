@@ -53,6 +53,9 @@
                                     class="text-blue-500 hover:underline transition">Lihat Transaksi</a>
                             </p>
                         @endif
+                        @error('bukti_transaksi')
+                            <div class="text-red-500 text-sm mt-2">{{ $message }}</div>
+                        @enderror
                     </div>
 
                     <div>
