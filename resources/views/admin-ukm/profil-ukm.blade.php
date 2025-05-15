@@ -85,19 +85,19 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-gray-700">
                 <div>
                     <span class="font-medium">Instagram:</span>
-                    <div>{{ $ukm->media_sosial['instagram'] }}</div>
+                    <div>{{ $ukm->media_sosial['instagram'] ?? '-' }}</div>
                 </div>
                 <div>
                     <span class="font-medium">Facebook:</span>
-                    <div>{{ $ukm->media_sosial['facebook'] }}</div>
+                    <div>{{ $ukm->media_sosial['facebook'] ?? '-' }}</div>
                 </div>
                 <div>
                     <span class="font-medium">X:</span>
-                    <div>{{ $ukm->media_sosial['twitter'] }}</div>
+                    <div>{{ $ukm->media_sosial['twitter'] ?? '-' }}</div>
                 </div>
                 <div>
                     <span class="font-medium">TikTok:</span>
-                    <div>{{ $ukm->media_sosial['tiktok'] }}</div>
+                    <div>{{ $ukm->media_sosial['tiktok'] ?? '-' }}</div>
                 </div>
             </div>
         </div>

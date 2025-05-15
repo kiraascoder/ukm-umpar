@@ -151,11 +151,7 @@
                     <div class="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300">
                         <div class="relative overflow-hidden">
                             <img src="{{ asset('storage/' . $ukm->foto_pengurus) }}"
-                                class="w-full h-64 object-cover transition-all duration-500 hover:scale-105">
-                            <div
-                                class="absolute top-4 right-4 bg-[#608BC1] text-white text-sm font-bold px-3 py-1 rounded-full">
-                                Popular
-                            </div>
+                                class="w-full h-64 object-cover transition-all duration-500 hover:scale-105">                            
                         </div>
                         <div class="p-6">
                             <h3 class="text-xl font-bold mb-2">{{ $ukm->nama }}</h3>
