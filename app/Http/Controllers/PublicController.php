@@ -10,61 +10,126 @@ use App\Models\Kegiatan;
 
 class PublicController extends Controller
 {
-
     public function index()
     {
-        $ukms = Ukm::with('ketuaUmum')->take(3)->get();
-        $gallery = KegiatanDokumentasi::with('kegiatan.ukm')->whereHas('kegiatan.ukm')->get();
-        $totalUkm = Ukm::count();
-        return view('mahasiswa.home', compact('ukms', 'totalUkm', 'gallery'));
+
+        $ukms = Ukm::with('ketuaUmum')
+            ->whereHas('admin', function ($query) {
+                $query->where('status', 'active');
+            })
+            ->take(3)
+            ->get();
+
+
+        $gallery = KegiatanDokumentasi::with('kegiatan.ukm')
+            ->whereHas('kegiatan.ukm.admin', function ($query) {
+                $query->where('status', 'active');
+            })
+            ->inRandomOrder()
+            ->take(9)
+            ->get();
+
+
+        $totalGallery = $gallery->count();
+
+
+        $totalUkm = Ukm::whereHas('admin', function ($query) {
+            $query->where('status', 'active');
+        })->count();
+
+        return view('mahasiswa.home', compact('ukms', 'totalUkm', 'gallery', 'totalGallery'));
     }
+
 
     public function viewGallery()
     {
-        $gallery = KegiatanDokumentasi::with('kegiatan.ukm')->whereHas('kegiatan.ukm')->get();
+        $gallery = KegiatanDokumentasi::with('kegiatan.ukm')
+            ->whereHas('kegiatan.ukm.admin', function ($query) {
+                $query->where('status', 'active');
+            })
+            ->latest()
+            ->take(13)
+            ->get();
+
         return view('mahasiswa.galeri', compact('gallery'));
     }
+
+
     public function viewKegiatan()
     {
-        $kegiatans = Kegiatan::latest()->take(9)->get();
+        $kegiatans = Kegiatan::whereHas('ukm.admin', function ($query) {
+            $query->where('status', 'active');
+        })
+            ->latest()
+            ->take(9)
+            ->get();
+
         return view('mahasiswa.kegiatan', compact('kegiatans'));
     }
 
-
     public function viewInformasi()
     {
-        $pendaftaran = Pendaftaran::with('ukm')->latest()->take(3)->get();
-        $totalPendaftaran = Pendaftaran::count();
+        $pendaftaran = Pendaftaran::with('ukm')
+            ->whereHas('ukm.admin', function ($query) {
+                $query->where('status', 'active');
+            })
+            ->latest()
+            ->take(9)
+            ->get();
+
+        $totalPendaftaran = Pendaftaran::whereHas('ukm.admin', function ($query) {
+            $query->where('status', 'active');
+        })->count();
+
         return view('mahasiswa.informasi', compact('pendaftaran', 'totalPendaftaran'));
     }
+
     public function viewContact()
     {
         return view('mahasiswa.contact');
     }
+
     public function viewUkm()
     {
-        $ukms = Ukm::all();
+        $ukms = Ukm::whereHas('admin', function ($query) {
+            $query->where('status', 'active');
+        })
+            ->get();
+
         return view('mahasiswa.ukm', compact('ukms'));
     }
 
     public function detailUkm($id)
     {
-        $ukm = Ukm::with('kegiatan.dokumentasi')->findOrFail($id);
+        $ukm = Ukm::with('kegiatan.dokumentasi')
+            ->whereHas('admin', function ($query) {
+                $query->where('status', 'active');
+            })
+            ->findOrFail($id);
+
         $anggota = $ukm->anggota()
             ->whereIn('jabatan', ['Ketua Umum', 'Sekretaris', 'Bendahara'])
             ->whereNotNull('foto')
             ->where('foto', '!=', '')
             ->get();
 
+        $galeri = $ukm->gallery()->get();
+
         $kegiatans = $ukm->kegiatan;
         $totalKegiatan = $kegiatans->count();
 
-        return view('mahasiswa.detail-ukm', compact('ukm', 'anggota', 'kegiatans', 'totalKegiatan'));
+        $pendaftarans = Pendaftaran::where('ukm_id', $id)->get();
+
+        return view('mahasiswa.detail-ukm', compact('ukm', 'anggota', 'kegiatans', 'totalKegiatan', 'pendaftarans', 'galeri'));
     }
 
     public function viewDetailKegiatan($id)
     {
-        $kegiatan = Kegiatan::findOrFail($id);
+        $kegiatan = Kegiatan::whereHas('ukm.admin', function ($query) {
+            $query->where('status', 'active');
+        })
+            ->findOrFail($id);
+
         $dokumentasi = $kegiatan->dokumentasi()->get();
 
         $gambar1 = $dokumentasi->get(0);
@@ -82,10 +147,16 @@ class PublicController extends Controller
             'gambar5'
         ));
     }
+
     public function detailInformasi($id)
     {
-        $informasi = Pendaftaran::findOrFail($id);
+        $informasi = Pendaftaran::whereHas('ukm.admin', function ($query) {
+            $query->where('status', 'active');
+        })
+            ->findOrFail($id);
+
         $ukmTerkait = $informasi->ukm;
+
         return view('mahasiswa.detail-informasi', compact('informasi', 'ukmTerkait'));
     }
 }

@@ -3,61 +3,130 @@
 @section('title', 'UKM UMPAR')
 
 @section('content')
-    <section class="relative py-20 overflow-hidden">
-        <div class="absolute inset-0">
-            <img src="{{ asset('storage/' . $ukm->foto_pengurus) }}" alt="Background Pengurus"
-                class="w-full h-full object-cover blur-sm brightness-75">
+    <div class="relative h-[80vh]">
+        <div class="absolute inset-0 bg-cover bg-center z-0"
+            style="background-image: url('{{ $ukm->foto_pengurus ? asset('storage/' . $ukm->foto_pengurus) : asset('img/default/sampul.jpg') }}');">
+            <div class="absolute inset-0 bg-black opacity-20"></div>
         </div>
-        <div class="relative container mx-auto px-4">
-            <div class="flex flex-col md:flex-row items-center justify-between">
-                <div class="md:w-1/2 mb-8 md:mb-0">
+        <nav class="container mx-auto px-6 py-4 relative z-10" x-data="{ open: false }">
+            <div class="flex justify-between items-center">
+                <div class="text-white font-bold text-2xl">
+                    <img src="{{ asset('img/umpar.png') }}" alt="Logo UMPAR" class="w-16">
                 </div>
-                <div class="md:w-1/2">
-                    <img src="{{ asset('storage/' . $ukm->foto_pengurus) }}" alt="Foto Pengurus"
-                        class="w-full rounded-lg shadow-lg">
+                <div class="md:hidden">
+                    <button class="text-white focus:outline-none" @click="open = !open">
+                        <i class="fa fa-bars text-2xl"></i>
+                    </button>
+                </div>
+                <div class="hidden md:flex space-x-10 font-medium text-white ">
+                    <a href="/" class="hover:text-yellow-300 transition">Home</a>
+                    <a href="{{ route('daftar-ukm') }}" class="hover:text-yellow-300 transition">UKM</a>
+                    <a href="{{ route('galeri') }}" class="hover:text-yellow-300 transition">Galeri</a>
+                    <a href="{{ route('kegiatan') }}" class="hover:text-yellow-300 transition">Kegiatan</a>
+                    <a href="{{ route('informasi') }}" class="hover:text-yellow-300 transition">Informasi</a>
                 </div>
             </div>
+
+
+            <div x-show="open" class="md:hidden mt-4 bg-white rounded-lg shadow-lg px-4 py-4 space-y-3">
+                <a href="/" class="block text-gray-800 hover:text-blue-600">Home</a>
+                <a href="{{ route('daftar-ukm') }}" class="block text-gray-800 hover:text-blue-600">UKM</a>
+                <a href="{{ route('galeri') }}" class="block text-gray-800 hover:text-blue-600">Galeri</a>
+                <a href="{{ route('kegiatan') }}" class="block text-gray-800 hover:text-blue-600">Kegiatan</a>
+                <a href="{{ route('informasi') }}" class="block text-gray-800 hover:text-blue-600">Informasi</a>
+            </div>
+        </nav>
+
+        <div class="absolute bottom-2 left-1/2 transform -translate-x-1/2 z-10 text-center">
+            <img src="{{ $ukm->logo ? asset('storage/' . $ukm->logo) : asset('img/umpar.png') }}"
+                class="w-64 h-64 rounded-full object-cover aspect-square mx-auto">
+            <h1 class="mt-4 text-2xl md:text-3xl font-bold text-white drop-shadow-lg">
+                Profile UKM {{ $ukm->nama }}
+            </h1>
         </div>
 
-        <div class="absolute bottom-2 left-16">
-            <img src="{{ asset('storage/' . $ukm->logo) }}" alt="Profile Picture"
-                class="w-64 h-64 rounded-full object-cover aspect-square border-4 border-white shadow-lg">
+    </div>
+
+    <section class="py-20 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row items-center gap-12">
+                <div class="w-full md:w-1/2">
+                    <h2 class="text-4xl font-extrabold text-gray-800 mb-6 text-center md:text-left">
+                        Deskripsi
+                    </h2>
+                    <p class="text-gray-600 leading-relaxed text-justify">
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti odit expedita quibusdam nemo
+                        maiores aspernatur sunt itaque suscipit deserunt modi minima veniam totam reprehenderit dolorum
+                        ullam commodi aliquid iusto beatae iste, vel omnis? Doloribus, illo dolorem quas praesentium eum
+                        minima sequi deserunt ad explicabo quaerat autem eius animi saepe incidunt quos distinctio quod,
+                        facere quisquam necessitatibus nihil soluta rem corporis labore? Assumenda quisquam modi perferendis
+                        atque itaque enim. Perspiciatis iusto omnis quas ipsum saepe dolores tenetur voluptates excepturi,
+                        hic quidem unde laudantium sequi iste eligendi reiciendis ullam sint. Consectetur harum nam odio
+                        delectus beatae provident eum suscipit earum similique officiis!
+                    </p>
+                </div>
+                <div class="w-full md:w-1/2 flex justify-center">
+                    <div class="w-full max-w-lg">
+                        <img src="{{ $ukm->foto_pengurus ? asset('storage/' . $ukm->foto_pengurus) : asset('img/default/sampul.jpg') }}"
+                            class="w-full rounded-xl shadow-lg transition-transform duration-300 hover:scale-105">
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
     <section class="py-20 bg-gray-50">
         <div class="container mx-auto px-4">
-            <div class="flex flex-col md:flex-row gap-10">
-                <div class="w-full md:w-1/2">
-                    <h2 class="text-3xl md:text-4xl font-bold mb-4 text-center md:text-left">Deskripsi</h2>
-                    <p class="text-gray-600">
-                        {{ $ukm->deskripsi }}
-                    </p>
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-extrabold text-gray-800 mb-6">Sejarah</h2>
+                <div class="max-w-3xl mx-auto text-gray-700">
+                    <div>
+                        <p class="text-gray-600 leading-relaxed text-center">
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti odit expedita quibusdam nemo
+                            maiores aspernatur sunt itaque suscipit deserunt modi minima veniam totam reprehenderit dolorum
+                            ullam commodi aliquid iusto beatae iste, vel omnis? Doloribus, illo dolorem quas praesentium eum
+                            minima sequi deserunt ad explicabo quaerat autem eius animi saepe incidunt quos distinctio quod,
+                            facere quisquam necessitatibus nihil soluta rem corporis labore? Assumenda quisquam modi
+                            perferendis
+                            atque itaque enim. Perspiciatis iusto omnis quas ipsum saepe dolores tenetur voluptates
+                            excepturi,
+                            hic quidem unde laudantium sequi iste eligendi reiciendis ullam sint. Consectetur harum nam odio
+                            delectus beatae provident eum suscipit earum similique officiis!
+                        </p>
+                    </div>
                 </div>
-                <div class="w-full md:w-1/2">
-                    <h2 class="text-3xl md:text-4xl font-bold mb-4 text-center md:text-left">Sejarah</h2>
-                    <p class="text-gray-600">
-                        {{ $ukm->sejarah }}
-                    </p>
+            </div>
+        </div>
+    </section>
+    <section class=" bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-extrabold text-gray-800 mb-8">Visi & Misi</h2>
+                <div class="max-w-3xl mx-auto text-gray-700">
+
+                    <div class="mb-12">
+                        <h3
+                            class="text-3xl font-semibold mb-4 text-indigo-600 border-b-2 border-indigo-600 inline-block pb-1">
+                            Visi</h3>
+                        <p class="text-lg leading-relaxed tracking-wide">
+                            {{ $ukm->visi }}
+                        </p>
+                    </div>
+                    <div>
+                        <h3
+                            class="text-3xl font-semibold mb-4 text-indigo-600 border-b-2 border-indigo-600 inline-block pb-1">
+                            Misi</h3>
+                        <div class="mt-3 text-left text-lg leading-relaxed tracking-wide space-y-4">
+                            {!! nl2br(e($ukm->misi)) !!}
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="py-20">
-        <div class="text-center mb-8">
-            <h2 class="text-3xl md:text-4xl font-bold mb-4">Visi & Misi</h2>
-            <p class="text-gray-600 max-w-2xl mx-auto">
-                <strong>Visi:</strong> {{ $ukm->visi }}
-            </p>
-            <p class="text-gray-600 max-w-2xl mx-auto mt-4">
-                <strong>Misi:</strong>
-            <ul class="list-disc text-left mx-auto max-w-xl">
-                {{-- {{ $ukm->misi }} --}}
-            </ul>
-            </p>
-        </div>
-    </section>
-    <section class="py-20 bg-gray-100">
+
+    <section class="py-20 bg-gray-50">
         <div class="text-center mb-8">
             <h2 class="text-3xl md:text-4xl font-bold mb-4">Sosial Media</h2>
             <p class="text-gray-600 mb-8">
@@ -97,11 +166,11 @@
         </div>
     </section>
 
-    <section class="py-20">
-        <div class="text-center mb-8">
-            <h2 class="text-3xl md:text-4xl font-bold mb-4">Struktur Organisasi</h2>
-            <p class="text-gray-600 mb-8">
-                Berikut adalah struktur organisasi UKM {{ $ukm->nama }} yang memudahkan koordinasi antar anggota.
+    <section class="py-20 bg-gray-50">
+        <div class="text-center max-w-5xl mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold mb-4 text-gray-800">Pengurus Inti</h2>
+            <p class="text-gray-600 mb-12 max-w-xl mx-auto">
+                Berikut adalah Pengurus Inti UKM {{ $ukm->nama }} yang memudahkan koordinasi antar anggota.
             </p>
 
             @if ($anggota->count() === 1)
@@ -109,18 +178,18 @@
                     @foreach ($anggota as $item)
                         <div class="bg-white rounded-lg shadow-md overflow-hidden p-6 text-center w-64">
                             <img src="{{ asset('storage/' . $item->foto) }}" alt="{{ $item->nama }}"
-                                class="w-32 h-32 rounded-full border-4 border-white shadow-lg mx-auto mb-4">
+                                class="w-32 h-32 object-cover rounded-full border-4 border-white shadow-lg mx-auto mb-4" />
                             <h3 class="text-xl font-bold text-gray-800 mb-2">{{ $item->jabatan }}</h3>
                             <p class="text-gray-700 text-base">{{ $item->nama }}</p>
                         </div>
                     @endforeach
                 </div>
             @elseif ($anggota->count() === 2)
-                <div class="flex justify-center space-x-8">
+                <div class="flex justify-center space-x-8 flex-wrap gap-8">
                     @foreach ($anggota as $item)
                         <div class="bg-white rounded-lg shadow-md overflow-hidden p-6 text-center w-64">
                             <img src="{{ asset('storage/' . $item->foto) }}" alt="{{ $item->nama }}"
-                                class="w-32 h-32 rounded-full border-4 border-white shadow-lg mx-auto mb-4">
+                                class="w-32 h-32 object-cover rounded-full border-4 border-white shadow-lg mx-auto mb-4" />
                             <h3 class="text-xl font-bold text-gray-800 mb-2">{{ $item->jabatan }}</h3>
                             <p class="text-gray-700 text-base">{{ $item->nama }}</p>
                         </div>
@@ -130,16 +199,16 @@
                 <div class="flex flex-col items-center space-y-10">
                     <div class="bg-white rounded-lg shadow-md overflow-hidden p-6 text-center w-64">
                         <img src="{{ asset('storage/' . $anggota[0]->foto) }}" alt="{{ $anggota[0]->nama }}"
-                            class="w-32 h-32 rounded-full border-4 border-white shadow-lg mx-auto mb-4">
+                            class="w-32 h-32 object-cover rounded-full border-4 border-white shadow-lg mx-auto mb-4" />
                         <h3 class="text-xl font-bold text-gray-800 mb-2">{{ $anggota[0]->jabatan }}</h3>
                         <p class="text-gray-700 text-base">{{ $anggota[0]->nama }}</p>
                     </div>
 
-                    <div class="flex space-x-8">
+                    <div class="flex space-x-8 flex-wrap justify-center gap-8">
                         @foreach ($anggota->slice(1) as $item)
                             <div class="bg-white rounded-lg shadow-md overflow-hidden p-6 text-center w-64">
                                 <img src="{{ asset('storage/' . $item->foto) }}" alt="{{ $item->nama }}"
-                                    class="w-32 h-32 rounded-full border-4 border-white shadow-lg mx-auto mb-4">
+                                    class="w-32 h-32 object-cover rounded-full border-4 border-white shadow-lg mx-auto mb-4" />
                                 <h3 class="text-xl font-bold text-gray-800 mb-2">{{ $item->jabatan }}</h3>
                                 <p class="text-gray-700 text-base">{{ $item->nama }}</p>
                             </div>
@@ -149,6 +218,7 @@
             @endif
         </div>
     </section>
+
     <section class="py-20  container mx-auto px-6">
         <div class="text-center mb-8">
             <h2 class="text-3xl md:text-4xl font-bold mb-4">Kegiatan</h2>
@@ -162,12 +232,8 @@
                 @foreach ($kegiatans as $kegiatan)
                     <div class="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300">
                         <div class="relative overflow-hidden">
-                            <img src="{{ asset('storage/' . $kegiatan->foto_sampul) }}" alt="Belum ada Gambar"
+                            <img src="{{ $kegiatan->foto_sampul ? asset('storage/' . $kegiatan->foto_sampul) : asset('img/activity.png') }}"
                                 class="w-full h-64 object-cover transition-all duration-500 hover:scale-105">
-                            <div
-                                class="absolute top-4 right-4 bg-[#608BC1] text-white text-sm font-bold px-3 py-1 rounded-full">
-                                Popular
-                            </div>
                         </div>
                         <div class="p-6">
                             <h3 class="text-xl font-bold mb-2">{{ $kegiatan->nama }}</h3>
@@ -180,121 +246,67 @@
                         </div>
                     </div>
                 @endforeach
-                @if ($totalKegiatan > 3)
-                    <div class="text-center mt-12 col-span-full">
-                        <a href="{{ route('daftar-ukm') }}"
-                            class="inline-block bg-[#608BC1] hover:bg-[#133E87] text-gray-900 font-bold py-3 px-8 rounded-lg transition transform hover:-translate-y-1">
-                            Lihat Semua UKM
-                        </a>
-                    </div>
-                @endif
             </div>
         </div>
     </section>
-
-    <section class="py-20">
+    <section class="container mx-auto px-6">
+        <div class="text-center mb-8">
+            <h2 class="text-3xl md:text-4xl font-bold mb-4">Informasi</h2>
+            <p class="text-gray-600 max-w-2xl mx-auto">
+                UKM UMPAR juga menyediakan informasi terbaru tentang kegiatan, acara, dan event yang akan datang.
+            </p>
+        </div>
+        <div class="container mx-auto px-4 py-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                @foreach ($pendaftarans as $pendaftaran)
+                    <div class="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300">
+                        <div class="relative overflow-hidden">
+                            <img src="{{ $pendaftaran->brosur ? asset('storage/' . $pendaftaran->brosur) : asset('img/activity.png') }}"
+                                class="w-full h-64 object-cover transition-all duration-500 hover:scale-105">
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2">{{ $pendaftaran->pendaftaran }}</h3>
+                            <p class="text-gray-600 mb-4">Batas Pendaftaran : {{ $pendaftaran->batas_pendaftaran }}</p>
+                            <a href="{{ route('detailInformasi', $pendaftaran->id) }}"
+                                class="text-[#608BC1] font-medium hover:text-yellow-600 transition inline-flex items-center">
+                                <span>Lihat Selengkapnya</span>
+                                <i class="fas fa-arrow-right ml-2 text-sm"></i>
+                            </a>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        </div>
+    </section>
+    <section class="container mx-auto px-6 py-8" x-data="{ selectedImage: '{{ asset('storage/' . $galeri[0]->photo_path) }}', fade: false }" x-init="$nextTick(() => fade = true)">
         <div class="text-center mb-8">
             <h2 class="text-3xl md:text-4xl font-bold mb-4">Galeri</h2>
-            <p class="text-gray-600 max-w-2xl mx-auto mb-8">
-                Berikut adalah beberapa dokumentasi kegiatan yang telah kami lakukan di UKM UMPAR.
+            <p class="text-gray-600 max-w-2xl mx-auto">
+                Galeri UKM {{ $ukm->name }} berisi foto-foto kegiatan, acara, dan event yang telah dilakukan.
             </p>
-            <div class="container mx-auto px-4 py-8">
-                <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
-                    <div class="md:col-span-2 md:row-span-2 relative overflow-hidden rounded-2xl shadow-lg group">
-                        <img src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NzEyNjZ8MHwxfHNlYXJjaHwxfHxuYXR1cmV8ZW58MHwwfHx8MTcyMTA0MjYwMXww&ixlib=rb-4.0.3&q=80&w=1080"
-                            alt="Nature" class="w-full h-full object-cover">
-                        <div
-                            class="absolute inset-0 bg-black bg-opacity-60 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                            <div class="absolute bottom-0 left-0 right-0 p-4">
-                                <h3 class="text-2xl font-bold text-white">Explore Nature</h3>
-                                <p class="text-white">Discover the beauty of the natural world</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="relative overflow-hidden rounded-2xl shadow-lg group">
-                        <img src="https://images.unsplash.com/photo-1493770348161-369560ae357d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NzEyNjZ8MHwxfHNlYXJjaHw2fHxmb29kfGVufDB8MHx8fDE3MjEwNDI2MTR8MA&ixlib=rb-4.0.3&q=80&w=1080"
-                            alt="Food" class="w-full h-48 object-cover">
-                        <div
-                            class="absolute inset-0 bg-black bg-opacity-60 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                            <div class="absolute bottom-0 left-0 right-0 p-4">
-                                <h4 class="text-xl font-bold text-white">Culinary Delights</h4>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="relative overflow-hidden rounded-2xl shadow-lg group">
-                        <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NzEyNjZ8MHwxfHNlYXJjaHw1fHx0ZWNobm9sb2d5fGVufDB8MHx8fDE3MjEwNDI2Mjh8MA&ixlib=rb-4.0.3&q=80&w=1080"
-                            alt="Technology" class="w-full h-48 object-cover">
-                        <div
-                            class="absolute inset-0 bg-black bg-opacity-60 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                            <div class="absolute bottom-0 left-0 right-0 p-4">
-                                <h4 class="text-xl font-bold text-white">Tech Innovations</h4>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="relative overflow-hidden rounded-2xl shadow-lg group">
-                        <img src="https://images.unsplash.com/photo-1503220317375-aaad61436b1b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NzEyNjZ8MHwxfHNlYXJjaHw1fHx0cmF2ZWx8ZW58MHwwfHx8MTcyMTA0MjY0MXww&ixlib=rb-4.0.3&q=80&w=1080"
-                            alt="Travel" class="w-full h-48 object-cover">
-                        <div
-                            class="absolute inset-0 bg-black bg-opacity-60 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                            <div class="absolute bottom-0 left-0 right-0 p-4">
-                                <h4 class="text-xl font-bold text-white">Travel Adventures</h4>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="relative overflow-hidden rounded-2xl shadow-lg group">
-                        <img src="https://images.unsplash.com/photo-1513364776144-60967b0f800f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NzEyNjZ8MHwxfHNlYXJjaHwxfHxhcnR8ZW58MHwwfHx8MTcyMTA0MjY5Nnww&ixlib=rb-4.0.3&q=80&w=1080"
-                            alt="Art" class="w-full h-48 object-cover">
-                        <div
-                            class="absolute inset-0 bg-black bg-opacity-60 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                            <div class="absolute bottom-0 left-0 right-0 p-4">
-                                <h4 class="text-xl font-bold text-white">Artistic Expressions</h4>
-                            </div>
-                        </div>
-                    </div>
+        </div>
 
-                    <!-- bottom cards -->
-                    <div class="relative overflow-hidden rounded-2xl shadow-lg group">
-                        <img src="https://images.unsplash.com/photo-1530549387789-4c1017266635?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NzEyNjZ8MHwxfHNlYXJjaHwyfHxzd2ltbWluZ3xlbnwwfDB8fHwxNzIxMDQzMjkxfDA&ixlib=rb-4.0.3&q=80&w=1080"
-                            alt="Sport" class="w-full h-48 object-cover">
-                        <div
-                            class="absolute inset-0 bg-black bg-opacity-60 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                            <div class="absolute bottom-0 left-0 right-0 p-4">
-                                <h4 class="text-xl font-bold text-white">Swimming</h4>
-                            </div>
-                        </div>
+        <div class="grid gap-6">
+
+            <div id="main-image" class="scroll-mt-24">
+                <img x-show="fade" x-transition:enter="transition-opacity duration-500"
+                    x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100" :src="selectedImage"
+                    class="h-auto max-h-[600px] w-full rounded-lg object-cover object-center" alt="gallery-main" />
+            </div>
+
+
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4">
+                @foreach ($galeri as $index => $item)
+                    <div>
+                        <img @click.prevent="fade = false; setTimeout(() => { selectedImage = '{{ asset('storage/' . $item->photo_path) }}'; fade = true }, 100)"
+                            src="{{ asset('storage/' . $item->photo_path) }}"
+                            class="object-cover object-center h-24 md:h-32 w-full rounded-lg cursor-pointer border-2 hover:border-blue-500"
+                            alt="gallery-thumbnail-{{ $index }}" />
                     </div>
-                    <div class="relative overflow-hidden rounded-2xl shadow-lg group">
-                        <img src="https://images.unsplash.com/photo-1611195974226-a6a9be9dd763?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NzEyNjZ8MHwxfHNlYXJjaHwxMnx8Y2hlc3N8ZW58MHwwfHx8MTcyMTA0MzI0Nnww&ixlib=rb-4.0.3&q=80&w=1080"
-                            alt="Sport" class="w-full h-48 object-cover">
-                        <div
-                            class="absolute inset-0 bg-black bg-opacity-60 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                            <div class="absolute bottom-0 left-0 right-0 p-4">
-                                <h4 class="text-xl font-bold text-white">Chess</h4>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="relative overflow-hidden rounded-2xl shadow-lg group">
-                        <img src="https://images.unsplash.com/photo-1553778263-73a83bab9b0c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NzEyNjZ8MHwxfHNlYXJjaHw1fHxmb290YmFsbHxlbnwwfDB8fHwxNzIxMDQzMjExfDA&ixlib=rb-4.0.3&q=80&w=1080"
-                            alt="Sport" class="w-full h-48 object-cover">
-                        <div
-                            class="absolute inset-0 bg-black bg-opacity-60 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                            <div class="absolute bottom-0 left-0 right-0 p-4">
-                                <h4 class="text-xl font-bold text-white">Football</h4>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="relative overflow-hidden rounded-2xl shadow-lg group">
-                        <img src="https://images.unsplash.com/photo-1624526267942-ab0ff8a3e972?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NzEyNjZ8MHwxfHNlYXJjaHw3fHxjcmlja2V0fGVufDB8MHx8fDE3MjEwNDMxNTh8MA&ixlib=rb-4.0.3&q=80&w=1080"
-                            alt="Sport" class="w-full h-48 object-cover">
-                        <div
-                            class="absolute inset-0 bg-black bg-opacity-60 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                            <div class="absolute bottom-0 left-0 right-0 p-4">
-                                <h4 class="text-xl font-bold text-white">Cricket</h4>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                @endforeach
             </div>
         </div>
     </section>
+
+
 @endsection

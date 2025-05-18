@@ -27,6 +27,12 @@ class Ukm extends Model
     {
         return $this->belongsTo(User::class, 'admin_ukm_id');
     }
+
+    public function gallery()
+    {
+        return $this->hasMany(Gallery::class);
+    }
+
     public function anggota()
     {
         return $this->hasMany(Anggota::class);

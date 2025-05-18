@@ -7,35 +7,37 @@
         <div class="absolute inset-0 bg-cover bg-center z-0" style="background-image: url({{ asset('img/bg-umpar.png') }});">
             <div class="absolute inset-0 bg-black opacity-20"></div>
         </div>
-        <nav class="container mx-auto px-6 py-4 flex justify-between items-center relative z-10">
-            <div class="text-white font-bold text-2xl">
-                <img src="{{ asset('img/umpar.png') }}" alt="Logo UMPAR" class="w-16">
-            </div>
-            <div class="hidden md:flex space-x-10 font-medium text-white">
-                <a href="/" class="hover:text-yellow-300 transition">Home</a>
-                <a href="{{ route('daftar-ukm') }}" class="hover:text-yellow-300 transition">UKM</a>
-                <a href="{{ route('galeri') }}" class="hover:text-yellow-300 transition">Galeri</a>
-                <a href="{{ route('kegiatan') }}" class="hover:text-yellow-300 transition">Kegiatan</a>
-                <a href="{{ route('informasi') }}" class="hover:text-yellow-300 transition">Informasi</a>
-            </div>
-            <div class="md:hidden" x-data="{ open: false }">
-                <button class="text-white focus:outline-none" @click="open = !open">
-                    <i class="fa fa-bars text-2xl"></i>
-                </button>
-                <div x-show="open" @click.away="open = false"
-                    class="absolute top-20 right-6 bg-white text-gray-800 shadow-lg rounded-lg p-6 w-48 z-50">
-                    <div class="flex flex-col space-y-4">
-                        <a href="/" class="hover:text-blue-600">Home</a>
-                        <a href="{{ route('daftar-ukm') }}" class="hover:text-blue-600">UKM</a>
-                        <a href="{{ route('galeri') }}" class="hover:text-blue-600">Galeri</a>
-                        <a href="{{ route('kegiatan') }}" class="hover:text-blue-600">Kegiatan</a>
-                        <a href="{{ route('informasi') }}" class="hover:text-blue-600">Informasi</a>
-                    </div>
+        <nav class="container mx-auto px-6 py-4 relative z-10" x-data="{ open: false }">
+            <div class="flex justify-between items-center">
+                <div class="text-white font-bold text-2xl">
+                    <img src="{{ asset('img/umpar.png') }}" alt="Logo UMPAR" class="w-16">
                 </div>
+                <div class="md:hidden">
+                    <button class="text-white focus:outline-none" @click="open = !open">
+                        <i class="fa fa-bars text-2xl"></i>
+                    </button>
+                </div>
+                <div
+                    class="hidden md:flex space-x-10 font-medium 
+            {{ Request::is('/') ? 'text-white' : 'text-gray-900' }}">
+                    <a href="/" class="hover:text-yellow-300 transition">Home</a>
+                    <a href="{{ route('daftar-ukm') }}" class="hover:text-yellow-300 transition">UKM</a>
+                    <a href="{{ route('galeri') }}" class="hover:text-yellow-300 transition">Galeri</a>
+                    <a href="{{ route('kegiatan') }}" class="hover:text-yellow-300 transition">Kegiatan</a>
+                    <a href="{{ route('informasi') }}" class="hover:text-yellow-300 transition">Informasi</a>
+                </div>
+            </div>
+
+
+            <div x-show="open" class="md:hidden mt-4 bg-white rounded-lg shadow-lg px-4 py-4 space-y-3">
+                <a href="/" class="block text-gray-800 hover:text-blue-600">Home</a>
+                <a href="{{ route('daftar-ukm') }}" class="block text-gray-800 hover:text-blue-600">UKM</a>
+                <a href="{{ route('galeri') }}" class="block text-gray-800 hover:text-blue-600">Galeri</a>
+                <a href="{{ route('kegiatan') }}" class="block text-gray-800 hover:text-blue-600">Kegiatan</a>
+                <a href="{{ route('informasi') }}" class="block text-gray-800 hover:text-blue-600">Informasi</a>
             </div>
         </nav>
 
-        <!-- Hero -->
         <div class="container mx-auto px-6 pt-32 pb-48 relative z-10" x-data="{ fadeIn: false }" x-init="setTimeout(() => fadeIn = true, 500)">
             <div class="max-w-3xl transition-all duration-1000"
                 :class="fadeIn ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'">
@@ -150,12 +152,14 @@
                 @foreach ($ukms as $ukm)
                     <div class="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300">
                         <div class="relative overflow-hidden">
-                            <img src="{{ asset('storage/' . $ukm->foto_pengurus) }}"
-                                class="w-full h-64 object-cover transition-all duration-500 hover:scale-105">                            
+                            <img src="{{ $ukm->foto_pengurus ? asset('storage/' . $ukm->foto_pengurus) : asset('img/default/ukm.png') }}"
+                                alt="Foto pengurus {{ $ukm->nama }}"
+                                class="w-full h-64 object-cover transition-all duration-500 hover:scale-105" />
                         </div>
                         <div class="p-6">
                             <h3 class="text-xl font-bold mb-2">{{ $ukm->nama }}</h3>
-                            <p class="text-gray-600 mb-4">{{ $ukm->deskripsi }}</p>
+                            <p class="text-gray-600 mb-4">
+                                {{ $ukm->deskripsi ? substr($ukm->deskripsi, 0, 100) . '...' : 'Tidak ada deskripsi' }}</p>
                             <a href="{{ route('detail-ukm', $ukm->id) }}"
                                 class="text-[#608BC1] font-medium hover:text-yellow-600 transition inline-flex items-center">
                                 <span>Lihat Selengkapnya</span>

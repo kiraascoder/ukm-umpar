@@ -1,6 +1,6 @@
 @extends('component.admin-layout')
 
-@section('title', 'Tambah Kegiatan UKM')
+@section('title', 'Tambah Pendaftaran UKM')
 
 @section('content')
     <div class="bg-gray-100 min-h-screen py-10">

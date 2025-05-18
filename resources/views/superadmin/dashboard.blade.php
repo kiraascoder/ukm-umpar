@@ -26,8 +26,8 @@
             </div>
 
             <div class="bg-purple-100 rounded-2xl p-6 text-center shadow">
-                <h3 class="text-md font-semibold text-purple-700">Jumlah Anggota</h3>
-                <p class="text-4xl font-bold text-purple-900 mt-2">{{ $jumlahAnggota }}</p>
+                <h3 class="text-md font-semibold text-purple-700">Jumlah Pesan Masuk</h3>
+                <p class="text-4xl font-bold text-purple-900 mt-2">{{ $jumlahPesanMasuk }}</p>
             </div>
         </div>
 

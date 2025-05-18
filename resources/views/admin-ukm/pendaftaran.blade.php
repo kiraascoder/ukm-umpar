@@ -24,7 +24,7 @@
                 @foreach ($pendaftaran as $item)
                     <div class="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300">
                         <div class="relative overflow-hidden">
-                            <img src="{{ asset($item->gambar ?? 'img/activity.png') }}" alt="{{ $item->nama }}"
+                            <img src="{{ $item->brosur ? asset('storage/' . $item->brosur) : asset('img/activity.png') }}"
                                 class="w-full h-64 object-cover transition-all duration-500 hover:scale-105">
                             <div
                                 class="absolute top-4 right-4 bg-[#608BC1] text-white text-sm font-bold px-3 py-1 rounded-full">

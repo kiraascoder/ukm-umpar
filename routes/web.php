@@ -2,7 +2,9 @@
 
 use App\Http\Controllers\AdminUKMController;
 use App\Http\Controllers\AnggotaController;
+use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\PendaftaranController;
+use App\Http\Controllers\PesanController;
 use App\Http\Controllers\ProkerController;
 use App\Http\Controllers\PublicController;
 use App\Http\Controllers\SuperAdminController;
@@ -111,12 +113,21 @@ Route::middleware(['admin:admin_ukm', 'checkUserStatus'])->group(function () {
     // Email & Phone
     Route::put('/admin/ukm/{id}/edit-email', [AdminUKMController::class, 'ukmEditEmail'])->name('adminUkmEditEmail');
     Route::put('/admin/ukm/{id}/edit-phone', [AdminUKMController::class, 'ukmEditPhone'])->name('adminUkmEditPhone');
+
+
+    // View dan Tambah foto galeri
+    Route::get('/admin/ukm/galeri', [GalleryController::class, 'index'])->name('adminUkmGaleri');
+    Route::post('/admin/ukm/galeri/tambah-galeri', [GalleryController::class, 'store'])->name('adminUkmTambahGaleri.store');
+    Route::put('/admin/ukm/galeri/{id}', [GalleryController::class, 'editGaleri'])->name('adminUkmEditGaleri.edit');
+    Route::delete('/admin/ukm/galeri/{id}/delete', [GalleryController::class, 'deleteGaleri'])->name('adminUkmDeleteGaleri.delete');
 });
 
 Route::middleware(['admin:admin'])->group(function () {
     Route::get('/admin/dashboard', [SuperAdminController::class, 'superAdminDashboardUkm'])->name('superAdminDashboard');
     Route::get('/admin/proker-ukm', [SuperAdminController::class, 'daftarProkerUkm'])->name('adminUkmProgram');
     Route::get('/admin/daftar-ukm', [SuperAdminController::class, 'daftarUkm'])->name('adminUkmList');
+    Route::get('/admin/pesan', [SuperAdminController::class, 'pesan'])->name('adminPesan');
+    Route::delete('/admin/pesan/{id}/delete', [SuperAdminController::class, 'destroyPesan'])->name('pesan.destroy');
     Route::get('/admin/proker-ukm/{id}/detail', [SuperAdminController::class, 'detailProkerUkm'])->name('prokerUkm');
     Route::get('/admin/daftar-ukm/{id}/detail', [SuperAdminController::class, 'detailUkm'])->name('detailUkm');
     Route::get('/admin/kegiatan/{id}/detail', [SuperAdminController::class, 'detailKegiatan'])->name('detailKegiatan');
@@ -129,6 +140,10 @@ Route::middleware(['admin:admin'])->group(function () {
 //Log Out
 Route::post('admin/logout', [AdminSesiController::class, 'logout'])->name('admin.logout');
 Route::post('admin/logout', [AdminSesiController::class, 'logout'])->name('admin.logout');
+
+// Kirim Pesan
+
+Route::post('/kirim-pesan', [PesanController::class, 'store'])->name('kirim-pesan');
 
 // Public Route
 Route::get('/contact', [PublicController::class, 'viewContact'])->name('kontak');

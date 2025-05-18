@@ -5,7 +5,6 @@
 @section('content')
     <div x-data="{ openModal: null, selectedNama: '', deleteUrl: '' }" class="bg-gray-100 min-h-screen p-6">
         <h1 class="text-2xl text-gray-800 mb-6">Manajemen Kegiatan UKM</h1>
-
         <div class="lg:col-span-3 w-full bg-white p-6 rounded-2xl shadow overflow-auto">
             <div class="flex items-center justify-between mb-4">
                 <h2 class="text-lg font-semibold text-gray-700">Daftar Kegiatan UKM</h2>
@@ -24,7 +23,7 @@
                 @foreach ($kegiatan as $item)
                     <div class="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300">
                         <div class="relative overflow-hidden">
-                            <img src="{{ asset($item->gambar ?? 'img/activity.png') }}" alt="{{ $item->nama }}"
+                        <img src="{{ $item->foto_sampul ? asset('storage/' . $item->foto_sampul) : asset('img/activity.png') }}"
                                 class="w-full h-64 object-cover transition-all duration-500 hover:scale-105">
                             <div
                                 class="absolute top-4 right-4 bg-[#608BC1] text-white text-sm font-bold px-3 py-1 rounded-full">
@@ -53,8 +52,7 @@
                 @endforeach
             </div>
         </div>
-
-        <!-- Modal Konfirmasi -->
+        
         <div x-cloak x-show="openModal" x-transition:enter="transition ease-out duration-300"
             x-transition:enter-start="opacity-0 scale-90" x-transition:enter-end="opacity-100 scale-100"
             x-transition:leave="transition ease-in duration-200" x-transition:leave-start="opacity-100 scale-100"

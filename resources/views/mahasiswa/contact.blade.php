@@ -8,10 +8,10 @@
             <div class="mb-4">
                 <div class="mb-6 max-w-3xl text-center sm:text-center md:mx-auto md:mb-12">
                     <p class="text-base font-semibold uppercase tracking-wide text-dark dark:text-dark-200">
-                        Contact
+                        Kontak
                     </p>
                     <h2 class="font-heading mb-4 font-bold tracking-tight text-gray-900 text-3xl sm:text-5xl">
-                        Get in Touch
+                        Hubungi Kami
                     </h2>
                     <p class="mx-auto mt-4 max-w-3xl text-xl text-gray-800">Hubungi UKM UMPAR untuk
                         memperoleh informasi lebih lanjut tentang UKM UMPAR.
@@ -21,7 +21,7 @@
             <div class="flex items-stretch justify-center">
                 <div class="grid md:grid-cols-2">
                     <div class="h-full pr-6">
-                        <p class="mt-3 mb-12 text-lg text-gray-800">
+                        <p class="mt-3 mb-12 text-lg text-gray-800 text-justify">
                             Terima kasih telah mengunjungi sistem informasi UKM kami. Jika Anda memiliki pertanyaan, saran,
                             atau membutuhkan bantuan lebih lanjut, jangan ragu untuk menghubungi kami. Kami siap membantu
                             Anda dengan segala kebutuhan terkait pengembangan usaha kecil dan menengah.
@@ -39,11 +39,14 @@
                                     </svg>
                                 </div>
                                 <div class="ml-4 mb-4">
-                                    <h3 class="mb-2 text-lg font-medium leading-6 text-gray-900">Our
-                                        Address
-                                    </h3>
-                                    <p class="text-gray-800">1230 Maecenas Street Donec Road</p>
-                                    <p class="text-gray-800">New York, EEUU</p>
+                                    <h3 class="mb-2 text-lg font-medium leading-6 text-gray-900">Alamat Kami</h3>
+                                    <p class="text-gray-800">Jl. Jend. Ahmad Yani KM. 6</p>
+                                    <p class="text-gray-800">
+                                        Kelurahan Bukit Harapan<br>
+                                        Kecamatan Soreang<br>
+                                        Kota Parepare<br>
+                                        Provinsi Sulawesi Selatan, Indonesia
+                                    </p>
                                 </div>
                             </li>
                             <li class="flex">
@@ -59,10 +62,9 @@
                                     </svg>
                                 </div>
                                 <div class="ml-4 mb-4">
-                                    <h3 class="mb-2 text-lg font-medium leading-6 text-gray-900">Contact
-                                    </h3>
-                                    <p class="text-gray-800">Mobile: +1 (123) 456-7890</p>
-                                    <p class="text-gray-800">Mail: tailnext@gmail.com</p>
+                                    <h3 class="mb-2 text-lg font-medium leading-6 text-gray-900">Kontak</h3>
+                                    <p class="text-gray-800">Mobile: 081144049599</p>
+                                    <p class="text-gray-800">Mail: umpar@umpar.ac.id</p>
                                 </div>
                             </li>
                             <li class="flex">
@@ -75,44 +77,59 @@
                                     </svg>
                                 </div>
                                 <div class="ml-4 mb-4">
-                                    <h3 class="mb-2 text-lg font-medium leading-6 text-gray-900">Working
-                                        hours</h3>
-                                    <p class="text-gray-800">Monday - Friday: 08:00 - 17:00</p>
-                                    <p class="text-gray-800">Saturday &amp; Sunday: 08:00 - 12:00
-                                    </p>
+                                    <h3 class="mb-2 text-lg font-medium leading-6 text-gray-900">Jam Operasional</h3>
+                                    <p class="text-gray-800">Senin - Jumat: 08:00 - 17:00</p>
+                                    <p class="text-gray-800">Sabtu &amp; Minggu: 08:00 - 12:00</p>
                                 </div>
                             </li>
                         </ul>
                     </div>
                     <div class="card h-fit max-w-6xl p-5 md:p-12" id="form">
                         <h2 class="mb-4 text-2xl font-bold text-dark">Silahkan Masukan Data Anda</h2>
-                        <form id="contactForm">
+
+                        @if (session('success'))
+                            <div class="bg-green-100 text-green-800 p-4 rounded mb-4">
+                                {{ session('success') }}
+                            </div>
+                        @endif
+
+                        @if ($errors->any())
+                            <div class="bg-red-100 text-red-800 p-4 rounded mb-4">
+                                <strong>Oops! Ada kesalahan pada data yang Anda masukkan:</strong>
+                                <ul class="list-disc list-inside mt-2 text-sm">
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
+
+                        <form action="{{ route('kirim-pesan') }}" method="POST">
+                            @csrf
                             <div class="mb-6">
                                 <div class="mx-0 mb-1 sm:mb-4">
-                                    <div class="mx-0 mb-1 sm:mb-4">
-                                        <label for="name" class="pb-1 text-xs uppercase tracking-wider"></label><input
-                                            type="text" id="name" autocomplete="given-name" placeholder="Your name"
-                                            class="mb-2 w-full rounded-md border border-gray-400 py-2 pl-2 pr-4 shadow-md text-gray-800 sm:mb-0"
-                                            name="name">
-                                    </div>
-                                    <div class="mx-0 mb-1 sm:mb-4">
-                                        <label for="email" class="pb-1 text-xs uppercase tracking-wider"></label><input
-                                            type="email" id="email" autocomplete="email"
-                                            placeholder="Your email address"
-                                            class="mb-2 w-full rounded-md border border-gray-400 py-2 pl-2 pr-4 shadow-md text-gray-800 sm:mb-0"
-                                            name="email">
-                                    </div>
+                                    <label for="nama" class="pb-1 text-xs uppercase tracking-wider"></label>
+                                    <input type="text" id="nama" name="nama" placeholder="Nama Anda"
+                                        class="mb-2 w-full rounded-md border border-gray-400 py-2 pl-2 pr-4 shadow-md text-gray-800 sm:mb-0"
+                                        value="{{ old('nama') }}">
                                 </div>
                                 <div class="mx-0 mb-1 sm:mb-4">
-                                    <label for="textarea" class="pb-1 text-xs uppercase tracking-wider"></label>
-                                    <textarea id="textarea" name="textarea" cols="30" rows="5" placeholder="Write your message..."
-                                        class="mb-2 w-full rounded-md border border-gray-400 py-2 pl-2 pr-4 shadow-md text-gray-800 sm:mb-0"></textarea>
+                                    <label for="email" class="pb-1 text-xs uppercase tracking-wider"></label>
+                                    <input type="email" id="email" name="email" placeholder="Alamat Email Anda"
+                                        class="mb-2 w-full rounded-md border border-gray-400 py-2 pl-2 pr-4 shadow-md text-gray-800 sm:mb-0"
+                                        value="{{ old('email') }}">
+                                </div>
+                                <div class="mx-0 mb-1 sm:mb-4">
+                                    <label for="pesan" class="pb-1 text-xs uppercase tracking-wider"></label>
+                                    <textarea id="pesan" name="pesan" cols="30" rows="5" placeholder="Pesan Anda"
+                                        class="mb-2 w-full rounded-md border border-gray-400 py-2 pl-2 pr-4 shadow-md text-gray-800 sm:mb-0">{{ old('pesan') }}</textarea>
                                 </div>
                             </div>
                             <div class="text-center">
                                 <button type="submit"
-                                    class="w-full bg-blue-800 text-white px-6 py-3 font-xl rounded-md sm:mb-0">Send
-                                    Message</button>
+                                    class="w-full bg-blue-800 text-white px-6 py-3 rounded-md shadow hover:bg-blue-700 transition">
+                                    Kirim Pesan
+                                </button>
                             </div>
                         </form>
                     </div>

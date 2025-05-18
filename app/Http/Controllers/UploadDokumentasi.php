@@ -13,7 +13,7 @@ class UploadDokumentasi extends Controller
     public function storeDokumentasi(Request $request)
     {
         $validatedData = $request->validate([
-            'photo_path' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', // Maksimal 2MB
+            'photo_path' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
             'kegiatan_id' => 'required|exists:kegiatan,id'
         ]);
 

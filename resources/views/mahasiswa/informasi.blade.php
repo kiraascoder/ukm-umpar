@@ -17,14 +17,11 @@
                         <div class="relative overflow-hidden">
                             <img src="{{ asset('storage/' . $item->brosur) }}" alt="{{ $item->ukm->nama }}"
                                 class="w-full h-64 object-cover transition-all duration-500"
-                                :class="{ 'transform scale-105': hover }">
-                            <div
-                                class="absolute top-4 right-4 bg-[#608BC1] text-white text-sm font-bold px-3 py-1 rounded-full">
-                                Terbuka
-                            </div>
+                                :class="{ 'transform scale-105': hover }">                            
                         </div>
                         <div class="p-6">
                             <h3 class="text-xl font-bold mb-2"> UKM {{ $item->ukm->nama }}</h3>
+                            <p class="text-gray-600 mb-2">{{ $item->pendaftaran }}</p>
                             <p class="text-gray-600 mb-4">Batas Pendaftaran : {{ $item->batas_pendaftaran }}</p>
                             <a href="{{ route('detailInformasi', $item->id) }}"
                                 class="text-[#608BC1] font-medium hover:text-yellow-600 transition inline-flex items-center">

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Anggota;
 use App\Models\Kegiatan;
+use App\Models\Pesan;
 use App\Models\Proker;
 use App\Models\Ukm;
 use App\Models\User;
@@ -19,11 +20,12 @@ class SuperAdminController extends Controller
         $jumlahProker = Proker::all()->count();
         $jumlahKegiatan = Proker::all()->count();
         $jumlahAnggota = Anggota::all()->count();
+        $jumlahPesanMasuk = Pesan::all()->count();
         $kegiatanTerkini = Kegiatan::latest()->take(5)->get();
         $anggota = Anggota::with('ukm')
             ->where('jabatan', 'Ketua Umum')
             ->get();
-        return view('superadmin.dashboard', compact('anggota', 'jumlahProker', 'jumlahUkm', 'jumlahKegiatan', 'jumlahAnggota', 'kegiatanTerkini'));
+        return view('superadmin.dashboard', compact('anggota', 'jumlahProker', 'jumlahUkm', 'jumlahKegiatan', 'jumlahAnggota', 'kegiatanTerkini', 'jumlahPesanMasuk'));
     }
     public function daftarProkerUkm()
     {
@@ -93,5 +95,17 @@ class SuperAdminController extends Controller
         $proker = Proker::with('ukm')->findOrFail($id);
         $pdf = Pdf::loadView('superadmin.pdf.detail-proker-pdf', compact('proker'));
         return $pdf->download('detail-proker-ukm.pdf');
+    }
+    public function pesan()
+    {
+        $pesan = Pesan::all();
+        return view('superadmin.pesan', compact('pesan'));
+    }
+
+    public function destroyPesan($id)
+    {
+        $pesan = Pesan::findOrFail($id);
+        $pesan->delete();
+        return redirect()->back()->with('success', 'Pesan berhasil dihapus.');
     }
 }

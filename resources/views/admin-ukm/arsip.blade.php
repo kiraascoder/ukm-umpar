@@ -4,7 +4,6 @@
 
 @section('content')
     <script src="https://unpkg.com/alpinejs" defer></script>
-
     <div class="bg-gray-100 min-h-screen p-6" x-data="{ openModal: null, selectedJudul: '', deleteUrl: '' }">
         <h1 class="text-2xl text-gray-800 mb-6">Surat UKM</h1>
         <div class="lg:col-span-3 w-full bg-white p-6 rounded-2xl shadow overflow-auto">

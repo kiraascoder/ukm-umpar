@@ -7,19 +7,16 @@
     <title>@yield('title', 'Sistem Informasi UKM UMPAR')</title>
     <link rel="icon" href="{{ asset('umpar.png') }}" type="image/png">
 
-    <!-- Font Awesome -->
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-    <!-- Alpine JS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
-
-    <!-- Vite compiled CSS -->
     @vite('resources/css/app.css')
 </head>
 
 <body class="font-sans text-gray-800 bg-gradient-to-b from-sky-50 to-white min-h-screen flex flex-col">
 
-    @if (!Request::is('/'))
+    @if (!Request::is('/') && !Request::is('ukm/*/detail'))
         @include('component.navbar')
     @endif
 
@@ -27,7 +24,7 @@
         @yield('content')
     </main>
 
-    <!-- Footer -->
+
     @include('component.footer')
 
     <!-- Alpine Custom Directives -->
@@ -81,6 +78,7 @@
             }));
         });
     </script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 </body>
 
 </html>

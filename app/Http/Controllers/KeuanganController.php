@@ -176,6 +176,6 @@ class KeuanganController extends Controller
     }
     public function download()
     {
-        return Excel::download(new KeuanganExport, 'rekap_keuangan_ukm.csv');
+    return Excel::download(new KeuanganExport, 'rekap_keuangan_ukm.csv');
     }
 }

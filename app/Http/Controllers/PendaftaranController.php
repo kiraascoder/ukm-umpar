@@ -39,7 +39,7 @@ class PendaftaranController extends Controller
             'batas_pendaftaran' => 'required|date',
             'brosur' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:10048',
             'link_pendaftaran' => 'required|string|max:255',
-            'persyaratan' => 'required|string|max:255',
+            'persyaratan' => 'required|string',
 
         ], [
             'brosur.image' => 'File harus berupa gambar.',

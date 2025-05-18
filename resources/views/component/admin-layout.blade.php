@@ -16,12 +16,12 @@
     @vite('resources/css/app.css')
 </head>
 
-<body class="bg-gradient-to-b from-sky-50 to-white min-h-screen flex">
+<body class="w-full bg-gradient-to-b from-sky-50 to-white min-h-screen flex">
     <aside class="w-64 text-white h-screen fixed shadow-lg">
         @include('component.sidebar')
     </aside>
     <div class="flex-1 ml-64">
-        <main class="container">
+        <main class="w-full">
             @yield('content')
         </main>
     </div>
