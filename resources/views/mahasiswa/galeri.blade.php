@@ -12,7 +12,7 @@
                 pengabdian masyarakat — setiap momen mencerminkan dedikasi mahasiswa dalam mengembangkan minat dan bakat di
                 luar perkuliahan.</p>
             <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
-                @foreach ($gallery->take(20) as $index => $dok)
+                @foreach ($gallery->shuffle()->take(20) as $index => $dok)
                     <div
                         class="@if ($index === 0) md:col-span-2 md:row-span-2 @endif relative overflow-hidden rounded-2xl shadow-lg group">
                         <img src="{{ asset('storage/' . $dok->photo_path) }}"

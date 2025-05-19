@@ -22,9 +22,8 @@
                 <div class="grid md:grid-cols-2">
                     <div class="h-full pr-6">
                         <p class="mt-3 mb-12 text-lg text-gray-800 text-justify">
-                            Terima kasih telah mengunjungi sistem informasi UKM kami. Jika Anda memiliki pertanyaan, saran,
-                            atau membutuhkan bantuan lebih lanjut, jangan ragu untuk menghubungi kami. Kami siap membantu
-                            Anda dengan segala kebutuhan terkait pengembangan usaha kecil dan menengah.
+                            Terima kasih telah mengunjungi sistem informasi UKM kami. Jika Anda memiliki saran,
+                            jangan ragu untuk menghubungi kami.
                         </p>
                         <ul class="mb-6 md:mb-0">
                             <li class="flex">

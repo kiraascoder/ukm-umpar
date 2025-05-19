@@ -41,7 +41,7 @@ class KegiatanController extends Controller
         $validateData = $request->validate(
             [
                 'nama' => 'required|string|max:255',
-                'deskripsi' => 'required|string|min:10|max:700',
+                'deskripsi' => 'required|string',
                 'tanggal' => 'required|date',
                 'foto_sampul' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
                 'link_dokumentasi' => 'string|max:255'
@@ -115,5 +115,4 @@ class KegiatanController extends Controller
         $kegiatan->delete();
         return redirect('/admin/ukm/kegiatan')->with('success', 'Kegiatan Berhasil berhasil dihapus.');
     }
-    
 }

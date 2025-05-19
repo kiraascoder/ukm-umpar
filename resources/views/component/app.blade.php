@@ -16,9 +16,15 @@
 
 <body class="font-sans text-gray-800 bg-gradient-to-b from-sky-50 to-white min-h-screen flex flex-col">
 
-    @if (!Request::is('/') && !Request::is('ukm/*/detail'))
+    @if (
+        !Request::is('/') &&
+            !Request::is('ukm/*/detail') &&
+            !Request::is('galeri/*/detail') &&
+            !Request::is('kegiatan/*/detail') &&
+            !Request::is('informasi/*/detail'))
         @include('component.navbar')
     @endif
+
 
     <main class="flex-grow">
         @yield('content')

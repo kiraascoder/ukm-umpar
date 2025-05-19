@@ -23,7 +23,7 @@
                                 {{ $ukm->deskripsi ? substr($ukm->deskripsi, 0, 100) . '...' : 'Tidak ada deskripsi' }}</p>
                             <a href="{{ route('detail-ukm', $ukm->id) }}"
                                 class="text-[#608BC1] font-medium hover:text-yellow-600 transition inline-flex items-center">
-                                <span>View Details</span>
+                                <span>Lihat Selengkapnya</span>
                                 <i class="fas fa-arrow-right ml-2 text-sm"></i>
                             </a>
                         </div>

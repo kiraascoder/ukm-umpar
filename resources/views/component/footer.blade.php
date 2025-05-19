@@ -26,14 +26,15 @@
                 <ul class="space-y-2 text-gray-400">
                     <li class="flex items-center">
                         <i class="fas fa-envelope mr-2 text-yellow-500"></i>
-                        umpar@umpar.ac.id
+                        <a href="mailto:umpar@umpar.ac.id" class="hover:underline">umpar@umpar.ac.id</a>
                     </li>
                     <li class="flex items-center">
                         <i class="fas fa-phone mr-2 text-yellow-500"></i>
-                        081144049599
+                        <a href="https://wa.me/6281144049599" target="_blank" class="hover:underline">0811 4404 9599</a>
                     </li>
                 </ul>
             </div>
+
 
             <!-- Follow As -->
             <div>

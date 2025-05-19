@@ -7,6 +7,7 @@ use App\Http\Controllers\PendaftaranController;
 use App\Http\Controllers\PesanController;
 use App\Http\Controllers\ProkerController;
 use App\Http\Controllers\PublicController;
+use App\Http\Controllers\DetailController;
 use App\Http\Controllers\SuperAdminController;
 use App\Http\Controllers\SuratController;
 use App\Http\Controllers\UploadDokumentasi;
@@ -162,3 +163,5 @@ Route::get('/informasi/{id}/detail', [PublicController::class, 'detailInformasi'
 Route::get('/login', function () {
     return redirect('admin/login');
 });
+
+

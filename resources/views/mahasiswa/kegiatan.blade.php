@@ -3,7 +3,7 @@
 @section('title', 'UKM UMPAR')
 
 @section('content')
-    <div class="py-20 bg-gradient-to-b from-sky-50 to-white" id="featured">
+    <div class="py-20 " id="featured">
         <div class="container mx-auto px-6">
             <div class="text-center mb-16">
                 <h2 class="text-3xl md:text-4xl font-bold mb-4">Daftar Kegiatan UKM UMPAR</h2>
@@ -29,7 +29,7 @@
                             <p class="text-gray-600 mb-4">{{ Str::limit($kegiatan->deskripsi, 100) }}</p>
                             <a href="{{ route('detail-kegiatan', $kegiatan->id) }}"
                                 class="text-[#608BC1] font-medium hover:text-yellow-600 transition inline-flex items-center">
-                                <span>View Details</span>
+                                <span>Lihat Selengkapnya</span>
                                 <i class="fas fa-arrow-right ml-2 text-sm"></i>
                             </a>
                         </div>

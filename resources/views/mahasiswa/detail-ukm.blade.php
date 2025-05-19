@@ -36,12 +36,10 @@
                 <a href="{{ route('informasi') }}" class="block text-gray-800 hover:text-blue-600">Informasi</a>
             </div>
         </nav>
-
         <div class="absolute bottom-2 left-1/2 transform -translate-x-1/2 z-10 text-center">
             <img src="{{ $ukm->logo ? asset('storage/' . $ukm->logo) : asset('img/umpar.png') }}"
                 class="w-64 h-64 rounded-full object-cover aspect-square mx-auto">
             <h1 class="mt-4 text-2xl md:text-3xl font-bold text-white drop-shadow-lg">
-                Profile UKM {{ $ukm->nama }}
             </h1>
         </div>
 
@@ -54,16 +52,7 @@
                     <h2 class="text-4xl font-extrabold text-gray-800 mb-6 text-center md:text-left">
                         Deskripsi
                     </h2>
-                    <p class="text-gray-600 leading-relaxed text-justify">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti odit expedita quibusdam nemo
-                        maiores aspernatur sunt itaque suscipit deserunt modi minima veniam totam reprehenderit dolorum
-                        ullam commodi aliquid iusto beatae iste, vel omnis? Doloribus, illo dolorem quas praesentium eum
-                        minima sequi deserunt ad explicabo quaerat autem eius animi saepe incidunt quos distinctio quod,
-                        facere quisquam necessitatibus nihil soluta rem corporis labore? Assumenda quisquam modi perferendis
-                        atque itaque enim. Perspiciatis iusto omnis quas ipsum saepe dolores tenetur voluptates excepturi,
-                        hic quidem unde laudantium sequi iste eligendi reiciendis ullam sint. Consectetur harum nam odio
-                        delectus beatae provident eum suscipit earum similique officiis!
-                    </p>
+                    {{ $ukm->deskripsi }}
                 </div>
                 <div class="w-full md:w-1/2 flex justify-center">
                     <div class="w-full max-w-lg">
@@ -80,18 +69,7 @@
                 <h2 class="text-4xl font-extrabold text-gray-800 mb-6">Sejarah</h2>
                 <div class="max-w-3xl mx-auto text-gray-700">
                     <div>
-                        <p class="text-gray-600 leading-relaxed text-center">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti odit expedita quibusdam nemo
-                            maiores aspernatur sunt itaque suscipit deserunt modi minima veniam totam reprehenderit dolorum
-                            ullam commodi aliquid iusto beatae iste, vel omnis? Doloribus, illo dolorem quas praesentium eum
-                            minima sequi deserunt ad explicabo quaerat autem eius animi saepe incidunt quos distinctio quod,
-                            facere quisquam necessitatibus nihil soluta rem corporis labore? Assumenda quisquam modi
-                            perferendis
-                            atque itaque enim. Perspiciatis iusto omnis quas ipsum saepe dolores tenetur voluptates
-                            excepturi,
-                            hic quidem unde laudantium sequi iste eligendi reiciendis ullam sint. Consectetur harum nam odio
-                            delectus beatae provident eum suscipit earum similique officiis!
-                        </p>
+                        {{ $ukm->sejarah }}
                     </div>
                 </div>
             </div>
@@ -124,48 +102,6 @@
             </div>
         </div>
     </section>
-
-
-    <section class="py-20 bg-gray-50">
-        <div class="text-center mb-8">
-            <h2 class="text-3xl md:text-4xl font-bold mb-4">Sosial Media</h2>
-            <p class="text-gray-600 mb-8">
-                Ikuti kami di sosial media untuk mendapatkan informasi terbaru tentang kegiatan
-                dan program yang kami tawarkan.
-            </p>
-
-            <div class="flex justify-center space-x-6">
-                @php
-                    $sosmed = json_decode($ukm->media_sosial, true);
-                @endphp
-
-                @if (isset($sosmed['facebook']))
-                    <a href="{{ $sosmed['facebook'] }}" class="text-blue-600 hover:text-blue-800" target="_blank">
-                        <i class="fab fa-facebook fa-2x"></i>
-                    </a>
-                @endif
-
-                @if (isset($sosmed['twitter']))
-                    <a href="{{ $sosmed['twitter'] }}" class="text-blue-400 hover:text-blue-600" target="_blank">
-                        <i class="fab fa-twitter fa-2x"></i>
-                    </a>
-                @endif
-
-                @if (isset($sosmed['tiktok']))
-                    <a href="{{ $sosmed['tiktok'] }}" class="text-black hover:text-gray-800" target="_blank">
-                        <i class="fab fa-tiktok fa-2x"></i>
-                    </a>
-                @endif
-
-                @if (isset($sosmed['instagram']))
-                    <a href="{{ $sosmed['instagram'] }}" class="text-pink-600 hover:text-pink-800" target="_blank">
-                        <i class="fab fa-instagram fa-2x"></i>
-                    </a>
-                @endif
-            </div>
-        </div>
-    </section>
-
     <section class="py-20 bg-gray-50">
         <div class="text-center max-w-5xl mx-auto px-4">
             <h2 class="text-3xl md:text-4xl font-bold mb-4 text-gray-800">Pengurus Inti</h2>
@@ -218,95 +154,174 @@
             @endif
         </div>
     </section>
-
-    <section class="py-20  container mx-auto px-6">
-        <div class="text-center mb-8">
-            <h2 class="text-3xl md:text-4xl font-bold mb-4">Kegiatan</h2>
-            <p class="text-gray-600 max-w-2xl mx-auto">
-                UKM UMPAR rutin mengadakan berbagai kegiatan seperti pelatihan, seminar, kompetisi, dan acara sosial
-                yang melibatkan mahasiswa dari berbagai latar belakang.
+    <section class="py-20 bg-gray-50">
+        <div class="text-center max-w-5xl mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold mb-4 text-gray-800">Struktur Organisasi</h2>
+            <p class="text-gray-600 mb-12 max-w-xl mx-auto">
+                Berikut adalah Struktur Organisasi UKM {{ $ukm->nama }}.
             </p>
-        </div>
-        <div class="container mx-auto px-4 py-8">
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                @foreach ($kegiatans as $kegiatan)
-                    <div class="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300">
-                        <div class="relative overflow-hidden">
-                            <img src="{{ $kegiatan->foto_sampul ? asset('storage/' . $kegiatan->foto_sampul) : asset('img/activity.png') }}"
-                                class="w-full h-64 object-cover transition-all duration-500 hover:scale-105">
-                        </div>
-                        <div class="p-6">
-                            <h3 class="text-xl font-bold mb-2">{{ $kegiatan->nama }}</h3>
-                            <p class="text-gray-600 mb-4">{{ $kegiatan->deskripsi }}</p>
-                            <a href="{{ route('detail-kegiatan', $kegiatan->id) }}"
-                                class="text-[#608BC1] font-medium hover:text-yellow-600 transition inline-flex items-center">
-                                <span>Lihat Selengkapnya</span>
-                                <i class="fas fa-arrow-right ml-2 text-sm"></i>
-                            </a>
-                        </div>
-                    </div>
-                @endforeach
+            <div class="flex justify-center">
+                <img src="{{ asset('storage/' . $ukm->struktur_organisasi) }}" class="w-[800px] h-auto rounded shadow">
             </div>
         </div>
     </section>
-    <section class="container mx-auto px-6">
+    <section class="py-20 bg-gray-50">
         <div class="text-center mb-8">
-            <h2 class="text-3xl md:text-4xl font-bold mb-4">Informasi</h2>
-            <p class="text-gray-600 max-w-2xl mx-auto">
-                UKM UMPAR juga menyediakan informasi terbaru tentang kegiatan, acara, dan event yang akan datang.
+            <h2 class="text-3xl md:text-4xl font-bold mb-4">Sosial Media</h2>
+            <p class="text-gray-600 mb-8">
+                Ikuti kami di sosial media untuk mendapatkan informasi terbaru tentang kegiatan
+                dan program yang kami tawarkan.
             </p>
-        </div>
-        <div class="container mx-auto px-4 py-8">
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                @foreach ($pendaftarans as $pendaftaran)
-                    <div class="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300">
-                        <div class="relative overflow-hidden">
-                            <img src="{{ $pendaftaran->brosur ? asset('storage/' . $pendaftaran->brosur) : asset('img/activity.png') }}"
-                                class="w-full h-64 object-cover transition-all duration-500 hover:scale-105">
-                        </div>
-                        <div class="p-6">
-                            <h3 class="text-xl font-bold mb-2">{{ $pendaftaran->pendaftaran }}</h3>
-                            <p class="text-gray-600 mb-4">Batas Pendaftaran : {{ $pendaftaran->batas_pendaftaran }}</p>
-                            <a href="{{ route('detailInformasi', $pendaftaran->id) }}"
-                                class="text-[#608BC1] font-medium hover:text-yellow-600 transition inline-flex items-center">
-                                <span>Lihat Selengkapnya</span>
-                                <i class="fas fa-arrow-right ml-2 text-sm"></i>
-                            </a>
-                        </div>
-                    </div>
-                @endforeach
+
+            <div class="flex justify-center space-x-6">
+                @php
+                    $sosmed = json_decode($ukm->media_sosial, true);
+                @endphp
+
+                @if (isset($sosmed['facebook']))
+                    <a href="{{ $sosmed['facebook'] }}" class="text-blue-600 hover:text-blue-800" target="_blank">
+                        <i class="fab fa-facebook fa-2x"></i>
+                    </a>
+                @endif
+
+                @if (isset($sosmed['twitter']))
+                    <a href="{{ $sosmed['twitter'] }}" class="text-blue-400 hover:text-blue-600" target="_blank">
+                        <i class="fab fa-twitter fa-2x"></i>
+                    </a>
+                @endif
+
+                @if (isset($sosmed['tiktok']))
+                    <a href="{{ $sosmed['tiktok'] }}" class="text-black hover:text-gray-800" target="_blank">
+                        <i class="fab fa-tiktok fa-2x"></i>
+                    </a>
+                @endif
+
+                @if (isset($sosmed['instagram']))
+                    <a href="{{ $sosmed['instagram'] }}" class="text-pink-600 hover:text-pink-800" target="_blank">
+                        <i class="fab fa-instagram fa-2x"></i>
+                    </a>
+                @endif
             </div>
         </div>
     </section>
-    <section class="container mx-auto px-6 py-8" x-data="{ selectedImage: '{{ asset('storage/' . $galeri[0]->photo_path) }}', fade: false }" x-init="$nextTick(() => fade = true)">
-        <div class="text-center mb-8">
-            <h2 class="text-3xl md:text-4xl font-bold mb-4">Galeri</h2>
-            <p class="text-gray-600 max-w-2xl mx-auto">
-                Galeri UKM {{ $ukm->name }} berisi foto-foto kegiatan, acara, dan event yang telah dilakukan.
-            </p>
-        </div>
+    <section>
+        <div class="py-20 bg-gray-50" id="featured">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-4">Kegiatan UKM {{ $ukm->nama }}</h2>
+                    <p class="text-gray-600 max-w-4xl text-center mx-auto mb-4">
+                        UKM di Universitas Muhammadiyah Parepare secara rutin mengadakan berbagai kegiatan yang mendukung
+                        pengembangan diri mahasiswa. Mulai dari pelatihan, seminar, perlombaan, hingga kegiatan sosial
+                        kemasyarakatan — semua dirancang untuk membentuk karakter, meningkatkan soft skill, dan memperluas
+                        jaringan pertemanan antar mahasiswa lintas jurusan.
+                    </p>
+                </div>
 
-        <div class="grid gap-6">
-
-            <div id="main-image" class="scroll-mt-24">
-                <img x-show="fade" x-transition:enter="transition-opacity duration-500"
-                    x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100" :src="selectedImage"
-                    class="h-auto max-h-[600px] w-full rounded-lg object-cover object-center" alt="gallery-main" />
-            </div>
-
-
-            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4">
-                @foreach ($galeri as $index => $item)
-                    <div>
-                        <img @click.prevent="fade = false; setTimeout(() => { selectedImage = '{{ asset('storage/' . $item->photo_path) }}'; fade = true }, 100)"
-                            src="{{ asset('storage/' . $item->photo_path) }}"
-                            class="object-cover object-center h-24 md:h-32 w-full rounded-lg cursor-pointer border-2 hover:border-blue-500"
-                            alt="gallery-thumbnail-{{ $index }}" />
-                    </div>
-                @endforeach
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="kegiatan-container">
+                    @foreach ($kegiatans as $kegiatan)
+                        <div class="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300"
+                            x-data="{ hover: false }">
+                            <div class="relative overflow-hidden">
+                                <img src="{{ asset('storage/' . $kegiatan->foto_sampul) }}" alt="{{ $kegiatan->nama }}"
+                                    class="w-full h-64 object-cover transition-all duration-500"
+                                    :class="{ 'transform scale-105': hover }">
+                            </div>
+                            <div class="p-6">
+                                <h3 class="text-xl font-bold mb-2">{{ $kegiatan->nama }}</h3>
+                                <p class="text-gray-600 mb-4">{{ Str::limit($kegiatan->deskripsi, 100) }}</p>
+                                <a href="{{ route('detail-kegiatan', $kegiatan->id) }}"
+                                    class="text-[#608BC1] font-medium hover:text-yellow-600 transition inline-flex items-center">
+                                    <span>Lihat Selengkapnya</span>
+                                    <i class="fas fa-arrow-right ml-2 text-sm"></i>
+                                </a>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
             </div>
         </div>
     </section>
+    <section>
+        <div class="py-20 bg-gray-50" id="featured">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-4">Informasi UKM {{ $ukm->nama }}</h2>
+                    <p class="text-gray-600 max-w-4xl text-center mx-auto mb-4">
+                        UKM di Universitas Muhammadiyah Parepare secara rutin mengadakan berbagai kegiatan yang mendukung
+                        pengembangan diri mahasiswa. Mulai dari pelatihan, seminar, perlombaan, hingga kegiatan sosial
+                        kemasyarakatan — semua dirancang untuk membentuk karakter, meningkatkan soft skill, dan memperluas
+                        jaringan pertemanan antar mahasiswa lintas jurusan.
+                    </p>
+                </div>
+                <div class="grid gap-8 mt-10 md:grid-cols-2 lg:grid-cols-3">
+                    @foreach ($pendaftaran as $item)
+                        <div class="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300"
+                            x-data="{ hover: false }" @mouseenter="hover = true" @mouseleave="hover = false">
+                            <div class="relative overflow-hidden">
+                                <img src="{{ asset('storage/' . $item->brosur) }}" alt="{{ $item->ukm->nama }}"
+                                    class="w-full h-64 object-cover transition-all duration-500"
+                                    :class="{ 'transform scale-105': hover }">
+                            </div>
+                            <div class="p-6">
+                                <h3 class="text-xl font-bold mb-2"> UKM {{ $item->ukm->nama }}</h3>
+                                <p class="text-gray-600 mb-2">{{ $item->pendaftaran }}</p>
+                                <p class="text-gray-600 mb-4">Batas Pendaftaran : {{ $item->batas_pendaftaran }}</p>
+                                <a href="{{ route('detailInformasi', $item->id) }}"
+                                    class="text-[#608BC1] font-medium hover:text-yellow-600 transition inline-flex items-center">
+                                    <span>Lihat Detail</span>
+                                    <i class="fas fa-arrow-right ml-2 text-sm"></i>
+                                </a>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+        </div>
+    </section>
+    <div class="container mx-auto px-4 py-8">
+        @php
+            $defaultImage = asset('img/activity.jpg');
+            $firstImage = isset($galeri[0]) ? asset('storage/' . $galeri[0]->photo_path) : $defaultImage;
+        @endphp
 
+        <section class="container mx-auto px-6 py-8" x-data="{ selectedImage: '{{ $firstImage }}', fade: false }" x-init="$nextTick(() => fade = true)">
 
+            <div class="text-center mb-8">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Galeri UKM {{ $ukm->name }}</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">
+                    Galeri UKM {{ $ukm->name }} berisi foto-foto kegiatan, acara, dan event yang telah dilakukan.
+                </p>
+            </div>
+
+            <div class="grid gap-6">
+
+                {{-- Main image --}}
+                <div id="main-image" class="scroll-mt-24">
+                    <img x-show="fade" x-transition:enter="transition-opacity duration-500"
+                        x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100" :src="selectedImage"
+                        class="h-auto max-h-[600px] w-full rounded-lg object-cover object-center" alt="gallery-main" />
+                </div>
+
+                {{-- Thumbnails --}}
+                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4">
+                    @forelse ($galeri as $index => $item)
+                        <div>
+                            <img @click.prevent="fade = false; setTimeout(() => { selectedImage = '{{ asset('storage/' . $item->photo_path) }}'; fade = true }, 100)"
+                                src="{{ asset('storage/' . $item->photo_path) }}"
+                                class="object-cover object-center h-24 md:h-32 w-full rounded-lg cursor-pointer border-2 hover:border-blue-500"
+                                alt="gallery-thumbnail-{{ $index }}" />
+                        </div>
+                    @empty
+                        {{-- Optional: show a single default thumbnail --}}
+                        <div>
+                            <img src="{{ $defaultImage }}"
+                                class="object-cover object-center h-24 md:h-32 w-full rounded-lg border-2"
+                                alt="default-thumbnail" />
+                        </div>
+                    @endforelse
+                </div>
+
+            </div>
+        </section>
+    </div>
 @endsection

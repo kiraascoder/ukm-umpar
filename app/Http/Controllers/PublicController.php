@@ -26,8 +26,9 @@ class PublicController extends Controller
                 $query->where('status', 'active');
             })
             ->inRandomOrder()
-            ->take(9)
+            ->limit(9)
             ->get();
+
 
 
         $totalGallery = $gallery->count();
@@ -43,16 +44,34 @@ class PublicController extends Controller
 
     public function viewGallery()
     {
-        $gallery = KegiatanDokumentasi::with('kegiatan.ukm')
+        
+        $latestGallery = KegiatanDokumentasi::with('kegiatan.ukm')
             ->whereHas('kegiatan.ukm.admin', function ($query) {
                 $query->where('status', 'active');
             })
             ->latest()
-            ->take(13)
+            ->take(6)
             ->get();
+
+
+        $excludedIds = $latestGallery->pluck('id');
+
+
+        $randomGallery = KegiatanDokumentasi::with('kegiatan.ukm')
+            ->whereHas('kegiatan.ukm.admin', function ($query) {
+                $query->where('status', 'active');
+            })
+            ->whereNotIn('id', $excludedIds)
+            ->inRandomOrder()
+            ->take(7)
+            ->get();
+
+
+        $gallery = $latestGallery->concat($randomGallery);
 
         return view('mahasiswa.galeri', compact('gallery'));
     }
+
 
 
     public function viewKegiatan()
@@ -118,9 +137,9 @@ class PublicController extends Controller
         $kegiatans = $ukm->kegiatan;
         $totalKegiatan = $kegiatans->count();
 
-        $pendaftarans = Pendaftaran::where('ukm_id', $id)->get();
+        $pendaftaran = Pendaftaran::where('ukm_id', $id)->get();
 
-        return view('mahasiswa.detail-ukm', compact('ukm', 'anggota', 'kegiatans', 'totalKegiatan', 'pendaftarans', 'galeri'));
+        return view('mahasiswa.detail-ukm', compact('ukm', 'anggota', 'kegiatans', 'totalKegiatan', 'pendaftaran', 'galeri'));
     }
 
     public function viewDetailKegiatan($id)
