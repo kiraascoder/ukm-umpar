@@ -48,7 +48,7 @@
             </table>
             @if ($proker->isEmpty())
                 <div class="text-center text-gray-500 py-10">
-                    Belum ada Surat.
+                    Belum ada Program Kerja.
                 </div>
             @endif
         </div>
