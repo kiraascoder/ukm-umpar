@@ -8,13 +8,13 @@
             <div class="mb-4">
                 <div class="mb-6 max-w-3xl text-center sm:text-center md:mx-auto md:mb-12">
                     <p class="text-base font-semibold uppercase tracking-wide text-dark dark:text-dark-200">
-                        Kontak
+                        Saran
                     </p>
                     <h2 class="font-heading mb-4 font-bold tracking-tight text-gray-900 text-3xl sm:text-5xl">
-                        Hubungi Kami
+                        Berikan Saran
                     </h2>
-                    <p class="mx-auto mt-4 max-w-3xl text-xl text-gray-800">Hubungi UKM UMPAR untuk
-                        memperoleh informasi lebih lanjut tentang UKM UMPAR.
+                    <p class="mx-auto mt-4 max-w-3xl text-xl text-gray-800">
+                        Terima kasih sudah berkunjung ke website kami! Bagaimana pendapat Anda tentang website ini?
                     </p>
                 </div>
             </div>
