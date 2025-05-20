@@ -14,7 +14,7 @@
                         Berikan Saran
                     </h2>
                     <p class="mx-auto mt-4 max-w-3xl text-xl text-gray-800">
-                        Terima kasih sudah berkunjung ke website kami! Bagaimana pendapat Anda tentang website ini?
+Terima kasih sudah berkunjung ke website kami! Bagaimana pendapat Anda tentang website ini?
                     </p>
                 </div>
             </div>

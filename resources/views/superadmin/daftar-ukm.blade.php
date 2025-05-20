@@ -7,7 +7,7 @@
         <h1 class="text-2xl text-gray-800 mb-6">Daftar UKM</h1>
         <div class="lg:col-span-3 w-full bg-white p-6 rounded-2xl shadow overflow-auto">
             <div class="flex items-center justify-between mb-4">
-                <h2 class="text-lg font-semibold text-gray-700">Daftar Program Kerja UKM</h2>
+                <h2 class="text-lg font-semibold text-gray-700">Daftar UKM UMPAR</h2>
             </div>
             <table class="min-w-full divide-y divide-gray-200 text-sm">
                 <thead class="bg-gray-50">
