@@ -34,11 +34,13 @@ class SuperAdminController extends Controller
     }
     public function daftarUkm()
     {
-        $anggota = Anggota::with('ukm')
-            ->where('jabatan', 'Ketua Umum')
-            ->get();
-        return view('superadmin.daftar-ukm', compact('anggota'));
+        $ukms = Ukm::with(['anggota' => function ($query) {
+            $query->where('jabatan', 'Ketua Umum');
+        }])->get();
+
+        return view('superadmin.daftar-ukm', compact('ukms'));
     }
+
     public function detailProkerUkm($id)
     {
         $proker = Proker::with('ukm')->findOrFail($id);

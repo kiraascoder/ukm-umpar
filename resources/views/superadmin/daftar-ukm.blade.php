@@ -19,20 +19,22 @@
                     </tr>
                 </thead>
                 <tbody class="bg-white divide-y divide-gray-100">
-                    @foreach ($anggota as $index => $item)
+                    @foreach ($ukms as $index => $ukm)
                         <tr class="hover:bg-gray-50">
                             <td class="px-6 py-4 text-gray-700">{{ $index + 1 }}</td>
-                            <td class="px-6 py-4 text-gray-700">{{ $item->ukm->nama }}</td>
-                            <td class="px-6 py-4 text-gray-700">{{ $item->nama }}</td>
+                            <td class="px-6 py-4 text-gray-700">{{ $ukm->nama }}</td>
+                            <td class="px-6 py-4 text-gray-700">
+                                {{ $ukm->anggota->first()->nama ?? 'Belum ada Ketua Umum' }}
+                            </td>
                             <td class="px-6 py-4 flex gap-2">
-                                <a href="{{ route('detailUkm', $item->ukm_id) }}"
+                                <a href="{{ route('detailUkm', $ukm->id) }}"
                                     class="text-blue-600 hover:text-blue-800 text-xs font-medium">Detail</a>
                             </td>
                         </tr>
                     @endforeach
                 </tbody>
             </table>
-            @if ($anggota->isEmpty())
+            @if ($ukms->isEmpty())
                 <div class="text-center text-gray-500 py-10">
                     Belum ada Surat.
                 </div>

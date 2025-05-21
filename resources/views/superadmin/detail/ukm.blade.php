@@ -53,11 +53,16 @@
 
         <div class="mt-6">
             <h3 class="text-lg font-semibold text-gray-700 mb-1">Media Sosial</h3>
-            <ul class="text-gray-600 space-y-1">
-                @foreach (json_decode($ukm->media_sosial, true) as $platform => $link)
-                    <li><span class="font-semibold">{{ ucfirst($platform) }}:</span> {{ $link }}</li>
-                @endforeach
-            </ul>
+            @if ($ukm->media_sosial && is_array(json_decode($ukm->media_sosial, true)))
+                <ul class="text-gray-600 space-y-1">
+                    @foreach (json_decode($ukm->media_sosial, true) as $platform => $link)
+                        <li><span class="font-semibold">{{ ucfirst($platform) }}:</span> {{ $link }}</li>
+                    @endforeach
+                </ul>
+            @else
+                <p class="text-gray-500">Belum ada media sosial yang ditambahkan.</p>
+            @endif
+
         </div>
 
         <div>
