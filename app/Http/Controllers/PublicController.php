@@ -44,18 +44,16 @@ class PublicController extends Controller
 
     public function viewGallery()
     {
-        
+
         $latestGallery = KegiatanDokumentasi::with('kegiatan.ukm')
             ->whereHas('kegiatan.ukm.admin', function ($query) {
                 $query->where('status', 'active');
             })
             ->latest()
-            ->take(6)
+            ->take(1)
             ->get();
 
-
         $excludedIds = $latestGallery->pluck('id');
-
 
         $randomGallery = KegiatanDokumentasi::with('kegiatan.ukm')
             ->whereHas('kegiatan.ukm.admin', function ($query) {
@@ -66,10 +64,18 @@ class PublicController extends Controller
             ->take(7)
             ->get();
 
-
         $gallery = $latestGallery->concat($randomGallery);
 
-        return view('mahasiswa.galeri', compact('gallery'));
+
+        $videos = Kegiatan::whereHas('ukm.admin', function ($query) {
+            $query->where('status', 'active');
+        })
+            ->whereNotNull('link_dokumentasi')
+            ->where('link_dokumentasi', '!=', '')
+            ->latest()
+            ->get();
+
+        return view('mahasiswa.galeri', compact('gallery', 'videos'));
     }
 
 

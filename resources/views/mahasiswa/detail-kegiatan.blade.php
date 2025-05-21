@@ -9,7 +9,9 @@
             <div
                 class="lg:flex-grow md:w-1/2 lg:pr-24 md:pr-16 flex flex-col md:items-start md:text-left mb-16 md:mb-0 items-center text-center">
                 <h1 class="title-font sm:text-4xl text-3xl mb-4 font-medium text-gray-900">{{ $kegiatan->nama }}</h1>
-                <p class="mb-8 leading-relaxed">{{ $kegiatan->deskripsi }}</p>
+                <p class="mb-8 leading-relaxed {{ $kegiatan->font_deskripsi }}">
+                    {!! $kegiatan->deskripsi !!}
+                </p>
             </div>
             <div class="lg:max-w-lg lg:w-full md:w-1/2 w-5/6">
                 <img class="object-cover object-center rounded" alt="Belum ada Gambar"
@@ -111,4 +113,11 @@
             <p class="text-center text-gray-500">Belum ada Video Dokumentasi.</p>
         @endif
     </section>
+    <div class="text-center mb-8">
+        <a href="{{ url('ukm/' . $kegiatan->ukm_id . '/detail') }}"
+            class="inline-block bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-6 rounded shadow">
+            ← Kembali ke Detail UKM
+        </a>
+    </div>
+
 @endsection

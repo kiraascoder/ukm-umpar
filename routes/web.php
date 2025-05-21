@@ -29,7 +29,6 @@ Route::get('admin/dashboard', [AdminUKMController::class, 'adminDashboard'])->mi
 // Auth
 Route::prefix('admin')->middleware('authenticated')->group(function () {
     Route::get('login', [AdminSesiController::class, 'adminLoginView'])->name('admin.login');
-    Route::get('login', [AdminSesiController::class, 'adminLoginView'])->name('admin.login');
     Route::post('login', [AdminSesiController::class, 'login'])->name('admin.login.submit');
     Route::get('register', [AdminSesiController::class, 'registerView'])->name('admin.register');
     Route::post('admin/register', [AdminSesiController::class, 'register'])->name('admin.register.submit');
@@ -163,5 +162,3 @@ Route::get('/informasi/{id}/detail', [PublicController::class, 'detailInformasi'
 Route::get('/login', function () {
     return redirect('admin/login');
 });
-
-

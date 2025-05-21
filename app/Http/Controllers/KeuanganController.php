@@ -44,7 +44,7 @@ class KeuanganController extends Controller
             'keterangan' => 'required|string|max:255',
             'jenis' => 'required|string|in:pemasukan,pengeluaran',
             'bukti_transaksi' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:10048',
-            'jumlah' => 'required|numeric',
+            'jumlah' => 'required|numeric|min:0',
             'tanggal' => 'required|date',
         ]);
 
@@ -60,15 +60,21 @@ class KeuanganController extends Controller
             $filePath = $request->hasFile('bukti_transaksi')
                 ? $request->file('bukti_transaksi')->store('bukti_transaksi', 'public')
                 : null;
-            if ($validateData['jenis'] == 'pemasukan') {
-                $ukm->saldo += $validateData['jumlah'];
-            } else {
+
+
+            if ($validateData['jenis'] === 'pengeluaran') {
                 if ($ukm->saldo < $validateData['jumlah']) {
-                    return redirect()->back()->with('error', 'Saldo tidak mencukupi untuk pengeluaran ini.');
+                    return redirect()->back()->with('error', 'Saldo tidak mencukupi untuk pengeluaran sebesar Rp ' . number_format($validateData['jumlah'], 0, ',', '.'));
                 }
                 $ukm->saldo -= $validateData['jumlah'];
+            } else {
+                $ukm->saldo += $validateData['jumlah'];
             }
+
+
             $ukm->save();
+
+
             $ukm->keuangan()->create([
                 'keterangan' => $validateData['keterangan'],
                 'jenis' => $validateData['jenis'],
@@ -82,6 +88,7 @@ class KeuanganController extends Controller
             return redirect()->back()->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
         }
     }
+
 
     public function hapusKeuangan($id)
     {
@@ -176,6 +183,6 @@ class KeuanganController extends Controller
     }
     public function download()
     {
-    return Excel::download(new KeuanganExport, 'rekap_keuangan_ukm.csv');
+        return Excel::download(new KeuanganExport, 'rekap_keuangan_ukm.csv');
     }
 }

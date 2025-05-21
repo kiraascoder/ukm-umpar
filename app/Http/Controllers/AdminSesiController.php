@@ -83,7 +83,7 @@ class AdminSesiController extends Controller
             'nama' => $request->nama_ukm,
             'admin_ukm_id' => $user->id,
         ]);
-        return redirect('/admin/login')->with('success', 'Registrasi berhasil! Silahkan Tunggu Verifikasi Dari Admin.');
+        return redirect()->route('admin.login')->with('success', 'Registrasi berhasil! Silahkan tunggu verifikasi dari admin.');
     }
     public function logout(Request $request)
     {

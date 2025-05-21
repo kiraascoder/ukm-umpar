@@ -3,6 +3,7 @@
 @section('title', 'UKM UMPAR')
 
 @section('content')
+
     <div class="relative h-[80vh]">
         <div class="absolute inset-0 bg-cover bg-center z-0"
             style="background-image: url('{{ $ukm->foto_pengurus ? asset('storage/' . $ukm->foto_pengurus) : asset('img/default/sampul.jpg') }}');">
@@ -204,43 +205,88 @@
             </div>
         </div>
     </section>
-    <section>
-        <div class="py-20 bg-gray-50" id="featured">
-            <div class="container mx-auto px-6">
-                <div class="text-center mb-16">
-                    <h2 class="text-3xl md:text-4xl font-bold mb-4">Kegiatan UKM {{ $ukm->nama }}</h2>
-                    <p class="text-gray-600 max-w-4xl text-center mx-auto mb-4">
-                        UKM di Universitas Muhammadiyah Parepare secara rutin mengadakan berbagai kegiatan yang mendukung
-                        pengembangan diri mahasiswa. Mulai dari pelatihan, seminar, perlombaan, hingga kegiatan sosial
-                        kemasyarakatan — semua dirancang untuk membentuk karakter, meningkatkan soft skill, dan memperluas
-                        jaringan pertemanan antar mahasiswa lintas jurusan.
-                    </p>
-                </div>
+    <section x-data="{
+        currentSlide: 0,
+        itemsPerPage: 6,
+        kegiatan: {{ Js::from($kegiatans) }},
+        get totalSlides() {
+            return Math.ceil(this.kegiatan.length / this.itemsPerPage);
+        },
+        get translateX() {
+            return `translateX(-${this.currentSlide * 100}%)`;
+        },
+        paginatedGroups() {
+            const result = [];
+            for (let i = 0; i < this.kegiatan.length; i += this.itemsPerPage) {
+                result.push(this.kegiatan.slice(i, i + this.itemsPerPage));
+            }
+            return result;
+        },
+        scrollLeft() {
+            if (this.currentSlide > 0) this.currentSlide--;
+        },
+        scrollRight() {
+            if (this.currentSlide < this.totalSlides - 1) this.currentSlide++;
+        }
+    }" class="py-20 bg-gray-50" id="featured">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-10">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Kegiatan UKM {{ $ukm->nama }}</h2>
+                <p class="text-gray-600 max-w-4xl text-center mx-auto mb-4">
+                    UKM di Universitas Muhammadiyah Parepare secara rutin mengadakan berbagai kegiatan.
+                </p>
+            </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="kegiatan-container">
-                    @foreach ($kegiatans as $kegiatan)
-                        <div class="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300"
-                            x-data="{ hover: false }">
-                            <div class="relative overflow-hidden">
-                                <img src="{{ asset('storage/' . $kegiatan->foto_sampul) }}" alt="{{ $kegiatan->nama }}"
-                                    class="w-full h-64 object-cover transition-all duration-500"
-                                    :class="{ 'transform scale-105': hover }">
-                            </div>
-                            <div class="p-6">
-                                <h3 class="text-xl font-bold mb-2">{{ $kegiatan->nama }}</h3>
-                                <p class="text-gray-600 mb-4">{{ Str::limit($kegiatan->deskripsi, 100) }}</p>
-                                <a href="{{ route('detail-kegiatan', $kegiatan->id) }}"
-                                    class="text-[#608BC1] font-medium hover:text-yellow-600 transition inline-flex items-center">
-                                    <span>Lihat Selengkapnya</span>
-                                    <i class="fas fa-arrow-right ml-2 text-sm"></i>
-                                </a>
-                            </div>
+
+            <div class="overflow-hidden relative">
+                <div class="flex transition-transform duration-500 ease-in-out" :style="{ transform: translateX }"
+                    style="width: 100%">
+
+                    <template x-for="group in paginatedGroups()" :key="group[0].id">
+                        <div class="w-full flex-shrink-0 grid grid-cols-1 md:grid-cols-3 gap-6 px-1">
+                            <template x-for="kegiatan in group" :key="kegiatan.id">
+                                <div
+                                    class="bg-white rounded-xl overflow-hidden shadow hover:shadow-lg transition-all duration-300 flex flex-col min-h-[350px]">
+                                    <div class="relative overflow-hidden">
+                                        <img :src="'/storage/' + kegiatan.foto_sampul" :alt="kegiatan.nama"
+                                            class="w-full h-[200px] object-cover object-center">
+                                    </div>
+                                    <div class="p-4 flex-1 flex flex-col">
+                                        <h3 class="text-lg font-bold mb-1" x-text="kegiatan.nama"></h3>
+                                        <p class="text-gray-600 mb-3 text-sm"
+                                            x-text="kegiatan.deskripsi.substring(0, 80) + '...'"></p>
+                                        <a :href="'/kegiatan/' + kegiatan.id"
+                                            class="text-[#608BC1] font-medium hover:text-yellow-600 transition inline-flex items-center text-sm mt-auto">
+                                            <span>Lihat Selengkapnya</span>
+                                            <i class="fas fa-arrow-right ml-2 text-xs"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </template>
                         </div>
-                    @endforeach
+                    </template>
                 </div>
+            </div>
+
+
+            <div class="flex justify-center mt-6 gap-4">
+                <button @click="scrollLeft"
+                    class="bg-white shadow p-3 rounded-full hover:bg-gray-100 transition disabled:opacity-50"
+                    :disabled="currentSlide === 0">
+                    <i class="fas fa-chevron-left text-[#608BC1]"></i>
+                </button>
+                <button @click="scrollRight"
+                    class="bg-white shadow p-3 rounded-full hover:bg-gray-100 transition disabled:opacity-50"
+                    :disabled="currentSlide >= totalSlides - 1">
+                    <i class="fas fa-chevron-right text-[#608BC1]"></i>
+                </button>
             </div>
         </div>
     </section>
+
+
+
+
     <section>
         <div class="py-20 bg-gray-50" id="featured">
             <div class="container mx-auto px-6">
@@ -282,9 +328,36 @@
         @php
             $defaultImage = asset('img/activity.jpg');
             $firstImage = isset($galeri[0]) ? asset('storage/' . $galeri[0]->photo_path) : $defaultImage;
+            $totalImages = count($galeri);
         @endphp
 
-        <section class="container mx-auto px-6 py-8" x-data="{ selectedImage: '{{ $firstImage }}', fade: false }" x-init="$nextTick(() => fade = true)">
+        <section class="container mx-auto px-6 py-8" x-data="{
+            selectedImage: '{{ $firstImage }}',
+            fade: false,
+            currentPage: 1,
+            perPage: 4,
+            totalImages: {{ $totalImages }},
+            get pagedThumbnails() {
+                return {{ json_encode($galeri) }}.slice((this.currentPage - 1) * this.perPage, this.currentPage * this.perPage);
+            },
+            changeImage(src) {
+                this.fade = false;
+                setTimeout(() => {
+                    this.selectedImage = src;
+                    this.fade = true;
+                }, 200);
+            },
+            nextPage() {
+                if (this.currentPage < Math.ceil(this.totalImages / this.perPage)) {
+                    this.currentPage++;
+                }
+            },
+            prevPage() {
+                if (this.currentPage > 1) {
+                    this.currentPage--;
+                }
+            }
+        }" x-init="$nextTick(() => fade = true)">
 
             <div class="text-center mb-8">
                 <h2 class="text-3xl md:text-4xl font-bold mb-4">Galeri UKM {{ $ukm->name }}</h2>
@@ -295,33 +368,81 @@
 
             <div class="grid gap-6">
 
-                {{-- Main image --}}
                 <div id="main-image" class="scroll-mt-24">
                     <img x-show="fade" x-transition:enter="transition-opacity duration-500"
                         x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100" :src="selectedImage"
                         class="h-auto max-h-[600px] w-full rounded-lg object-cover object-center" alt="gallery-main" />
                 </div>
 
-                {{-- Thumbnails --}}
-                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4">
-                    @forelse ($galeri as $index => $item)
-                        <div>
-                            <img @click.prevent="fade = false; setTimeout(() => { selectedImage = '{{ asset('storage/' . $item->photo_path) }}'; fade = true }, 100)"
-                                src="{{ asset('storage/' . $item->photo_path) }}"
-                                class="object-cover object-center h-24 md:h-32 w-full rounded-lg cursor-pointer border-2 hover:border-blue-500"
-                                alt="gallery-thumbnail-{{ $index }}" />
-                        </div>
-                    @empty
-                        {{-- Optional: show a single default thumbnail --}}
-                        <div>
-                            <img src="{{ $defaultImage }}"
-                                class="object-cover object-center h-24 md:h-32 w-full rounded-lg border-2"
-                                alt="default-thumbnail" />
-                        </div>
-                    @endforelse
+
+                <div>
+                    <div class="grid grid-cols-4 gap-4 mb-4">
+                        <template x-for="(item, index) in pagedThumbnails" :key="index">
+                            <div>
+                                <img @click.prevent="changeImage(item.photo_path ? '{{ asset('storage') }}/' + item.photo_path : '{{ $defaultImage }}')"
+                                    :src="item.photo_path ? '{{ asset('storage') }}/' + item.photo_path :
+                                        '{{ $defaultImage }}'"
+                                    class="object-cover object-center h-24 md:h-32 w-full rounded-lg cursor-pointer border-2 hover:border-blue-500"
+                                    :class="selectedImage === (item.photo_path ? '{{ asset('storage') }}/' + item.photo_path :
+                                        '{{ $defaultImage }}') ? 'border-blue-600' : ''"
+                                    alt="gallery-thumbnail" />
+                            </div>
+                        </template>
+                    </div>
+
+
+                    <div class="flex justify-center items-center space-x-6 mt-6">
+
+                        <button @click="prevPage()" :disabled="currentPage === 1"
+                            class="flex items-center px-4 py-2 bg-white border border-gray-300 rounded-md shadow-sm text-gray-700 hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed transition">
+
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+                            </svg>
+                            Prev
+                        </button>
+
+
+                        <span class="text-gray-700 font-semibold">
+                            Halaman <span x-text="currentPage"></span> dari <span
+                                x-text="Math.ceil(totalImages / perPage)"></span>
+                        </span>
+
+
+                        <button @click="nextPage()" :disabled="currentPage === Math.ceil(totalImages / perPage)"
+                            class="flex items-center px-4 py-2 bg-white border border-gray-300 rounded-md shadow-sm text-gray-700 hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed transition">
+                            Next
+
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2" fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+                            </svg>
+                        </button>
+                    </div>
+
                 </div>
 
             </div>
         </section>
     </div>
+
 @endsection
+<script>
+    document.addEventListener('alpine:init', () => {
+        Alpine.data('carousel', () => ({
+            scrollLeft() {
+                this.$refs.scrollContainer.scrollBy({
+                    left: -320,
+                    behavior: 'smooth'
+                });
+            },
+            scrollRight() {
+                this.$refs.scrollContainer.scrollBy({
+                    left: 320,
+                    behavior: 'smooth'
+                });
+            },
+        }))
+    })
+</script>

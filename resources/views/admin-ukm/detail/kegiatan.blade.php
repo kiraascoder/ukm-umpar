@@ -31,7 +31,7 @@
             <div class="lg:w-2/3 w-full">
                 <h3 class="text-lg font-semibold text-gray-700 mb-2">Deskripsi Kegiatan</h3>
                 <p class="text-gray-600 leading-relaxed whitespace-pre-line">
-                    {{ $kegiatan->deskripsi }}
+                    {!! $kegiatan->deskripsi !!}
                 </p>
             </div>
         </div>
@@ -175,7 +175,7 @@
 
             if (file && file.size > 2 * 1024 * 1024) {
                 errorMessage.classList.remove('hidden');
-                return false; 
+                return false;
             } else {
                 errorMessage.classList.add('hidden');
                 return true;

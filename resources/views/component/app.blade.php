@@ -11,6 +11,18 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+    <x-head.tinymce-config />
+    <script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fira+Code&family=Merriweather&family=Open+Sans&family=Oswald&display=swap"
+        rel="stylesheet">
+
+    <style>
+        [x-data]::-webkit-scrollbar {
+            display: none;
+        }
+    </style>
+
     @vite('resources/css/app.css')
 </head>
 

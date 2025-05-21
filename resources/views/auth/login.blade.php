@@ -18,6 +18,12 @@
                     <h1 class="text-2xl xl:text-3xl">
                         Login Sebagai Admin
                     </h1>
+                    @if (session('success'))
+                        <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mt-4 w-full text-center"
+                            role="alert">
+                            {{ session('success') }}
+                        </div>
+                    @endif
                     <div class="w-full flex-1 mt-8">
                         <form action="{{ route('admin.login.submit') }}" method="POST">
                             @csrf

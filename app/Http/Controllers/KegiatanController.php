@@ -14,9 +14,10 @@ class KegiatanController extends Controller
     {
         $user = Auth::user();
         $ukm = Ukm::where('admin_ukm_id', $user->id)->first();
-        $kegiatan = $ukm ? $ukm->kegiatan()->get() : collect();
+        $kegiatan = $ukm ? $ukm->kegiatan()->orderBy('created_at', 'desc')->get() : collect();
         return view('admin-ukm.kegiatan', compact('kegiatan'));
     }
+
 
     public function editKegiatanView($id)
     {
@@ -44,14 +45,17 @@ class KegiatanController extends Controller
                 'deskripsi' => 'required|string',
                 'tanggal' => 'required|date',
                 'foto_sampul' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-                'link_dokumentasi' => 'string|max:255'
+                'link_dokumentasi' => 'nullable|string|max:255',
+                'font_deskripsi' => 'required|string|in:sans,serif,mono,cursive,display,body',
             ],
             [
                 'nama.required' => 'Nama kegiatan harus diisi.',
                 'deskripsi.required' => 'Deskripsi kegiatan harus diisi.',
                 'tanggal.required' => 'Tanggal kegiatan harus diisi.',
                 'deskripsi.min' => 'Deskripsi kegiatan minimal harus 10 karakter.',
-                'foto_sampul.max' => "Foto Tidak Boleh Lebih Dari 2MB"
+                'foto_sampul.max' => "Foto Tidak Boleh Lebih Dari 2MB",
+                'font_deskripsi.required' => 'Pilih font untuk deskripsi.',
+                'font_deskripsi.in' => 'Font yang dipilih tidak valid.',
             ]
         );
 
@@ -77,7 +81,8 @@ class KegiatanController extends Controller
                 'deskripsi' => $validateData['deskripsi'],
                 'tanggal' => $validateData['tanggal'],
                 'foto_sampul' => $validateData['foto_sampul'],
-                'link_dokumentasi' => $validateData['link_dokumentasi'],
+                'link_dokumentasi' => $validateData['link_dokumentasi'] ?? null,
+                'font_deskripsi' => $validateData['font_deskripsi'],
             ]);
 
             return redirect('/admin/ukm/kegiatan')->with('success', 'Kegiatan berhasil ditambahkan.');
@@ -93,7 +98,8 @@ class KegiatanController extends Controller
             'nama' => 'required|string|max:255',
             'deskripsi' => 'required|string|min:10|max:700',
             'tanggal' => 'required|date',
-            'link_dokumentasi' => 'string|max:255'
+            'link_dokumentasi' => 'string|max:255',
+            'font_deskripsi' => 'required|string|in:font-sans,font-serif,font-mono,font-display,font-cursive,font-mono' // sesuaikan dengan font yang kamu sediakan
         ]);
 
         $kegiatan = Kegiatan::findOrFail($id);
@@ -102,17 +108,11 @@ class KegiatanController extends Controller
             'nama' => $validateData['nama'],
             'deskripsi' => $validateData['deskripsi'],
             'tanggal' => $validateData['tanggal'],
-            'link_dokumentasi' => $validateData['link_dokumentasi']
+            'link_dokumentasi' => $validateData['link_dokumentasi'],
+            'font_deskripsi' => $validateData['font_deskripsi'],
         ]);
 
         return redirect()->route('adminUkmDetailKegiatan', $id)
             ->with('success', 'Kegiatan berhasil diperbarui.');
-    }
-
-    public function deleteKegiatan($id)
-    {
-        $kegiatan = Kegiatan::findOrFail($id);
-        $kegiatan->delete();
-        return redirect('/admin/ukm/kegiatan')->with('success', 'Kegiatan Berhasil berhasil dihapus.');
     }
 }

@@ -14,17 +14,13 @@
                         Berikan Saran
                     </h2>
                     <p class="mx-auto mt-4 max-w-3xl text-xl text-gray-800">
-Terima kasih sudah berkunjung ke website kami! Bagaimana pendapat Anda tentang website ini?
+                        Terima kasih sudah berkunjung ke website kami! Bagaimana pendapat Anda tentang website ini?
                     </p>
                 </div>
             </div>
             <div class="flex items-stretch justify-center">
                 <div class="grid md:grid-cols-2">
                     <div class="h-full pr-6">
-                        <p class="mt-3 mb-12 text-lg text-gray-800 text-justify">
-                            Terima kasih telah mengunjungi sistem informasi UKM kami. Jika Anda memiliki saran,
-                            jangan ragu untuk menghubungi kami.
-                        </p>
                         <ul class="mb-6 md:mb-0">
                             <li class="flex">
                                 <div class="flex h-10 w-10 items-center justify-center rounded bg-blue-900 text-gray-50">

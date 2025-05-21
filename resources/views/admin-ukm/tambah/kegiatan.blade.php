@@ -26,13 +26,27 @@
 
                     <div>
                         <label class="block font-medium text-gray-700">Deskripsi Kegiatan</label>
-                        <textarea name="deskripsi" rows="4"
+                        <textarea name="deskripsi" rows="4" id="myeditorinstance"
                             class="mt-1 p-2 w-full border rounded-md @error('deskripsi') border-red-500 @enderror">{{ old('deskripsi') }}</textarea>
                         @error('deskripsi')
                             <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                         @enderror
                     </div>
-
+                    <select name="font_deskripsi"
+                        class="mt-1 p-2 w-full border rounded-md @error('font_deskripsi') border-red-500 @enderror">
+                        <option value="sans" {{ old('font_deskripsi') == 'sans' ? 'selected' : '' }}>Sans Serif (Figtree)
+                        </option>
+                        <option value="serif" {{ old('font_deskripsi') == 'serif' ? 'selected' : '' }}>Serif (Merriweather)
+                        </option>
+                        <option value="mono" {{ old('font_deskripsi') == 'mono' ? 'selected' : '' }}>Monospace (Fira Code)
+                        </option>
+                        <option value="cursive" {{ old('font_deskripsi') == 'cursive' ? 'selected' : '' }}>Cursive (Comic
+                            Sans MS)</option>
+                        <option value="display" {{ old('font_deskripsi') == 'display' ? 'selected' : '' }}>Display (Oswald)
+                        </option>
+                        <option value="body" {{ old('font_deskripsi') == 'body' ? 'selected' : '' }}>Body (Open Sans)
+                        </option>
+                    </select>
                     <div>
                         <label class="block font-medium text-gray-700">Tanggal Kegiatan</label>
                         <input type="date" name="tanggal" value="{{ old('tanggal') }}"
