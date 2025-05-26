@@ -21,44 +21,46 @@ class GalleryController extends Controller
     {
         return view('admin-ukm.tambah.galeri');
     }
+public function store(Request $request)
+{
+    $request->validate([
+        'photos' => 'required|array|min:1|max:30',
+        'photos.*' => 'image|mimes:jpeg,png,jpg,gif,webp|max:2048',
+    ], [
+        'photos.required' => 'Minimal satu gambar harus diunggah.',
+        'photos.min' => 'Minimal satu gambar harus diunggah.',
+        'photos.max' => 'Maksimal 10 gambar yang dapat diunggah sekaligus.',
+        'photos.*.max' => 'Setiap gambar maksimal berukuran 2MB.',
+        'photos.*.image' => 'File harus berupa gambar.',
+        'photos.*.mimes' => 'Format gambar harus jpeg, png, jpg, gif, atau webp.',
+    ]);
 
-    public function store(Request $request)
-    {
-        $request->validate([
-            'photos' => 'required|array|max:10',
-            'photos.*' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
-        ], [
-            'photos.required' => 'Minimal satu gambar harus diunggah.',
-            'photos.max' => 'Maksimal 10 gambar yang dapat diunggah sekaligus.',
-            'photos.*.max' => 'Setiap gambar maksimal berukuran 2MB.',
-        ]);
+    $user = Auth::user();
+    $ukm = Ukm::where('admin_ukm_id', $user->id)->first();
 
-        $user = Auth::user();
-        $ukm = Ukm::where('admin_ukm_id', $user->id)->first();
-
-        if (!$ukm) {
-            return redirect()->back()->with('error', 'UKM tidak ditemukan.');
-        }
-
-
-        $existingCount = Gallery::where('ukm_id', $ukm->id)->count();
-        $newPhotosCount = count($request->file('photos'));
-        if (($existingCount + $newPhotosCount) > 10) {
-            return redirect()->back()->with('error', 'Maksimal 10 foto dapat diunggah untuk satu UKM. Anda sudah mengunggah ' . $existingCount . ' foto.');
-        }
-
-
-        foreach ($request->file('photos') as $photo) {
-            $path = $photo->store('galleries', 'public');
-
-            Gallery::create([
-                'ukm_id' => $ukm->id,
-                'photo_path' => $path,
-            ]);
-        }
-
-        return redirect()->back()->with('success', 'Foto berhasil diunggah.');
+    if (!$ukm) {
+        return back()->with('error', 'UKM tidak ditemukan.');
     }
+
+    // Cek jumlah maksimal total foto untuk UKM ini
+    $existingCount = Gallery::where('ukm_id', $ukm->id)->count();
+    $newPhotosCount = count($request->file('photos'));
+
+    if (($existingCount + $newPhotosCount) > 30) {
+        return back()->with('error', "Maksimal 30 foto. Anda sudah mengunggah {$existingCount} foto.");
+    }
+
+    foreach ($request->file('photos') as $photo) {
+        $path = $photo->store('galleries', 'public');
+
+        Gallery::create([
+            'ukm_id' => $ukm->id,
+            'photo_path' => $path,
+        ]);
+    }
+
+    return back()->with('success', 'Foto berhasil diunggah.');
+}
 
 
     public function deleteGaleri($id)

@@ -59,7 +59,15 @@
                             <p class="text-red-500 text-sm">{{ $message }}</p>
                         @enderror
                     </div>
-
+                    <div>
+                    <label class="block font-medium text-gray-700">Nomor WhatsApp</label>
+                    <input type="text" name="wa" id="wa"
+                        class="mt-1 p-2 w-full border rounded-md @error('wa') border-red-500 @enderror"
+                        value="{{ old('wa') }}">
+                    @error('wa')
+                        <p class="text-red-500 text-sm">{{ $message }}</p>
+                    @enderror
+                </div>
                     <div class="text-center">
                         <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded">Tambah
                             Pendaftaran
@@ -69,4 +77,14 @@
             </div>
         </div>
     </div>
+    <script>
+    const waInput = document.getElementById('wa');
+    waInput.addEventListener('blur', () => {
+        let val = waInput.value.trim();
+
+        if(val.startsWith('08')) {
+            waInput.value = '+62' + val.substring(1);
+        }
+    });
+    </script>
 @endsection

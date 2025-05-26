@@ -36,6 +36,9 @@
             <p class="text-gray-600 mb-4">
                 Persyaratan : {{ Str::limit($pendaftaran->persyaratan, 100, '...') }}
             </p>
+            <p class="text-gray-600 mb-4">
+                Kontak WA : {{ $pendaftaran->wa }}
+            </p>
         </div>
         <div class="w-full bg-white p-6 rounded-2xl shadow mt-4">
             <h3 class="text-lg font-semibold text-gray-700 mb-4">Brosur</h3>

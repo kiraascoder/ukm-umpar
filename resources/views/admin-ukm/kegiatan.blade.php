@@ -33,7 +33,8 @@
                         <div class="p-6">
                             <h3 class="text-xl font-bold mb-2">{{ $item->nama }}</h3>
                             <p class="text-gray-600 mb-4">
-                                {{ Str::limit($item->deskripsi, 100, '...') }}
+                                {!! Str::limit(strip_tags($item->deskripsi), 100, '...') !!}
+
                             </p>
                             <div class="flex justify-between">
                                 <a href="{{ route('adminUkmDetailKegiatan', ['id' => $item->id]) }}"

@@ -41,7 +41,7 @@ Route::middleware(['admin:admin_ukm', 'checkUserStatus'])->group(function () {
     Route::get('/admin/ukm/profile', [AdminUKMController::class, 'ukmProfile'])->name('adminUkmProfile');
     Route::get('/admin/ukm/{id}/edit-profile', [AdminUKMController::class, 'ukmEditProfile'])->name('adminUkmEditProfile');
     Route::put('/admin/ukm/store', [AdminUKMController::class, 'storeDataUkm'])->name('adminUkm.store');
-    Route::put('/admin/ukm/update-saldo/{id}', [KeuanganController::class, 'ukmUpdateSaldo'])->name('adminUkmUpdateSaldo.update');
+    Route::put('/admin/ukm/update-saldo/{id}', [KeuanganController::class, 'ukmTambahSaldo'])->name('adminUkmUpdateSaldo.update');
 
 
 
@@ -128,6 +128,7 @@ Route::middleware(['admin:admin'])->group(function () {
     Route::get('/admin/daftar-ukm', [SuperAdminController::class, 'daftarUkm'])->name('adminUkmList');
     Route::get('/admin/pesan', [SuperAdminController::class, 'pesan'])->name('adminPesan');
     Route::delete('/admin/pesan/{id}/delete', [SuperAdminController::class, 'destroyPesan'])->name('pesan.destroy');
+    Route::delete('/admin/ukm/{id}/delete', [SuperAdminController::class, 'deleteUkm'])->name('hapusUkm.delete');
     Route::get('/admin/proker-ukm/{id}/detail', [SuperAdminController::class, 'detailProkerUkm'])->name('prokerUkm');
     Route::get('/admin/daftar-ukm/{id}/detail', [SuperAdminController::class, 'detailUkm'])->name('detailUkm');
     Route::get('/admin/kegiatan/{id}/detail', [SuperAdminController::class, 'detailKegiatan'])->name('detailKegiatan');

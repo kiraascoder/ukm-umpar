@@ -165,15 +165,17 @@ class KeuanganController extends Controller
 
         return redirect('/admin/ukm/keuangan')->with('success', 'Transaksi berhasil diperbarui.');
     }
-    public function ukmUpdateSaldo(Request $request, $id)
+  public function ukmUpdateSaldo(Request $request, $id)
     {
         $request->validate([
-            'saldo' => 'required|numeric|min:0',
-        ]);
-        $ukm = Ukm::findOrFail($id);
-        $ukm->saldo = $request->saldo;
-        $ukm->save();
-        return redirect()->route('adminUkmKeuangan')->with('success', 'Saldo awal berhasil diperbarui.');
+        'saldo' => 'required|numeric|min:0',
+    ]);
+
+    $ukm = Ukm::findOrFail($id);
+    $ukm->saldo += $request->saldo; 
+    $ukm->save();
+
+    return redirect()->route('adminUkmKeuangan')->with('success', 'Saldo berhasil ditambahkan.');
     }
 
     public function ukmUpdateSaldoView($id)

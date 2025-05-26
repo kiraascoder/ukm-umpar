@@ -9,7 +9,7 @@ class Pendaftaran extends Model
     protected $table = 'pendaftaran_anggota';
 
     protected $fillable = [
-        'ukm_id', 'pendaftaran', 'batas_pendaftaran', 'brosur', 'link_pendaftaran', 'persyaratan',
+        'ukm_id', 'pendaftaran', 'batas_pendaftaran', 'brosur', 'link_pendaftaran', 'persyaratan', 'wa'
     ];
 
     public function ukm()

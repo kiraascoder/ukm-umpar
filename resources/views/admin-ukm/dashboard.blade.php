@@ -64,7 +64,7 @@
                 @if ($kegiatanTerbaru)
                     <div class="p-4 border rounded-lg bg-gray-50">
                         <h3 class="text-md font-bold text-gray-800">{{ $kegiatanTerbaru->judul }}</h3>
-                        <p class="text-sm text-gray-600 mt-1">{{ $kegiatanTerbaru->deskripsi }}</p>
+                        <p class="text-sm text-gray-600 mt-1">{!! $kegiatanTerbaru->deskripsi !!}</p>
                         <p class="text-xs text-gray-500 mt-2">Tanggal: {{ $kegiatanTerbaru->created_at->format('d M Y') }}
                         </p>
                     </div>

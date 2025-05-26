@@ -185,11 +185,11 @@
                     </a>
                 @endif
 
-                @if (isset($sosmed['twitter']))
-                    <a href="{{ $sosmed['twitter'] }}" class="text-blue-400 hover:text-blue-600" target="_blank">
-                        <i class="fab fa-twitter fa-2x"></i>
-                    </a>
-                @endif
+                @if (isset($sosmed['youtube']))
+    <a href="{{ $sosmed['youtube'] }}" class="text-blue-400 hover:text-blue-600" target="_blank">
+        <i class="fab fa-youtube fa-2x"></i>
+    </a>
+@endif
 
                 @if (isset($sosmed['tiktok']))
                     <a href="{{ $sosmed['tiktok'] }}" class="text-black hover:text-gray-800" target="_blank">
@@ -253,13 +253,15 @@
                                     </div>
                                     <div class="p-4 flex-1 flex flex-col">
                                         <h3 class="text-lg font-bold mb-1" x-text="kegiatan.nama"></h3>
-                                        <p class="text-gray-600 mb-3 text-sm"
-                                            x-text="kegiatan.deskripsi.substring(0, 80) + '...'"></p>
-                                        <a :href="'/kegiatan/' + kegiatan.id"
-                                            class="text-[#608BC1] font-medium hover:text-yellow-600 transition inline-flex items-center text-sm mt-auto">
-                                            <span>Lihat Selengkapnya</span>
-                                            <i class="fas fa-arrow-right ml-2 text-xs"></i>
-                                        </a>
+                                       <div class="text-gray-600 mb-3 text-sm"
+     x-html="kegiatan.deskripsi">
+</div>
+
+                                       <a :href="'/kegiatan/' + kegiatan.id + '/detail'"
+    class="text-[#608BC1] font-medium hover:text-yellow-600 transition inline-flex items-center text-sm mt-auto">
+    <span>Lihat Selengkapnya</span>
+    <i class="fas fa-arrow-right ml-2 text-xs"></i>
+</a>
                                     </div>
                                 </div>
                             </template>

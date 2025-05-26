@@ -43,6 +43,15 @@
                             {{ $informasi->persyaratan }}
                         </p>
                     </div>
+                    <div>
+                        <h2 class="text-lg font-semibold text-gray-700 mb-1">📱 Narahubung WhatsApp</h2>
+                        <a href="https://wa.me/{{ preg_replace('/[^0-9]/', '', $informasi->wa) }}"
+                            target="_blank"
+                            class="text-green-600 hover:text-green-800 underline break-all text-sm">
+                            {{ $informasi->wa }}
+                        </a>
+                    </div>
+
 
 
                     <div>

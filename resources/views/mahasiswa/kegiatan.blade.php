@@ -26,7 +26,7 @@
                         </div>
                         <div class="p-6">
                             <h3 class="text-xl font-bold mb-2">{{ $kegiatan->nama }}</h3>
-                            <p class="text-gray-600 mb-4">{{ Str::limit($kegiatan->deskripsi, 100) }}</p>
+                            <p class="text-gray-600 mb-4">{!! Str::limit(strip_tags($kegiatan->deskripsi), 100, '...') !!}</p>
                             <a href="{{ route('detail-kegiatan', $kegiatan->id) }}"
                                 class="text-[#608BC1] font-medium hover:text-yellow-600 transition inline-flex items-center">
                                 <span>Lihat Selengkapnya</span>

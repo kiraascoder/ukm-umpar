@@ -22,7 +22,7 @@
 
             <!-- Contact -->
             <div>
-                <h3 class="text-lg font-bold mb-4">Contact</h3>
+                <h3 class="text-lg font-bold mb-4">Kontak</h3>
                 <ul class="space-y-2 text-gray-400">
                     <li class="flex items-center">
                         <i class="fas fa-envelope mr-2 text-yellow-500"></i>
@@ -40,17 +40,14 @@
             <div>
                 <h3 class="text-lg font-bold mb-4">Follow As</h3>
                 <div class="flex space-x-4">
-                    <a href="#" class="text-gray-400 hover:text-white transition">
+                    <a href="https://www.facebook.com/universitasmuhammadiyah.parepare.37" class="text-gray-400 hover:text-white transition">
                         <i class="fab fa-facebook-f text-2xl"></i>
                     </a>
-                    <a href="#" class="text-gray-400 hover:text-white transition">
+                    <a href="https://youtube.com/@umparchannel8925?si=4Zahp6QxUD5Pd2xb" class="text-gray-400 hover:text-white transition">
                         <i class="fab fa-youtube text-2xl"></i>
                     </a>
-                    <a href="#" class="text-gray-400 hover:text-white transition">
+                    <a href="https://www.instagram.com/umpar.official?igsh=dHVwejRtMjRndHIw" class="text-gray-400 hover:text-white transition">
                         <i class="fab fa-instagram text-2xl"></i>
-                    </a>
-                    <a href="#" class="text-gray-400 hover:text-white transition">
-                        <i class="fab fa-twitter text-2xl"></i>
                     </a>
                 </div>
             </div>

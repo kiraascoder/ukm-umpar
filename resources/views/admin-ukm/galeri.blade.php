@@ -17,7 +17,7 @@
         @endif
         <div class="lg:col-span-3 w-full bg-white p-6 rounded-2xl shadow overflow-auto">
             <div class="flex items-center justify-between mb-4">
-                @if ($gallery->count() < 10)
+                @if ($gallery->count() < 30)
                     <form action="{{ route('adminUkmTambahGaleri.store') }}" method="POST" enctype="multipart/form-data"
                         class="space-y-4 w-full" onsubmit="return validateFileSize()">
                         @csrf

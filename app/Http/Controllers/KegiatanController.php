@@ -92,27 +92,29 @@ class KegiatanController extends Controller
     }
 
 
-    public function updateKegiatan(Request $request, $id)
-    {
-        $validateData = $request->validate([
-            'nama' => 'required|string|max:255',
-            'deskripsi' => 'required|string|min:10|max:700',
-            'tanggal' => 'required|date',
-            'link_dokumentasi' => 'string|max:255',
-            'font_deskripsi' => 'required|string|in:font-sans,font-serif,font-mono,font-display,font-cursive,font-mono' // sesuaikan dengan font yang kamu sediakan
-        ]);
+ public function updateKegiatan(Request $request, $id)
+{
+    $validateData = $request->validate([
+        'nama' => 'required|string|max:255',
+        'deskripsi' => 'nullable|string|min:10|max:700',
+        'tanggal' => 'required|date',
+        'link_dokumentasi' => 'nullable|string|max:255',
+        'font_deskripsi' => 'nullable|string|in:font-sans,font-serif,font-mono,font-display,font-cursive,font-mono'
+    ]);
 
-        $kegiatan = Kegiatan::findOrFail($id);
+    $kegiatan = Kegiatan::findOrFail($id);
 
-        $kegiatan->update([
-            'nama' => $validateData['nama'],
-            'deskripsi' => $validateData['deskripsi'],
-            'tanggal' => $validateData['tanggal'],
-            'link_dokumentasi' => $validateData['link_dokumentasi'],
-            'font_deskripsi' => $validateData['font_deskripsi'],
-        ]);
+    // Update secara eksplisit agar field bisa dikosongkan
+    $kegiatan->nama = $validateData['nama'];
+    $kegiatan->tanggal = $validateData['tanggal'];
+    $kegiatan->deskripsi = $validateData['deskripsi'] ?? '';
+    $kegiatan->link_dokumentasi = $validateData['link_dokumentasi'] ?? '';
+    $kegiatan->font_deskripsi = $validateData['font_deskripsi'] ?? '';
+    $kegiatan->save();
 
-        return redirect()->route('adminUkmDetailKegiatan', $id)
-            ->with('success', 'Kegiatan berhasil diperbarui.');
-    }
+    return redirect()->route('adminUkmDetailKegiatan', $id)
+        ->with('success', 'Kegiatan berhasil diperbarui.');
+}
+
+
 }

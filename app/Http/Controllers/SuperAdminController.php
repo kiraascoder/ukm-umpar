@@ -110,4 +110,18 @@ class SuperAdminController extends Controller
         $pesan->delete();
         return redirect()->back()->with('success', 'Pesan berhasil dihapus.');
     }
+    public function deleteUkm($id)
+    {
+     $ukm = Ukm::findOrFail($id);
+
+    $adminUkmId = $ukm->admin_ukm_id;
+    $user = User::find($adminUkmId);
+    if ($user) {
+        $user->delete();
+    }
+    $ukm->delete();
+
+    return redirect()->back()->with('success', 'User admin UKM dan data UKM berhasil dihapus.');
+    }
+
 }

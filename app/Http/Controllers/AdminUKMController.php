@@ -61,7 +61,7 @@ class AdminUKMController extends Controller
             'media_sosial' => 'nullable|array',
             'media_sosial.instagram' => 'nullable|string',
             'media_sosial.facebook' => 'nullable|string',
-            'media_sosial.twitter' => 'nullable|string',
+            'media_sosial.youtube' => 'nullable|string',
             'media_sosial.tiktok' => 'nullable|string'
         ], [
             'logo.image' => 'File harus berupa gambar.',
@@ -75,7 +75,7 @@ class AdminUKMController extends Controller
             'foto_pengurus.max' => 'Ukuran gambar maksimal 10MB.',
             'media_sosial.instagram.string' => 'Link Instagram harus berupa URL.',
             'media_sosial.facebook.string' => 'Link Facebook harus berupa URL.',
-            'media_sosial.twitter.string' => 'Link Twitter harus berupa URL.',
+            'media_sosial.youtube.string' => 'Link Youtube harus berupa URL.',
             'media_sosial.tiktok.string' => 'Link TikTok harus berupa URL.',            
         ]);
 
@@ -123,7 +123,7 @@ class AdminUKMController extends Controller
         $media_sosial = json_encode([
             'instagram' => $validatedData['media_sosial']['instagram'] ?? $media_sosial['instagram'] ?? null,
             'facebook' => $validatedData['media_sosial']['facebook'] ?? $media_sosial['facebook'] ?? null,
-            'twitter' => $validatedData['media_sosial']['twitter'] ?? $media_sosial['twitter'] ?? null,
+            'youtube' => $validatedData['media_sosial']['youtube'] ?? $media_sosial['youtube'] ?? null,
             'tiktok' => $validatedData['media_sosial']['tiktok'] ?? $media_sosial['tiktok'] ?? null,
         ]);
 

@@ -40,6 +40,7 @@ class PendaftaranController extends Controller
             'brosur' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:10048',
             'link_pendaftaran' => 'required|string|max:255',
             'persyaratan' => 'required|string',
+            'wa' => 'required|string|max:20',
 
         ], [
             'brosur.image' => 'File harus berupa gambar.',
@@ -67,7 +68,9 @@ class PendaftaranController extends Controller
                 'brosur' => $filePath,
                 'link_pendaftaran' => $validateData['link_pendaftaran'],
                 'persyaratan' => $validateData['persyaratan'],
+                'wa' => $validateData['wa'],
             ]);
+
 
             return redirect('/admin/ukm/pendaftaran')->with('success', 'Pendaftaran berhasil ditambahkan.');
         } catch (\Exception $e) {
