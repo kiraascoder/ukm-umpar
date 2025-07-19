@@ -107,8 +107,8 @@
                     <div>{{ $ukm->media_sosial['facebook'] ?? '-' }}</div>
                 </div>
                 <div>
-                    <span class="font-medium">X:</span>
-                    <div>{{ $ukm->media_sosial['twitter'] ?? '-' }}</div>
+                    <span class="font-medium">Youtube:</span>
+                    <div>{{ $ukm->media_sosial['youtube'] ?? '-' }}</div>
                 </div>
                 <div>
                     <span class="font-medium">TikTok:</span>

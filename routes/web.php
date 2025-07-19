@@ -157,6 +157,7 @@ Route::get('/daftar-ukm', [PublicController::class, 'viewUkm'])->name('daftar-uk
 
 // Ukm Route
 Route::get('/kegiatan/{id}/detail', [PublicController::class, 'viewDetailKegiatan'])->name('detail-kegiatan');
+Route::get('/kegiatan/{id}/detail-kegiatan', [PublicController::class, 'detailKegiatan'])->name('detailKegiatan');
 Route::get('/informasi/{id}/detail', [PublicController::class, 'detailInformasi'])->name('detailInformasi');
 
 

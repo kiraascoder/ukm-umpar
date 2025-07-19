@@ -184,4 +184,29 @@ class PublicController extends Controller
 
         return view('mahasiswa.detail-informasi', compact('informasi', 'ukmTerkait'));
     }
+
+    public function detailKegiatan($id)
+    {
+        $kegiatan = Kegiatan::whereHas('ukm.admin', function ($query) {
+            $query->where('status', 'active');
+        })
+            ->findOrFail($id);
+
+        $dokumentasi = $kegiatan->dokumentasi()->get();
+
+        $gambar1 = $dokumentasi->get(0);
+        $gambar2 = $dokumentasi->get(1);
+        $gambar3 = $dokumentasi->get(2);
+        $gambar4 = $dokumentasi->get(3);
+        $gambar5 = $dokumentasi->get(4);
+
+        return view('mahasiswa.detailKegiatan', compact(
+            'kegiatan',
+            'gambar1',
+            'gambar2',
+            'gambar3',
+            'gambar4',
+            'gambar5'
+        ));
+    }
 }
