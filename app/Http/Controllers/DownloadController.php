@@ -18,4 +18,14 @@ class DownloadController extends Controller
 
         return Storage::disk('public')->download($path);
     }
+    public function formulirAdmin($id)
+    {
+        $pendaftaran = \App\Models\Pendaftaran::findOrFail($id); // Sesuaikan nama model jika perlu
+
+        if (!$pendaftaran->formulir || !Storage::disk('public')->exists($pendaftaran->formulir)) {
+            abort(404, 'File formulir tidak ditemukan.');
+        }
+
+        return Storage::disk('public')->download($pendaftaran->formulir);
+    }
 }

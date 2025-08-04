@@ -184,4 +184,4 @@ Route::post('/reset-password', [ForgotPasswordController::class, 'resetPassword'
 // Download Formulir 
 // web.php
 Route::get('/download-formulir/{id}', [DownloadController::class, 'formulir'])->name('download.formulir');
-
+Route::get('/admin/pendaftaran/download-formulir/{id}', [\App\Http\Controllers\DownloadController::class, 'formulirAdmin'])->name('admin.pendaftaran.downloadFormulir');

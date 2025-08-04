@@ -70,7 +70,7 @@
             @if ($pendaftaran->formulir)
                 <div class="flex items-center justify-between bg-gray-50 p-4 rounded border border-gray-200">
                     <p class="text-gray-700">Formulir tersedia untuk diunduh.</p>
-                    <a href="{{ asset('storage/' . $pendaftaran->formulir) }}" download
+                    <a href="{{ route('admin.pendaftaran.downloadFormulir', $pendaftaran->id) }}"
                         class="inline-flex items-center px-4 py-2 bg-green-600 hover:bg-green-700 text-white text-sm font-medium rounded-md shadow">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" viewBox="0 0 20 20"
                             fill="currentColor">
@@ -85,6 +85,5 @@
                 <p class="text-center text-gray-500">Belum ada formulir yang diunggah.</p>
             @endif
         </div>
-
     </div>
 @endsection
