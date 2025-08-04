@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Ukm;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Anggota;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 
 class AnggotaController extends Controller
@@ -84,6 +85,7 @@ class AnggotaController extends Controller
     public function editAnggota(Request $request, $id)
     {
         $anggota = Anggota::findOrFail($id);
+
         $validatedData = $request->validate(
             [
                 'nama' => 'required|string|max:255',
@@ -95,12 +97,16 @@ class AnggotaController extends Controller
                 'fakultas' => 'required|string|in:fkip,feb,faktek,fapetrik,fikes,fai,hukum',
                 'angkatan' => 'required|string|max:255',
                 'foto' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+                'password' => ['nullable', 'confirmed', 'min:8'],
             ],
             [
                 'foto.max' => 'Ukuran gambar tidak boleh lebih dari 2MB.',
                 'foto.image' => 'File foto harus berupa gambar.',
+                'password.confirmed' => 'Konfirmasi password tidak cocok.',
+                'password.min' => 'Password minimal 8 karakter.',
             ]
         );
+
         if ($request->hasFile('foto')) {
             if ($request->file('foto')->isValid()) {
                 if ($anggota->foto) {
@@ -113,7 +119,15 @@ class AnggotaController extends Controller
                 return back()->withErrors(['foto' => 'The uploaded photo is invalid. Please try again.']);
             }
         }
+
         $anggota->update($validatedData);
+
+        // Tambahkan logika update password jika diisi
+        if ($request->filled('password')) {
+            $anggota->password = Hash::make($request->password);
+            $anggota->save();
+        }
+
         return redirect()->route('adminUkmDetailAnggota', ['id' => $anggota->id])
             ->with('success', 'Data anggota berhasil diperbarui.');
     }

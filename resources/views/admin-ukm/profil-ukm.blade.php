@@ -39,6 +39,7 @@
             </div>
             <div>
                 <h2 class="text-xl font-semibold text-gray-800">UKM {{ $ukm->nama }}</h2>
+                
                 <p class="text-sm text-gray-500 mt-1">Informasi lengkap organisasi UKM Anda</p>
                 <p class="text-sm text-gray-500 mt-1">No Hp : {{ $user->phone }}</p>
                 <p class="text-sm text-gray-500 mt-1">Email : {{ $user->email }}</p>

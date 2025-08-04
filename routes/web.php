@@ -7,7 +7,6 @@ use App\Http\Controllers\PendaftaranController;
 use App\Http\Controllers\PesanController;
 use App\Http\Controllers\ProkerController;
 use App\Http\Controllers\PublicController;
-use App\Http\Controllers\DetailController;
 use App\Http\Controllers\SuperAdminController;
 use App\Http\Controllers\SuratController;
 use App\Http\Controllers\UploadDokumentasi;
@@ -124,6 +123,7 @@ Route::middleware(['admin:admin_ukm', 'checkUserStatus'])->group(function () {
 
 Route::middleware(['admin:admin'])->group(function () {
     Route::get('/admin/dashboard', [SuperAdminController::class, 'superAdminDashboardUkm'])->name('superAdminDashboard');
+
     Route::get('/admin/proker-ukm', [SuperAdminController::class, 'daftarProkerUkm'])->name('adminUkmProgram');
     Route::get('/admin/daftar-ukm', [SuperAdminController::class, 'daftarUkm'])->name('adminUkmList');
     Route::get('/admin/pesan', [SuperAdminController::class, 'pesan'])->name('adminPesan');

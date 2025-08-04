@@ -24,7 +24,7 @@
                             {{ session('success') }}
                         </div>
                     @endif
-                    <div class="w-full flex-1 mt-8">
+                    <div class="w-full flex-1 mt-8">Q
                         <form action="{{ route('admin.login.submit') }}" method="POST">
                             @csrf
                             <div class="mx-auto max-w-xs">

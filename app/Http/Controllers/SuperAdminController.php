@@ -49,7 +49,8 @@ class SuperAdminController extends Controller
     public function detailUkm($id)
     {
         $ukm = Ukm::findOrFail($id);
-        return view('superadmin.detail.ukm', compact('ukm'));
+        $anggota = $ukm->anggota()->paginate(5);
+        return view('superadmin.detail.ukm', compact('ukm', 'anggota'));
     }
     public function detailKegiatan($id)
     {
