@@ -54,8 +54,8 @@
                     @if ($informasi->formulir)
                         <div>
                             <h2 class="text-lg font-semibold text-gray-700 mb-1">📄 Formulir Pendaftaran</h2>
-                            <a href="{{ asset('storage/' . $informasi->formulir) }}" download
-                                class="inline-block bg-green-600 hover:bg-green-700 transition text-white font-semibold text-sm px-6 py-3 rounded-lg shadow">
+                            <a href="{{ route('download.formulir', $informasi->id) }}"
+                                class="inline-block bg-green-600 hover:bg-green-700 text-white text-sm px-4 py-2 rounded-md shadow">
                                 Download Formulir
                             </a>
                         </div>

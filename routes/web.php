@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminUKMController;
 use App\Http\Controllers\AnggotaController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\DownloadController;
 use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\PendaftaranController;
@@ -179,3 +180,8 @@ Route::post('/admin/lupa-password', [ForgotPasswordController::class, 'sendReset
 // Form reset password dari email
 Route::get('/reset-password', [ForgotPasswordController::class, 'showResetForm'])->name('password.reset');
 Route::post('/reset-password', [ForgotPasswordController::class, 'resetPassword'])->name('password.update');
+
+// Download Formulir 
+// web.php
+Route::get('/download-formulir/{id}', [DownloadController::class, 'formulir'])->name('download.formulir');
+
