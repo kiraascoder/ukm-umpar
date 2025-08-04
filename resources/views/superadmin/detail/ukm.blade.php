@@ -3,6 +3,12 @@
 @section('title', 'Detail UKM')
 
 @section('content')
+    @if (session('success'))
+        <div class="mb-4 max-w-5xl mx-auto px-4 py-3 bg-green-100 text-green-700 rounded-md shadow">
+            {{ session('success') }}
+        </div>
+    @endif
+
     <div class="max-w-5xl mx-auto mt-10 p-6 bg-white shadow-xl rounded-2xl space-y-8">
         <!-- Header -->
         <div class="flex items-center space-x-6">
@@ -87,12 +93,13 @@
                                 <td class="px-4 py-2">{{ $a->nama }}</td>
                                 <td class="px-4 py-2">{{ $a->jabatan }}</td>
                                 <td class="px-4 py-2">
-                                    <button
-                                        class="bg-indigo-600 text-white px-3 py-1 rounded-full text-xs hover:bg-indigo-700 transition">Detail</button>
+                                    <a href="{{ route('getAnggotaUkm', $a->id) }}"
+                                        class="bg-indigo-600 text-white px-3 py-1 rounded-full text-xs hover:bg-indigo-700 transition">
+                                        Detail
+                                    </a>
                                 </td>
                             </tr>
                         @endforeach
-
 
                         @if ($ukm->anggota->isEmpty())
                             <tr>
@@ -104,8 +111,38 @@
                 <div class="mt-4">
                     {{ $anggota->links() }}
                 </div>
-
             </div>
+        </div>
+
+        <!-- Form Ubah Password Admin UKM -->
+        <div class="border-t pt-6">
+            <h3 class="text-lg font-semibold text-red-600 mb-4">Ubah Password Admin UKM</h3>
+
+            <form action="{{ route('superadmin.ukm.updatePassword', $ukm->admin->id) }}" method="POST"
+                class="space-y-4 max-w-md">
+                @csrf
+                @method('PUT')
+
+                <div>
+                    <label for="password" class="block text-sm font-medium text-gray-700">Password Baru</label>
+                    <input type="password" name="password" id="password" required
+                        class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:border-indigo-500">
+                </div>
+
+                <div>
+                    <label for="password_confirmation" class="block text-sm font-medium text-gray-700">Konfirmasi Password
+                        Baru</label>
+                    <input type="password" name="password_confirmation" id="password_confirmation" required
+                        class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:border-indigo-500">
+                </div>
+
+                <div>
+                    <button type="submit"
+                        class="inline-flex items-center px-4 py-2 bg-red-600 text-white text-sm font-medium rounded-md hover:bg-red-700 transition">
+                        Ubah Password
+                    </button>
+                </div>
+            </form>
         </div>
 
         <!-- Tombol Kembali -->

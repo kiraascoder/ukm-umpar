@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\AdminUKMController;
 use App\Http\Controllers\AnggotaController;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\PendaftaranController;
 use App\Http\Controllers\PesanController;
@@ -123,9 +125,12 @@ Route::middleware(['admin:admin_ukm', 'checkUserStatus'])->group(function () {
 
 Route::middleware(['admin:admin'])->group(function () {
     Route::get('/admin/dashboard', [SuperAdminController::class, 'superAdminDashboardUkm'])->name('superAdminDashboard');
-
     Route::get('/admin/proker-ukm', [SuperAdminController::class, 'daftarProkerUkm'])->name('adminUkmProgram');
     Route::get('/admin/daftar-ukm', [SuperAdminController::class, 'daftarUkm'])->name('adminUkmList');
+    Route::get('/admin/anggota/{id}', [SuperAdminController::class, 'anggota'])->name('getAnggotaUkm');
+    Route::get('/admin/anggota/{id}/edit', [SuperAdminController::class, 'editAnggotaView'])->name('getAnggotaUkm.edit');
+    Route::put('/admin/anggota/edit/{id}', [SuperAdminController::class, 'editAnggota'])->name('anggotaUkm.edit');
+    Route::put('/admin/ukm/{id}/update-password', [SuperAdminController::class, 'updatePassword'])->name('superadmin.ukm.updatePassword');
     Route::get('/admin/pesan', [SuperAdminController::class, 'pesan'])->name('adminPesan');
     Route::delete('/admin/pesan/{id}/delete', [SuperAdminController::class, 'destroyPesan'])->name('pesan.destroy');
     Route::delete('/admin/ukm/{id}/delete', [SuperAdminController::class, 'deleteUkm'])->name('hapusUkm.delete');
@@ -164,3 +169,13 @@ Route::get('/informasi/{id}/detail', [PublicController::class, 'detailInformasi'
 Route::get('/login', function () {
     return redirect('admin/login');
 });
+
+
+// web.php
+// Form permintaan lupa password
+Route::get('/admin/lupa-password', [AuthController::class, 'showForgotForm'])->name('password.request');
+Route::post('/admin/lupa-password', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
+
+// Form reset password dari email
+Route::get('/reset-password', [ForgotPasswordController::class, 'showResetForm'])->name('password.reset');
+Route::post('/reset-password', [ForgotPasswordController::class, 'resetPassword'])->name('password.update');

@@ -24,7 +24,7 @@
                             {{ session('success') }}
                         </div>
                     @endif
-                    <div class="w-full flex-1 mt-8">Q
+                    <div class="w-full flex-1 mt-8">
                         <form action="{{ route('admin.login.submit') }}" method="POST">
                             @csrf
                             <div class="mx-auto max-w-xs">
@@ -73,6 +73,13 @@
                                         Masuk
                                     </span>
                                 </button>
+                                
+                                <div class="text-right mt-2">
+                                    <a href="{{ route('password.request') }}"
+                                        class="text-sm text-indigo-600 hover:underline">
+                                        Lupa sandi?
+                                    </a>
+                                </div>
 
                                 <div class="mt-6 text-md text-gray-600 text-center">
                                     <p>Belum Punya Akun?

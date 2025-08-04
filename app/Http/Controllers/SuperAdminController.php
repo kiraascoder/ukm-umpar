@@ -10,6 +10,8 @@ use App\Models\Ukm;
 use App\Models\User;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 
 class SuperAdminController extends Controller
 {
@@ -73,6 +75,67 @@ class SuperAdminController extends Controller
         ));
     }
 
+    public function anggota($id)
+    {
+        $anggota = Anggota::findOrFail($id);
+        return view('superadmin.detail.anggota', compact('anggota'));
+    }
+
+    public function editAnggota(Request $request, $id)
+    {
+        $anggota = Anggota::findOrFail($id);
+
+        $validatedData = $request->validate(
+            [
+                'nama' => 'required|string|max:255',
+                'jabatan' => 'required|string|max:255',
+                'tempat_lahir' => 'required|string|max:255',
+                'tanggal_lahir' => 'required|date',
+                'jenis_kelamin' => 'required|string|in:Laki-laki,Perempuan',
+                'jurusan' => 'required|string|max:255',
+                'fakultas' => 'required|string|in:fkip,feb,faktek,fapetrik,fikes,fai,hukum',
+                'angkatan' => 'required|string|max:255',
+                'foto' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+                'password' => ['nullable', 'confirmed', 'min:8'],
+            ],
+            [
+                'foto.max' => 'Ukuran gambar tidak boleh lebih dari 2MB.',
+                'foto.image' => 'File foto harus berupa gambar.',
+                'password.confirmed' => 'Konfirmasi password tidak cocok.',
+                'password.min' => 'Password minimal 8 karakter.',
+            ]
+        );
+
+        if ($request->hasFile('foto')) {
+            if ($request->file('foto')->isValid()) {
+                if ($anggota->foto) {
+                    Storage::delete('public/' . $anggota->foto);
+                }
+
+                $path = $request->file('foto')->store('anggota_foto', 'public');
+                $validatedData['foto'] = $path;
+            } else {
+                return back()->withErrors(['foto' => 'The uploaded photo is invalid. Please try again.']);
+            }
+        }
+
+        $anggota->update($validatedData);
+
+        // Tambahkan logika update password jika diisi
+        if ($request->filled('password')) {
+            $anggota->password = Hash::make($request->password);
+            $anggota->save();
+        }
+
+        return redirect()->route('getAnggotaUkm', ['id' => $anggota->id])
+            ->with('success', 'Data anggota berhasil diperbarui.');
+    }
+    public function editAnggotaView($id)
+    {
+        $anggota = Anggota::findOrFail($id);
+        return view('superadmin.edit.anggota', compact('anggota'));
+    }
+
     public function viewVerifikasiUkm()
     {
         $adminUKM = User::where('role', 'admin_ukm')->with('ukm')->get();
@@ -123,5 +186,17 @@ class SuperAdminController extends Controller
         $ukm->delete();
 
         return redirect()->back()->with('success', 'User admin UKM dan data UKM berhasil dihapus.');
+    }
+    public function updatePassword(Request $request, $id)
+    {
+        $request->validate([
+            'password' => ['required', 'string', 'min:6', 'confirmed'],
+        ]);
+
+        $user = User::findOrFail($id); // user ini adalah admin UKM
+        $user->password = Hash::make($request->password);
+        $user->save();
+
+        return back()->with('success', 'Password berhasil diubah.');
     }
 }

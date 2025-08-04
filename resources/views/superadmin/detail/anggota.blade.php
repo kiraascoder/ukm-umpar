@@ -43,7 +43,7 @@
         <div class="bg-white rounded-2xl shadow p-6">
             <div class="flex items-center justify-between mb-4">
                 <h3 class="text-lg font-semibold text-gray-700">Informasi Pribadi</h3>
-                <a href="{{ route('adminUkmEditAnggota', ['id' => $anggota->id]) }}"
+                <a href="{{ route('getAnggotaUkm.edit', ['id' => $anggota->id]) }}"
                     class="px-4 py-1 border rounded-full text-sm text-gray-600 hover:bg-gray-100 inline-flex items-center">
                     <i class="fas fa-pen mr-1"></i>Edit
                 </a>

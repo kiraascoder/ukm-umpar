@@ -22,8 +22,8 @@
                     </div>
                 </div>
             @endif
-            <form action="{{ route('adminUkmEditAnggota.edit', $anggota->id) }}" method="POST"
-                enctype="multipart/form-data" class="grid grid-cols-2 gap-4">
+            <form action="{{ route('anggotaUkm.edit', $anggota->id) }}" method="POST" enctype="multipart/form-data"
+                class="grid grid-cols-2 gap-4">
                 @csrf
                 @method('PUT')
                 <div>
@@ -122,26 +122,7 @@
                         <p class="text-sm text-red-600 mt-1">{{ $message }}</p>
                     @enderror
                 </div>
-
-                <div class="col-span-2">
-                    <label for="password" class="block text-sm font-medium text-[#07074D]">Password Baru</label>
-                    <input type="password" name="password" id="password"
-                        class="mt-1 p-2 w-full border @error('password') border-red-500 @else  @enderror rounded-md shadow-sm bg-white focus:outline-none focus:ring-2 focus:ring-[#6A64F1] focus:border-transparent" />
-                    @error('password')
-                        <p class="text-sm text-red-600 mt-1">{{ $message }}</p>
-                    @enderror
-                </div>
-
-                <div class="col-span-2">
-                    <label for="password_confirmation" class="block text-sm font-medium text-[#07074D]">Konfirmasi
-                        Password Baru</label>
-                    <input type="password" name="password_confirmation" id="password_confirmation"
-                        class="mt-1 p-2 w-full border @error('password_confirmation') border-red-500 @else  @enderror rounded-md shadow-sm bg-white focus:outline-none focus:ring-2 focus:ring-[#6A64F1] focus:border-transparent" />
-                    @error('password_confirmation')
-                        <p class="text-sm text-red-600 mt-1">{{ $message }}</p>
-                    @enderror
-                </div>
-
+                
                 <div class="col-span-2 flex justify-between mt-4">
                     <a href="{{ route('adminUkmDetailAnggota', $anggota->id) }}"
                         class="bg-gray-500 hover:bg-gray-700 text-white py-2 px-4 rounded transition duration-300">
