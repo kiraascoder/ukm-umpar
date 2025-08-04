@@ -7,7 +7,7 @@
         <div class="flex items-center justify-between gap-2">
             <h1 class="text-2xl text-gray-800">Profil Anggota</h1>
             <div class="flex gap-2">
-                <a href="{{ route('adminUkmAnggota') }}"
+                <a href="{{ route('detailUkm') }}"
                     class="inline-flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded-md shadow">
                     Kembali
                 </a>

@@ -122,9 +122,9 @@
                         <p class="text-sm text-red-600 mt-1">{{ $message }}</p>
                     @enderror
                 </div>
-                
+
                 <div class="col-span-2 flex justify-between mt-4">
-                    <a href="{{ route('adminUkmDetailAnggota', $anggota->id) }}"
+                    <a href="{{ route('getAnggotaUkm', $anggota->id) }}"
                         class="bg-gray-500 hover:bg-gray-700 text-white py-2 px-4 rounded transition duration-300">
                         Back
                     </a>
