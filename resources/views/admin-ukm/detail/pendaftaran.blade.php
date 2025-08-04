@@ -65,5 +65,26 @@
             @endif
 
         </div>
+        <div class="w-full bg-white p-6 rounded-2xl shadow mt-4">
+            <h3 class="text-lg font-semibold text-gray-700 mb-4">Formulir Pendaftaran</h3>
+            @if ($pendaftaran->formulir)
+                <div class="flex items-center justify-between bg-gray-50 p-4 rounded border border-gray-200">
+                    <p class="text-gray-700">Formulir tersedia untuk diunduh.</p>
+                    <a href="{{ asset('storage/' . $pendaftaran->formulir) }}" download
+                        class="inline-flex items-center px-4 py-2 bg-green-600 hover:bg-green-700 text-white text-sm font-medium rounded-md shadow">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" viewBox="0 0 20 20"
+                            fill="currentColor">
+                            <path fill-rule="evenodd"
+                                d="M3 4a1 1 0 011-1h3v2H5v10h10V5h-2V3h3a1 1 0 011 1v12a1 1 0 01-1 1H4a1 1 0 01-1-1V4zm7 1a1 1 0 00-1 1v4H7l3 3 3-3h-2V6a1 1 0 00-1-1z"
+                                clip-rule="evenodd" />
+                        </svg>
+                        Download Formulir
+                    </a>
+                </div>
+            @else
+                <p class="text-center text-gray-500">Belum ada formulir yang diunggah.</p>
+            @endif
+        </div>
+
     </div>
 @endsection

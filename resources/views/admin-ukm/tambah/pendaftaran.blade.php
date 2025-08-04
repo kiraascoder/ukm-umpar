@@ -68,6 +68,15 @@
                             <p class="text-red-500 text-sm">{{ $message }}</p>
                         @enderror
                     </div>
+                    <div>
+                        <label class="block font-medium text-gray-700">Formulir Pendaftaran</label>
+                        <input type="file" name="formulir"
+                            class="mt-1 p-2 w-full border rounded-md @error('formulir') border-red-500 @enderror"
+                            value="{{ old('formulir') }}">
+                        @error('formulir')
+                            <p class="text-red-500 text-sm">{{ $message }}</p>
+                        @enderror
+                    </div>
                     <div class="text-center">
                         <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded">Tambah
                             Pendaftaran

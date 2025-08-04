@@ -51,7 +51,20 @@
                         </a>
                     </div>
 
-
+                    @if ($informasi->formulir)
+                        <div>
+                            <h2 class="text-lg font-semibold text-gray-700 mb-1">📄 Formulir Pendaftaran</h2>
+                            <a href="{{ asset('storage/' . $informasi->formulir) }}" download
+                                class="inline-block bg-green-600 hover:bg-green-700 transition text-white font-semibold text-sm px-6 py-3 rounded-lg shadow">
+                                Download Formulir
+                            </a>
+                        </div>
+                    @else
+                        <div>
+                            <h2 class="text-lg font-semibold text-gray-700 mb-1">📄 Formulir Pendaftaran</h2>
+                            <p class="text-sm text-gray-500 italic">Formulir belum tersedia.</p>
+                        </div>
+                    @endif
 
                     <div>
                         <a href="{{ $informasi->link_pendaftaran }}" target="_blank"

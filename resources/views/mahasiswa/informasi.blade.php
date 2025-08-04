@@ -24,10 +24,10 @@
                             <p class="text-gray-600 mb-2">{{ $item->pendaftaran }}</p>
                             <p class="text-gray-600 mb-4">Batas Pendaftaran : {{ $item->batas_pendaftaran }}</p>
                             <a href="{{ route('detailInformasi', $item->id) }}"
-                                class="text-[#608BC1] font-medium hover:text-yellow-600 transition inline-flex items-center">
+                                class="text-[#608BC1] font-medium hover:text-yellow-600 transition inline-flex items-center mb-2">
                                 <span>Lihat Detail</span>
                                 <i class="fas fa-arrow-right ml-2 text-sm"></i>
-                            </a>
+                            </a>                            
                         </div>
                     </div>
                 @endforeach

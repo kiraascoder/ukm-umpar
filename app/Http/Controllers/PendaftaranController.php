@@ -43,6 +43,7 @@ class PendaftaranController extends Controller
             'link_pendaftaran' => 'nullable|string|max:255',
             'persyaratan' => 'required|string',
             'wa' => 'required|string|max:20',
+            'formulir' => 'required|file|mimes:pdf,doc,docx|max:10048',
 
         ], [
             'brosur.image' => 'File harus berupa gambar.',
@@ -50,6 +51,11 @@ class PendaftaranController extends Controller
             'brosur.max' => 'Ukuran gambar maksimal 10MB.',
             'link_pendaftaran.string' => 'Link pendaftaran harus berupa URL.',
             'persyaratan.string' => 'Persyaratan harus berupa teks.',
+            'wa.string' => 'Nomor WhatsApp harus berupa angka.',
+            'wa.max' => 'Nomor WhatsApp maksimal 20 karakter.',
+            'formulir.required' => 'Formulir pendaftaran harus diunggah.',
+            'formulir.file' => 'Formulir pendaftaran harus berupa file.',
+            'formulir.mimes' => 'Format file pendaftaran yang diperbolehkan: pdf, doc, docx.',
         ]);
 
         $user = Auth::user();
@@ -63,6 +69,8 @@ class PendaftaranController extends Controller
             $filePath = $request->hasFile('brosur')
                 ? $request->file('brosur')->store('brosur', 'public')
                 : null;
+            $formulir = $request->file('formulir') ? $request->file('formulir')->store('formulir', 'public') : null;
+
 
             $ukm->pendaftaran()->create([
                 'pendaftaran' => $validateData['pendaftaran'],
@@ -71,6 +79,7 @@ class PendaftaranController extends Controller
                 'link_pendaftaran' => $validateData['link_pendaftaran'],
                 'persyaratan' => $validateData['persyaratan'],
                 'wa' => $validateData['wa'],
+                'formulir' => $formulir
             ]);
 
 
@@ -90,7 +99,7 @@ class PendaftaranController extends Controller
     public function editPendaftaran(Request $request, $id)
     {
         $pendaftaran = Pendaftaran::findOrFail($id);
-    
+
         $validatedData = $request->validate([
             'pendaftaran' => 'required|string|max:255',
             'batas_pendaftaran' => 'required|date',
@@ -98,22 +107,30 @@ class PendaftaranController extends Controller
             'link_pendaftaran' => 'required|string|max:255',
             'persyaratan' => 'required|string',
             'wa' => 'required|string|max:20',
+            'formulir' => 'required|file|mimes:pdf,doc,docx|max:10048',
         ]);
-    
+
         try {
             if ($request->hasFile('brosur')) {
-                
+
                 if ($pendaftaran->brosur && Storage::disk('public')->exists($pendaftaran->brosur)) {
                     Storage::disk('public')->delete($pendaftaran->brosur);
                 }
-    
-                
+
+                if ($pendaftaran->formulir && Storage::disk('public')->exists($pendaftaran->formulir)) {
+                    Storage::disk('public')->delete($pendaftaran->formulir);
+                }
+
+
                 $filePath = $request->file('brosur')->store('brosur', 'public');
                 $validatedData['brosur'] = $filePath;
+
+                $formulir = $request->file('formulir')->store('formulir', 'public');
+                $validatedData['formulir'] = $formulir;
             }
-    
+
             $pendaftaran->update($validatedData);
-    
+
             return redirect('/admin/ukm/pendaftaran')->with('success', 'Pendaftaran berhasil diperbarui.');
         } catch (\Exception $e) {
             Log::error('Gagal mengedit pendaftaran: ' . $e->getMessage());

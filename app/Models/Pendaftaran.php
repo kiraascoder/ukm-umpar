@@ -15,7 +15,8 @@ class Pendaftaran extends Model
         'brosur',
         'link_pendaftaran',
         'persyaratan',
-        'wa'
+        'wa',
+        'formulir',
     ];
 
     public function ukm()
