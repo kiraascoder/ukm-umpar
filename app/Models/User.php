@@ -53,4 +53,13 @@ class User extends Authenticatable
     {
         return $this->hasOne(Ukm::class, 'admin_ukm_id');
     }
+    public function sendPasswordResetNotification($token)
+    {
+        $url = url(route('password.reset', [
+            'token' => $token,
+            'email' => $this->email,
+        ], false));
+
+        $this->notify(new \App\Notifications\CustomResetPasswordNotification($url));
+    }
 }

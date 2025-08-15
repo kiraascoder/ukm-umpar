@@ -4,7 +4,7 @@ use App\Http\Controllers\AdminUKMController;
 use App\Http\Controllers\AnggotaController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DownloadController;
-use App\Http\Controllers\ForgotPasswordController;
+use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\PendaftaranController;
 use App\Http\Controllers\PesanController;
@@ -15,6 +15,7 @@ use App\Http\Controllers\SuratController;
 use App\Http\Controllers\UploadDokumentasi;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminSesiController;
+use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\KeuanganController;
 use App\Http\Controllers\KegiatanController;
 
@@ -173,15 +174,22 @@ Route::get('/login', function () {
 
 
 // web.php
-// Form permintaan lupa password
-Route::get('/admin/lupa-password', [AuthController::class, 'showForgotForm'])->name('password.request');
-Route::post('/admin/lupa-password', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
+Route::middleware('guest')->group(function () {
+    // Form minta link reset
+    Route::get('/password/forgot', [ForgotPasswordController::class, 'showLinkRequestForm'])
+        ->name('password.request');
 
-// Form reset password dari email
-Route::get('/reset-password', [ForgotPasswordController::class, 'showResetForm'])->name('password.reset');
-Route::post('/reset-password', [ForgotPasswordController::class, 'resetPassword'])->name('password.update');
+    // Proses kirim link via email (Mailable)
+    Route::post('/password/email', [ForgotPasswordController::class, 'sendResetLinkEmail'])
+        ->middleware('throttle:6,1')
+        ->name('password.email');
 
-// Download Formulir 
-// web.php
-Route::get('/download-formulir/{id}', [DownloadController::class, 'formulir'])->name('download.formulir');
-Route::get('/admin/pendaftaran/download-formulir/{id}', [\App\Http\Controllers\DownloadController::class, 'formulirAdmin'])->name('admin.pendaftaran.downloadFormulir');
+    // Form set password baru (link dari email)
+    Route::get('/password/reset/{token}', [ResetPasswordController::class, 'showResetForm'])
+        ->name('password.reset');
+
+    // Simpan password baru
+    Route::post('/password/reset', [ResetPasswordController::class, 'reset'])
+        ->middleware('throttle:6,1')
+        ->name('password.update');
+});
