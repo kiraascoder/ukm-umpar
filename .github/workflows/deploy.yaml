@@ -43,7 +43,7 @@ jobs:
           server: ${{ secrets.FTP_HOST }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          server-dir: /domains/ukmumpar.site/ukmumpar/   # pastikan trailing slash
+          server-dir: /ukmumpar/   # pastikan trailing slash
           local-dir: ./
           dry-run: true
           exclude: |
