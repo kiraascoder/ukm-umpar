@@ -74,5 +74,5 @@ jobs:
             public/storage/**
             public/storage/**/*
             # Jika ingin vendor di-server tetap (dan tidak upload dari CI), buka komentar baris di bawah:
-            # vendor/**
-            # vendor/**/*
+            vendor/**
+            vendor/**/*
