@@ -166,6 +166,7 @@ Route::get('/daftar-ukm', [PublicController::class, 'viewUkm'])->name('daftar-uk
 Route::get('/kegiatan/{id}/detail', [PublicController::class, 'viewDetailKegiatan'])->name('detail-kegiatan');
 Route::get('/kegiatan/{id}/detail-kegiatan', [PublicController::class, 'detailKegiatan'])->name('detailKegiatan');
 Route::get('/informasi/{id}/detail', [PublicController::class, 'detailInformasi'])->name('detailInformasi');
+Route::get('/informasi/{id}/detail/formulir', [PendaftaranController::class, 'downloadFormulir'])->name('download.formulir');
 
 
 Route::get('/login', function () {

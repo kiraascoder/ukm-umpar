@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Str;
 
 class PendaftaranController extends Controller
 {
@@ -36,58 +37,75 @@ class PendaftaranController extends Controller
 
     public function storePendaftaran(Request $request)
     {
-        $validateData = $request->validate([
-            'pendaftaran' => 'required|string|max:255',
+        $validated = $request->validate([
+            'pendaftaran'       => 'required|string|max:255',
             'batas_pendaftaran' => 'required|date',
-            'brosur' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:10048',
-            'link_pendaftaran' => 'nullable|string|max:255',
-            'persyaratan' => 'required|string',
-            'wa' => 'required|string|max:20',
-            'formulir' => 'required|file|mimes:pdf,doc,docx|max:10048',
-
+            'brosur'            => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:10048',
+            'link_pendaftaran'  => 'nullable|url|max:255', // pakai url, bukan string
+            'persyaratan'       => 'required|string',
+            // contoh validasi WA: angka, +, spasi, tanda kurung, strip
+            'wa'                => ['required', 'max:20', 'regex:/^[0-9+\s()\-]+$/'],
+            'formulir'          => 'required|file|mimes:pdf,doc,docx|max:10048',
         ], [
-            'brosur.image' => 'File harus berupa gambar.',
-            'brosur.mimes' => 'Format gambar yang diperbolehkan: jpeg, png, jpg, gif, svg.',
-            'brosur.max' => 'Ukuran gambar maksimal 10MB.',
-            'link_pendaftaran.string' => 'Link pendaftaran harus berupa URL.',
-            'persyaratan.string' => 'Persyaratan harus berupa teks.',
-            'wa.string' => 'Nomor WhatsApp harus berupa angka.',
-            'wa.max' => 'Nomor WhatsApp maksimal 20 karakter.',
-            'formulir.required' => 'Formulir pendaftaran harus diunggah.',
-            'formulir.file' => 'Formulir pendaftaran harus berupa file.',
-            'formulir.mimes' => 'Format file pendaftaran yang diperbolehkan: pdf, doc, docx.',
+            'link_pendaftaran.url' => 'Link pendaftaran harus berupa URL yang valid.',
+            'wa.regex'             => 'Nomor WhatsApp hanya boleh berisi angka, spasi, +, (), dan -.',
+            'formulir.required'    => 'Formulir pendaftaran harus diunggah.',
+            'formulir.mimes'       => 'Format file yang diperbolehkan: pdf, doc, docx.',
         ]);
 
         $user = Auth::user();
-        $ukm = Ukm::where('admin_ukm_id', $user->id)->first();
+        $ukm  = \App\Models\Ukm::where('admin_ukm_id', $user->id)->first();
 
         if (!$ukm) {
-            return redirect()->back()->with('error', 'Anda tidak memiliki UKM yang terdaftar.');
+            return back()->with('error', 'Anda tidak memiliki UKM yang terdaftar.');
         }
 
         try {
-            $filePath = $request->hasFile('brosur')
-                ? $request->file('brosur')->store('brosur', 'public')
-                : null;
-            $formulir = $request->file('formulir') ? $request->file('formulir')->store('formulir', 'public') : null;
+            // Simpan brosur (opsional) ke disk 'public' -> menghasilkan path relatif seperti "brosur/xxx.png"
+            $brosurPath = null;
+            if ($request->hasFile('brosur')) {
+                $brosurFile = $request->file('brosur');
+                $brosurPath = $brosurFile->storeAs(
+                    'brosur',
+                    time() . '_' . Str::slug(pathinfo($brosurFile->getClientOriginalName(), PATHINFO_FILENAME))
+                        . '.' . $brosurFile->getClientOriginalExtension(),
+                    'public'
+                );
+            }
 
+            // Simpan formulir (wajib) -> path relatif "formulir/xxx.pdf"
+            $formulirFile = $request->file('formulir');
+            $formulirPath = $formulirFile->storeAs(
+                'formulir',
+                time() . '_' . Str::slug(pathinfo($formulirFile->getClientOriginalName(), PATHINFO_FILENAME))
+                    . '.' . $formulirFile->getClientOriginalExtension(),
+                'public'
+            );
 
+            // Buat data pendaftaran via relasi UKM
             $ukm->pendaftaran()->create([
-                'pendaftaran' => $validateData['pendaftaran'],
-                'batas_pendaftaran' => $validateData['batas_pendaftaran'],
-                'brosur' => $filePath,
-                'link_pendaftaran' => $validateData['link_pendaftaran'],
-                'persyaratan' => $validateData['persyaratan'],
-                'wa' => $validateData['wa'],
-                'formulir' => $formulir
+                'pendaftaran'       => $validated['pendaftaran'],
+                'batas_pendaftaran' => $validated['batas_pendaftaran'],
+                'brosur'            => $brosurPath,                     // bisa null
+                'link_pendaftaran'  => $validated['link_pendaftaran'] ?? null,
+                'persyaratan'       => $validated['persyaratan'],
+                'wa'                => $validated['wa'],
+                'formulir'          => $formulirPath,                   // path relatif: "formulir/xxx.ext"
             ]);
 
-
             return redirect('/admin/ukm/pendaftaran')->with('success', 'Pendaftaran berhasil ditambahkan.');
-        } catch (\Exception $e) {
-            return redirect()->back()->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
+        } catch (\Throwable $e) {
+            // Opsional: hapus file kalau sudah terlanjur upload saat error
+            if (!empty($brosurPath)) {
+                Storage::disk('public')->delete($brosurPath);
+            }
+            if (!empty($formulirPath)) {
+                Storage::disk('public')->delete($formulirPath);
+            }
+            return back()->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
         }
     }
+
     public function deletePendaftaran($id)
     {
         $pendaftaran = Pendaftaran::findOrFail($id);
@@ -136,5 +154,27 @@ class PendaftaranController extends Controller
             Log::error('Gagal mengedit pendaftaran: ' . $e->getMessage());
             return redirect()->back()->with('error', 'Terjadi kesalahan saat mengupdate pendaftaran: ' . $e->getMessage());
         }
+    }
+    public function downloadFormulir($id)
+    {
+        $pendaftaran = Pendaftaran::findOrFail($id);
+
+        if (!$pendaftaran->formulir) {
+            abort(404, 'Formulir tidak tersedia.');
+        }
+
+        $relativePath = ltrim($pendaftaran->formulir, '/'); // contoh: "formulir/xxx.pdf"
+        $disk = Storage::disk('public');
+
+        if (!$disk->exists($relativePath)) {
+            abort(404, 'File formulir tidak ditemukan di server.');
+        }
+
+        // Nama file unduhan yang rapi
+        $ext = pathinfo($relativePath, PATHINFO_EXTENSION);
+        $base = 'Formulir_Pendaftaran_' . $pendaftaran->id;
+        $downloadName = $base . ($ext ? ".{$ext}" : '');
+
+        return $disk->download($relativePath, $downloadName);
     }
 }

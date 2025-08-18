@@ -7,6 +7,7 @@ use App\Models\Pendaftaran;
 use App\Models\Ukm;
 use Illuminate\Http\Request;
 use App\Models\Kegiatan;
+use Illuminate\Support\Facades\Storage;
 
 class PublicController extends Controller
 {
@@ -208,5 +209,24 @@ class PublicController extends Controller
             'gambar4',
             'gambar5'
         ));
+    }
+
+    public function downloadFormulir($id)
+    {
+        $pendaftaran = Pendaftaran::findOrFail($id);
+        if (!$pendaftaran->formulir) {
+            abort(404, "Formulir tidak tersedia.");
+        }
+
+        // Path file di storage
+        $path = 'formulir/' . $pendaftaran->formulir;
+
+        // Cek kalau file memang ada
+        if (!Storage::exists($path)) {
+            abort(404, "File tidak ditemukan di server.");
+        }
+
+        // Download file
+        return Storage::download($path, 'Formulir_Pendaftaran_' . $pendaftaran->id . '.' . pathinfo($informasi->formulir, PATHINFO_EXTENSION));
     }
 }
