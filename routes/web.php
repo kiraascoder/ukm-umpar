@@ -45,9 +45,6 @@ Route::middleware(['admin:admin_ukm', 'checkUserStatus'])->group(function () {
     Route::get('/admin/ukm/{id}/edit-profile', [AdminUKMController::class, 'ukmEditProfile'])->name('adminUkmEditProfile');
     Route::put('/admin/ukm/store', [AdminUKMController::class, 'updateDataUkm'])->name('adminUkm.store');
     Route::put('/admin/ukm/update-saldo/{id}', [KeuanganController::class, 'ukmTambahSaldo'])->name('adminUkmUpdateSaldo.update');
-
-
-
     // View dan tambah anggota ukm
     Route::get('/admin/ukm/anggota', [AnggotaController::class, 'ukmAnggota'])->name('adminUkmAnggota');
     Route::get('/admin/ukm/anggota/tambah', [AnggotaController::class, 'viewTambahAnggota'])->name('adminUkmTambahAnggota');
@@ -56,8 +53,6 @@ Route::middleware(['admin:admin_ukm', 'checkUserStatus'])->group(function () {
     Route::put('/admin/ukm/anggota/{id}', [AnggotaController::class, 'EditAnggota'])->name('adminUkmEditAnggota.edit');
     Route::delete('/admin/ukm/anggota/{id}/delete', [AnggotaController::class, 'deleteAnggota'])->name('adminUkmHapusAnggota');
     Route::post('/admin/ukm/anggota/store', [AnggotaController::class, 'storeAnggota'])->name('adminUkmAnggota.store');
-
-
     // View dan tambah arsip surat
     Route::get('/admin/ukm/arsip-surat', [SuratController::class, 'ukmArsipSurat'])->name('adminUkmArsipSurat');
     Route::get('/admin/ukm/arsip-surat/{id}/edit', [SuratController::class, 'editSuratView'])->name('adminUkmEditArsipSurat');
